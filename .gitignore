@@ -1,0 +1,45 @@
+# API Keys and configuration
+.claude/api-keys.conf
+.claude/session-state.json
+.claude/*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/settings.json
+.idea/
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# Backup files
+*.bak
+*.backup
+
+# Logs
+logs/
+*.log
+
+# Node modules (if applicable)
+node_modules/
+
+# Python cache (if applicable)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+dist/
+build/
+out/
