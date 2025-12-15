@@ -1,7 +1,9 @@
 THE FINAL, OFFICIAL, UNBREAKABLE ORCHESTRATION S.O.P.
 Standard Operating Procedure for @chief — 2025 Legendary Edition
+
 This is the exact, mandatory, never-changing sequence your team follows every single time — no exceptions, no creativity, no drift.
-text@chief — FINAL 2025 ORCHESTRATION S.O.P. — EXECUTE THIS EXACTLY
+
+@chief — FINAL 2025 ORCHESTRATION S.O.P. — EXECUTE THIS EXACTLY
 
 Every session, every task, every time — this is LAW:
 
@@ -19,19 +21,14 @@ Every session, every task, every time — this is LAW:
    2.6 @CodebaseCartographer → start continuous monitoring
    2.7 @InfraGuardian → validate infra_registry.yaml
    2.8 @ProjectAnalyzer → deep scan + trash detection
-   2.9 /watch-dog start → DRIFT ASSASSIN ACTIVATED
-   2.10 /openspec-police activate → CHAT TODO LISTS BANNED FOREVER
-   2.11 /skill approve-specs → wait for human "specs approved"
-   2.12 Implementation begins
+   2.9 /openspec-police activate → CHAT TODO LISTS BANNED FOREVER
+   2.10 /skill approve-specs → wait for human "specs approved"
+   2.11 Implementation begins
 
 3. TASK EXECUTION (after specs approved)
-   → @chief spawns ALL parallel teams:
-      • Coding Team (Coder, Debugger, Tester)
-      • OpenSpec Team (SpecArchitect, OpenSpecPolice)
-      • Session Team (SessionOrchestrator, CodebaseCartographer)
-      • Research/Proposal Team (Researcher, ProposalWriter)
-   → Every single action is posted to OpenSpec + session state instantly
-   → No sequential waiting — all teams run in parallel
+   → @chief coordinates all agents in parallel
+   → Every action updates OpenSpec + session state
+   → All agents work simultaneously under @chief's command
 
 4. FINAL DELIVERY
    → /skill pr-review → open-source pr-agent review
@@ -42,8 +39,9 @@ Every session, every task, every time — this is LAW:
    → /skill budget-cap 30 → aborts if over $30
    → /skill rollback-openspec → restores last good OpenSpec
 
-6. MODEL SWAP (anytime)
-   → /swap-model zai|kimi|claude → instant swap for all agents
+6. MODEL SWAP (current limitation)
+   → Model swap requires restarting Claude Code and editing api-keys.conf
+   → Planned: /swap-model zai|kimi|claude (coming soon)
 
 7. GOLDEN RULES — NEVER BROKEN
    → ONLY @chief may orchestrate
