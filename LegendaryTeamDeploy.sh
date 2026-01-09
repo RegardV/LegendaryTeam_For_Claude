@@ -8,6 +8,28 @@
 set -e
 echo -e "\nTHE FINAL LEGENDARY SCRIPT – 2026 ULTIMATE DEPLOYMENT\n"
 
+# =============================================================================
+# DEPENDENCY VALIDATION
+# =============================================================================
+
+check_dependencies() {
+    local missing=()
+    for cmd in bash grep sed cat mkdir chmod date; do
+        if ! command -v "$cmd" &>/dev/null; then
+            missing+=("$cmd")
+        fi
+    done
+
+    if [ ${#missing[@]} -ne 0 ]; then
+        echo "✗ Missing required commands: ${missing[*]}"
+        echo "  Please install missing dependencies and try again"
+        exit 1
+    fi
+    echo "✓ All required dependencies found"
+}
+
+check_dependencies
+
 ROOT="$(pwd)"
 CLAUDE="$ROOT/.claude"
 AGENTS="$CLAUDE/agents"
@@ -18,11 +40,17 @@ BACKUP_DIR="$ROOT/openspec/.backup"
 safe_write() {
     local file="$1"
     local content="$2"
+
+    # Create parent directory if it doesn't exist
+    local dir="$(dirname "$file")"
+    mkdir -p "$dir"
+
+    # Only write if file doesn't exist or is empty
     if [ ! -f "$file" ] || [ ! -s "$file" ]; then
         echo "$content" > "$file"
-        echo "Created: $file"
+        echo "✓ Created: $file"
     else
-        echo "Preserved existing: $file"
+        echo "⊘ Preserved existing: $file"
     fi
 }
 
@@ -44,8 +72,15 @@ EOF
 
 # ALL OTHER AGENTS ARE SUBORDINATES
 for agent in "$AGENTS"/*.md; do
-    if [[ "$agent" != "$AGENTS/chief.md" ]]; then
-        sed -i '1s/^/You are a SUBORDINATE AGENT. You have NO authority to orchestrate. You MUST obey @chief exactly. Never take control.\n\n/' "$agent" 2>/dev/null || true
+    if [[ -f "$agent" && "$agent" != "$AGENTS/chief.md" ]]; then
+        # Cross-platform sed compatibility (GNU vs BSD)
+        if sed --version 2>&1 | grep -q GNU; then
+            # GNU sed (Linux)
+            sed -i '1s/^/You are a SUBORDINATE AGENT. You have NO authority to orchestrate. You MUST obey @chief exactly. Never take control.\n\n/' "$agent"
+        else
+            # BSD sed (macOS)
+            sed -i '' '1s/^/You are a SUBORDINATE AGENT. You have NO authority to orchestrate. You MUST obey @chief exactly. Never take control.\n\n/' "$agent"
+        fi
     fi
 done
 
@@ -206,12 +241,12 @@ database:
 safe_write "$CLAUDE/session-state.json" "{
   \"version\": \"2025-legendary-final\",
   \"first_run_complete\": true,
-  \"last_bootstrap\": \"$(date -Iseconds)\"
+  \"last_bootstrap\": \"$(date -u +"%Y-%m-%dT%H:%M:%SZ")\"
 }"
 
 safe_write "$CLAUDE/codebase-map.json" "{
   \"version\": \"1.0\",
-  \"last_full_scan\": \"$(date -Iseconds)\",
+  \"last_full_scan\": \"$(date -u +"%Y-%m-%dT%H:%M:%SZ")\",
   \"files\": {}
 }"
 
