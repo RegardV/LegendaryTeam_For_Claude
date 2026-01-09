@@ -1,0 +1,13 @@
+{
+  "version": "2026-legendary-v1.0",
+  "lastUpdated": "2026-01-09T00:00:00Z",
+  "queue": [],
+  "statistics": {
+    "totalQueued": 0,
+    "totalApproved": 0,
+    "totalRejected": 0,
+    "averageWaitTimeMinutes": 0,
+    "longestWaitTimeMinutes": 0
+  },
+  "history": []
+}
