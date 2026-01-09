@@ -43,3 +43,31 @@ __pycache__/
 dist/
 build/
 out/
+
+# =============================================================================
+# Legendary Team v2026 - Continuity System
+# =============================================================================
+
+# Temporary ledgers (session-scoped, not committed)
+thoughts/ledgers/*.md
+!thoughts/ledgers/.gitkeep
+
+# Cache directory (SQLite database and temporary files)
+.claude/cache/artifact-index/*.db
+.claude/cache/artifact-index/*.db-*
+.claude/cache/*.json
+!.claude/cache/.gitkeep
+
+# Handoffs and plans (KEEP THESE - they're permanent documentation)
+# thoughts/shared/handoffs/*.md  # DO NOT IGNORE - commit these!
+# thoughts/shared/plans/*.md     # DO NOT IGNORE - commit these!
+
+# Session state (temporary, regenerated each session)
+.claude/session-state.json
+.claude/codebase-map.json
+
+# Dashboard generated files (can be regenerated)
+legendary-dashboard.html
+
+# OpenSpec backups (keep in git, but ignore if too many)
+# openspec/.backup/*.yaml  # Uncomment if backups become too large

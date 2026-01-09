@@ -265,6 +265,43 @@ fi
 safe_write "$ROOT/tech_stack.yaml" '{}
 # Rebuilt every /bootstrap — defines current team'
 
-echo -e "\nFINAL LEGENDARY SCRIPT COMPLETE — BACKUP + ROLLBACK + EVERYTHING"
+# =============================================================================
+# 8. CONTINUITY SYSTEM – v2026 UPGRADE
+# =============================================================================
+
+echo "✓ Setting up continuity system (thoughts/ + artifact index)..."
+
+# Create continuity directories
+mkdir -p "$ROOT/thoughts/ledgers" \
+         "$ROOT/thoughts/shared/handoffs" \
+         "$ROOT/thoughts/shared/plans" \
+         "$ROOT/thoughts/templates" \
+         "$CLAUDE/cache/artifact-index"
+
+# Initialize artifact database (only if sqlite3 available)
+if command -v sqlite3 &>/dev/null; then
+    DB_FILE="$CLAUDE/cache/artifact-index/context.db"
+    SCHEMA_FILE="$CLAUDE/cache/artifact-index/schema.sql"
+
+    if [ -f "$SCHEMA_FILE" ] && [ ! -f "$DB_FILE" ]; then
+        echo "✓ Initializing artifact index database..."
+        sqlite3 "$DB_FILE" < "$SCHEMA_FILE" 2>/dev/null && \
+            echo "✓ Artifact index ready (FTS5 search enabled)" || \
+            echo "⚠ Artifact index creation skipped (run scripts/init-artifact-index.sh manually)"
+    else
+        if [ -f "$DB_FILE" ]; then
+            echo "⊘ Artifact index already exists"
+        else
+            echo "⚠ Schema file not found - artifact index not initialized"
+            echo "  Run: ./scripts/init-artifact-index.sh"
+        fi
+    fi
+else
+    echo "⚠ sqlite3 not found - artifact index not initialized"
+    echo "  Install: apt-get install sqlite3 (Linux) or brew install sqlite3 (macOS)"
+    echo "  Then run: ./scripts/init-artifact-index.sh"
+fi
+
+echo -e "\nFINAL LEGENDARY SCRIPT COMPLETE — BACKUP + ROLLBACK + CONTINUITY + EVERYTHING"
 echo "Run: claude → /bootstrap"
 echo "Your team is now perfect. Forever.\n"
