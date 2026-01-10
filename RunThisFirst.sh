@@ -15,13 +15,37 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
+GOLD='\033[1;33m'  # Same as YELLOW, for consistency
 NC='\033[0m'
+
+# =============================================================================
+# DEPENDENCY VALIDATION
+# =============================================================================
+
+check_required_commands() {
+    local missing=()
+
+    for cmd in bash grep sed cat mkdir chmod; do
+        if ! command -v "$cmd" &>/dev/null; then
+            missing+=("$cmd")
+        fi
+    done
+
+    if [ ${#missing[@]} -ne 0 ]; then
+        echo -e "${RED}✗ Missing required commands: ${missing[*]}${NC}"
+        exit 1
+    fi
+
+    echo -e "${GREEN}✓ All required dependencies found${NC}"
+}
+
+check_required_commands
 
 # =============================================================================
 # 1. MAIN LEGENDARY SCRIPT
 # =============================================================================
 
-if [ ! grep -q "THE FINAL LEGENDARY SCRIPT" LegendaryTeamDeploy.sh 2>/dev/null; then
+if ! grep -q "THE FINAL LEGENDARY SCRIPT" LegendaryTeamDeploy.sh 2>/dev/null; then
     echo -e "${RED}✗ LegendaryTeamDeploy.sh missing or corrupted${NC}"
     exit 1
 fi
@@ -33,7 +57,9 @@ echo -e "${GREEN}✓ Main legendary script found${NC}"
 # =============================================================================
 
 echo -e "${BLUE}Applying monitoring patch...${NC}"
-if [ -f "Legendary_monitoring_patch.sh" ]; then
+if [ -f "legendary-dashboard.html" ]; then
+    echo -e "${GREEN}⊘ Dashboard already exists — skipping monitoring patch${NC}"
+elif [ -f "Legendary_monitoring_patch.sh" ]; then
     chmod +x Legendary_monitoring_patch.sh
     ./Legendary_monitoring_patch.sh
     echo -e "${GREEN}✓ Monitoring patch applied${NC}"
@@ -42,7 +68,9 @@ else
 fi
 
 echo -e "${BLUE}Applying troubleshooting patch...${NC}"
-if [ -f "Legendary_Troubleshooting_Patch.sh" ]; then
+if [ -f ".claude/troubleshooting.md" ]; then
+    echo -e "${GREEN}⊘ Troubleshooting guide already exists — skipping${NC}"
+elif [ -f "Legendary_Troubleshooting_Patch.sh" ]; then
     chmod +x Legendary_Troubleshooting_Patch.sh
     ./Legendary_Troubleshooting_Patch.sh
     echo -e "${GREEN}✓ Troubleshooting guide added${NC}"

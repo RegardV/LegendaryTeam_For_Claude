@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legendary Team 2026 - Complete Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --dark: #1f2937;
+            --dark-lighter: #374151;
+            --gray: #6b7280;
+            --light: #f9fafb;
+            --border: #e5e7eb;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+        }
+
+        /* Sticky Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        header .subtitle {
+            text-align: center;
+            opacity: 0.9;
+            font-size: 1.2rem;
+        }
+
+        header .version {
+            text-align: center;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            border-bottom: 2px solid var(--border);
+            position: sticky;
+            top: 136px;
+            z-index: 999;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        nav li {
+            position: relative;
+        }
+
+        nav a {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        nav a:hover {
+            background: var(--light);
+            border-bottom-color: var(--primary);
+            color: var(--primary);
+        }
+
+        nav a.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        /* Dropdown */
+        nav .dropdown {
+            position: relative;
+        }
+
+        nav .dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 250px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            border-radius: 4px;
+            margin-top: 0;
+        }
+
+        nav .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        nav .dropdown-content a {
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 1.5rem;
+        }
+
+        nav .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            background: white;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        section h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        section h3 {
+            color: var(--dark);
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+        }
+
+        section h4 {
+            color: var(--dark-lighter);
+            font-size: 1.2rem;
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        /* Code Blocks */
+        pre {
+            background: var(--dark);
+            color: #f8f8f2;
+            padding: 1.5rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+        }
+
+        p code, li code {
+            background: var(--light);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            color: var(--danger);
+            font-size: 0.85rem;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--light);
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        tr:hover {
+            background: var(--light);
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 0.25rem;
+        }
+
+        .badge-success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .badge-warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-danger {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .badge-info {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        /* Alert Boxes */
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+            border-left: 4px solid;
+        }
+
+        .alert-info {
+            background: #dbeafe;
+            border-color: var(--primary);
+            color: #1e3a8a;
+        }
+
+        .alert-success {
+            background: #d1fae5;
+            border-color: var(--secondary);
+            color: #065f46;
+        }
+
+        .alert-warning {
+            background: #fef3c7;
+            border-color: var(--warning);
+            color: #92400e;
+        }
+
+        .alert-danger {
+            background: #fee2e2;
+            border-color: var(--danger);
+            color: #991b1b;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .card h4 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin: 0.5rem 0;
+        }
+
+        /* Links */
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* Scroll to Top */
+        #scrollTop {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        #scrollTop:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        /* Methodology Cards */
+        .methodology {
+            border-left: 5px solid var(--primary);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .methodology h4 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        /* Agent Cards */
+        .agent-card {
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            transition: all 0.3s;
+        }
+
+        .agent-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .agent-card h4 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+
+        .agent-card .tier {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .tier-1 {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .tier-2 {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.75rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav a {
+                border-bottom: none;
+                border-left: 3px solid transparent;
+            }
+
+            nav a:hover, nav a.active {
+                border-left-color: var(--primary);
+                border-bottom-color: transparent;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            header, nav, #scrollTop {
+                display: none;
+            }
+
+            section {
+                page-break-inside: avoid;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🚀 Legendary Team 2026</h1>
+        <div class="subtitle">Complete Documentation - The Most Advanced Autonomous AI Engineering Team</div>
+        <div class="version">Version 2026-legendary-v2.0 | Last Updated: 2026-01-09</div>
+    </header>
+
+    <nav id="mainNav">
+        <ul>
+            <li><a href="#overview" class="active">Overview</a></li>
+            <li class="dropdown">
+                <a href="#methodologies">Methodologies ▼</a>
+                <div class="dropdown-content">
+                    <a href="#method-prd">PRD-First Development</a>
+                    <a href="#method-modular">Modular Architecture</a>
+                    <a href="#method-commandify">Command-ify Everything</a>
+                    <a href="#method-contextreset">Context Reset</a>
+                    <a href="#method-evolution">System Evolution</a>
+                    <a href="#method-parallel">Parallel Autonomous Operation</a>
+                    <a href="#method-continuity">Continuity System</a>
+                    <a href="#method-hooks">Hooks System</a>
+                    <a href="#method-artifacts">Artifact Indexing</a>
+                    <a href="#method-confidence">Confidence-Based Routing</a>
+                </div>
+            </li>
+            <li><a href="#installation">Installation</a></li>
+            <li class="dropdown">
+                <a href="#agents">Agents ▼</a>
+                <div class="dropdown-content">
+                    <a href="#agent-chief">@chief</a>
+                    <a href="#agent-confidence">@ConfidenceAgent</a>
+                    <a href="#agents-autonomous">Autonomous Teams</a>
+                    <a href="#agents-queued">Queued Teams</a>
+                </div>
+            </li>
+            <li><a href="#usage">Usage Guide</a></li>
+            <li><a href="#commands">Commands</a></li>
+            <li><a href="#dashboard">Dashboard</a></li>
+            <li><a href="#troubleshooting">Troubleshooting</a></li>
+            <li><a href="#architecture">Architecture</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- OVERVIEW -->
+        <section id="overview">
+            <h2>📖 Overview</h2>
+
+            <div class="alert alert-info">
+                <strong>What is Legendary Team 2026?</strong><br>
+                The most advanced autonomous AI engineering organization with <strong>parallel autonomous operation</strong> that works at <strong>3-5x faster velocity</strong> while maintaining safety and quality. It transforms your <code>.claude</code> folder into a self-healing, memory-aware, production-grade autonomous engineering organization.
+            </div>
+
+            <h3>Key Innovation: Parallel Autonomous Operation</h3>
+            <p>Unlike traditional AI assistants that wait for human approval on every task, the Legendary Team uses <strong>confidence-based routing</strong> to automatically execute high-confidence work in parallel while queuing uncertain work for asynchronous human review.</p>
+
+            <div class="grid">
+                <div class="card">
+                    <h4>🎯 What You Get</h4>
+                    <ul>
+                        <li><strong>3-5x faster</strong> delivery through parallelization</li>
+                        <li><strong>70% less</strong> human review overhead</li>
+                        <li><strong>Non-blocking</strong> workflow - progress never stops</li>
+                        <li><strong>11 specialized agents</strong> working autonomously</li>
+                        <li><strong>Complete safety</strong> - critical decisions always require approval</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🛡️ Safety First</h4>
+                    <ul>
+                        <li>Production deployments always blocked</li>
+                        <li>Security/architecture/infrastructure queued for review</li>
+                        <li>Auto-rollback on failures</li>
+                        <li>Learning system adapts from outcomes</li>
+                        <li>Complete audit trail of all decisions</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>⚡ Performance</h4>
+                    <ul>
+                        <li>Parallel efficiency: 3-5x faster</li>
+                        <li>Auto-proceed accuracy: >90%</li>
+                        <li>Average wait time: <15 minutes</li>
+                        <li>Throughput: >5 tasks/hour</li>
+                        <li>Human reviews: only 20-30% of tasks</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>How It Works: Quick Example</h3>
+            <div class="card">
+                <p><strong>Request:</strong> "Implement e-commerce checkout"</p>
+                <p><strong>What Happens:</strong></p>
+                <ol>
+                    <li>@chief decomposes into 10 sub-tasks</li>
+                    <li>@ConfidenceAgent analyzes each (0-100% confidence)</li>
+                    <li>5 tasks (75-95% confidence) → <span class="badge badge-success">spawn parallel teams immediately</span></li>
+                    <li>4 tasks (45-65% confidence) → <span class="badge badge-warning">queue for your review</span></li>
+                    <li>1 task (30% confidence) → <span class="badge badge-danger">block for your decision</span></li>
+                </ol>
+                <p><strong>Result:</strong> 10 tasks done in 90 minutes vs 300+ minutes sequential = <strong>3.3x faster!</strong></p>
+                <p>You reviewed only 50% of tasks, zero blocking on routine work.</p>
+            </div>
+        </section>
+
+        <!-- METHODOLOGIES -->
+        <section id="methodologies">
+            <h2>🧠 Core Methodologies & Principles</h2>
+            <p>The Legendary Team is built on 10 foundational methodologies that work together to create a revolutionary autonomous engineering system.</p>
+
+            <div id="method-prd" class="methodology">
+                <h4>1. PRD-First Development (OpenSpec)</h4>
+                <p><strong>Principle:</strong> Document before coding. The OpenSpec is the single source of truth.</p>
+                <p><strong>Implementation:</strong></p>
+                <ul>
+                    <li>All requirements documented in <code>OpenSpec/</code> directory</li>
+                    <li>@OpenSpecPolice agent enforces "no code without approved specs"</li>
+                    <li>Drift protection stops if >15% code missing from specs</li>
+                    <li>OpenSpec versioning and rollback capabilities</li>
+                </ul>
+                <p><strong>Why It Matters:</strong> Prevents scope creep, enables parallelization (teams know what to build), provides rollback capability.</p>
+                <div class="alert alert-info">
+                    <strong>Golden Rule:</strong> NO code implementation without approved OpenSpec. @OpenSpecPolice bans chat TODO lists forever.
+                </div>
+            </div>
+
+            <div id="method-modular" class="methodology">
+                <h4>2. Modular Rules Architecture</h4>
+                <p><strong>Principle:</strong> Split by concern, load context on-demand. No giant monolithic files.</p>
+                <p><strong>Implementation:</strong></p>
+                <ul>
+                    <li><code>.claude/agents/</code> - Specialized AI teammates (11 agents)</li>
+                    <li><code>.claude/skills/</code> - Reusable abilities (git, testing, etc.)</li>
+                    <li><code>.claude/commands/</code> - Slash commands (/review-queue, /team-status)</li>
+                    <li><code>.claude/hooks/</code> - Automated quality gates</li>
+                    <li>Each component is independent and composable</li>
+                </ul>
+                <p><strong>Why It Matters:</strong> Reduces context usage, enables team specialization, makes system maintainable at scale.</p>
+            </div>
+
+            <div id="method-commandify" class="methodology">
+                <h4>3. Command-ify Everything</h4>
+                <p><strong>Principle:</strong> Make repetitive tasks into reusable slash commands.</p>
+                <p><strong>Implementation:</strong></p>
+                <ul>
+                    <li><code>/bootstrap</code> - Full system startup</li>
+                    <li><code>/review-queue</code> - Display tasks waiting for review</li>
+                    <li><code>/team-status</code> - Monitor active parallel teams</li>
+                    <li><code>/approve-task [id]</code> - Approve queued work</li>
+                    <li><code>/reject-task [id]</code> - Reject and learn</li>
+                    <li><code>/emergency-stop</code> - Kill everything</li>
+                </ul>
+                <p><strong>Why It Matters:</strong> Reduces friction, makes workflows reproducible, speeds up common operations.</p>
+            </div>
+
+            <div id="method-contextreset" class="methodology">
+                <h4>4. The Context Reset ("Clear, Don't Compact")</h4>
+                <p><strong>Principle:</strong> When context fills up, clear it and restore state from ledgers. Never compact (degrades signal).</p>
+                <p><strong>Implementation:</strong></p>
+                <ul>
+                    <li>Session ledgers in <code>thoughts/ledgers/</code> track current work</li>
+                    <li>Handoffs in <code>thoughts/shared/handoffs/</code> transfer knowledge between sessions</li>
+                    <li>PreCompact hook blocks compaction, enforces "create handoff first"</li>
+                    <li>SessionStart hook auto-loads ledgers and handoffs</li>
+                    <li>Complete state restoration after context clear</li>
+                </ul>
+                <p><strong>Why It Matters:</strong> Prevents context degradation, enables infinite session length, maintains quality across context resets.</p>
+                <div class="alert alert-warning">
+                    <strong>Rule:</strong> PreCompact hook will BLOCK compaction until you create a handoff. Use <code>/clear</code> instead.
+                </div>
+            </div>
+
+            <div id="method-evolution" class="methodology">
+                <h4>5. System Evolution Mindset</h4>
+                <p><strong>Principle:</strong> Every bug, every failure, every success teaches the system. Continuous learning and adaptation.</p>
+                <p><strong>Implementation:</strong></p>
+                <ul>
+                    <li>Artifact index (SQLite) stores all decisions, outcomes, and learnings</li>
+                    <li>Confidence model adapts based on task success/failure rates</li>
+                    <li>Failed auto-proceed tasks reduce confidence for similar future tasks</li>
+                    <li>Successful patterns increase confidence scores</li>
+                    <li>"What Didn't Work" sections in handoffs capture failures</li>
+                    <li>Searchable history via FTS5 full-text search</li>
+                </ul>
+                <p><strong>Why It Matters:</strong> System gets smarter over time, prevents repeated mistakes, institutional knowledge persists.</p>
+            </div>
+
+            <div id="method-parallel" class="methodology">
+                <h4>6. Parallel Autonomous Operation</h4>
+                <p><strong>Principle:</strong> High-confidence work proceeds immediately in parallel. Uncertain work queues for async human review. Critical work blocks.</p>
+                <p><strong>Implementation:</strong></p>
+                <ul>
+                    <li><strong>3-Tier Routing:</strong>
+                        <ul>
+                            <li>Tier 1 (≥70% confidence): Auto-proceed, spawn parallel teams</li>
+                            <li>Tier 2 (40-69% confidence): Queue for review, continue other work</li>
+                            <li>Tier 3 (<40% confidence): Block for human decision</li>
+                        </ul>
+                    </li>
+                    <li>@ConfidenceAgent scores each task (0-100) using 8 weighted factors</li>
+                    <li>@chief spawns 3-15 teams simultaneously for independent tasks</li>
+                    <li>Review queue managed via <code>thoughts/shared/review-queue.json</code></li>
+                    <li>Teams auto-merge when tests pass</li>
+                </ul>
+                <p><strong>Why It Matters:</strong> 3-5x faster delivery, 70% less human overhead, non-blocking workflow.</p>
+                <div class="alert alert-success">
+                    <strong>Example:</strong> 10 sub-tasks → 5 auto-proceed in parallel (25 min), 4 queue for review, 1 blocks. Result: 90 min total vs 300+ min sequential.
+                </div>
+            </div>
+
+            <div id="method-continuity" class="methodology">
+                <h4>7. Continuity System</h4>
+                <p><strong>Principle:</strong> Never lose context. Track session state, transfer knowledge across sessions, remember everything.</p>
+                <p><strong>Implementation:</strong></p>
+                <ul>
+                    <li><strong>Ledgers</strong> (<code>thoughts/ledgers/</code>): Current session work tracking
+                        <ul>
+                            <li>Goal, constraints, completed work, decisions, next steps</li>
+                            <li>Auto-loaded at session start</li>
+                            <li>Updated continuously during work</li>
+                        </ul>
+                    </li>
+                    <li><strong>Handoffs</strong> (<code>thoughts/shared/handoffs/</code>): Cross-session knowledge transfer
+                        <ul>
+                            <li>Changes made, what worked/didn't work, key decisions</li>
+                            <li>Permanent record indexed in SQLite</li>
+                            <li>Created before context clear or session end</li>
+                        </ul>
+                    </li>
+                    <li><strong>Plans</strong> (<code>thoughts/shared/plans/</code>): Pre-implementation design
+                        <ul>
+                            <li>Problem, solution, alternatives, risks</li>
+                            <li>Referenced by queued tasks</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p><strong>Why It Matters:</strong> Infinite session length, seamless handoffs between sessions, institutional memory.</p>
+            </div>
+
+            <div id="method-hooks" class="methodology">
+                <h4>8. Hooks System (Automated Quality Gates)</h4>
+                <p><strong>Principle:</strong> Automate quality enforcement. Prevent issues before they happen.</p>
+                <p><strong>Implementation:</strong></p>
+                <ul>
+                    <li><strong>SessionStart.js:</strong> Auto-load ledgers and handoffs, restore state</li>
+                    <li><strong>PreToolUse.js:</strong> TypeScript validation, budget checks before tool execution</li>
+                    <li><strong>PostToolUse.js:</strong> State tracking, artifact indexing, file change monitoring</li>
+                    <li><strong>PreCompact.js:</strong> Block compaction, enforce "Clear, Don't Compact" philosophy</li>
+                    <li><strong>SessionEnd.js:</strong> Cleanup, prompt for handoff creation</li>
+                    <li>All hooks continue on errors (graceful degradation)</li>
+                </ul>
+                <p><strong>Why It Matters:</strong> Quality gates are automatic, prevents mistakes, enforces best practices without human intervention.</p>
+            </div>
+
+            <div id="method-artifacts" class="methodology">
+                <h4>9. Artifact Indexing (Searchable History)</h4>
+                <p><strong>Principle:</strong> Every decision, every handoff, every plan is searchable. Institutional knowledge is queryable.</p>
+                <p><strong>Implementation:</strong></p>
+                <ul>
+                    <li>SQLite database at <code>.claude/cache/artifact-index/artifacts.db</code></li>
+                    <li>FTS5 full-text search on title, summary, content, tags, keywords</li>
+                    <li>Indexes: handoffs, plans, learnings, ledgers</li>
+                    <li>Tracks outcomes (SUCCEEDED, PARTIAL, FAILED)</li>
+                    <li>Auto-indexed by PostToolUse hook</li>
+                    <li>Query via SQL or search commands</li>
+                </ul>
+                <p><strong>Why It Matters:</strong> Find similar past solutions instantly, learn from history, prevent repeated work.</p>
+            </div>
+
+            <div id="method-confidence" class="methodology">
+                <h4>10. Confidence-Based Routing</h4>
+                <p><strong>Principle:</strong> Let data decide routing. Algorithmic confidence scoring determines auto-proceed vs queue vs block.</p>
+                <p><strong>Implementation:</strong></p>
+                <ul>
+                    <li><strong>Scoring Algorithm (8 factors):</strong>
+                        <ul>
+                            <li>+40: Similar task succeeded before</li>
+                            <li>+30: Clear OpenSpec requirements</li>
+                            <li>+20: Existing patterns available</li>
+                            <li>+10: Low risk (CRUD, UI, tests)</li>
+                            <li>-20: Security implications</li>
+                            <li>-20: New architectural pattern</li>
+                            <li>-30: Conflicting requirements</li>
+                            <li>-40: Destructive operations</li>
+                        </ul>
+                    </li>
+                    <li>Logged to <code>.claude/cache/confidence-decisions.json</code></li>
+                    <li>Learning loop: outcomes update future confidence</li>
+                    <li>False positives degrade confidence by 10%</li>
+                </ul>
+                <p><strong>Why It Matters:</strong> Objective routing decisions, self-improving system, transparency in decision-making.</p>
+            </div>
+        </section>
+
+        <!-- INSTALLATION -->
+        <section id="installation">
+            <h2>⚙️ Installation</h2>
+
+            <h3>Prerequisites</h3>
+            <ul>
+                <li>You are in your project folder</li>
+                <li>Internet connection (for API calls)</li>
+                <li>Z.AI / Kimi API keys (or add later)</li>
+                <li>Git installed</li>
+                <li>Node.js installed (for hooks and scripts)</li>
+            </ul>
+
+            <h3>Step 1: Clone Repository</h3>
+            <pre><code>git clone https://github.com/RegardV/LegendaryTeam_For_Claude.git
+cd LegendaryTeam_For_Claude</code></pre>
+
+            <h3>Step 2: Run Master Installer</h3>
+            <p><strong>For Linux/macOS/WSL2:</strong></p>
+            <pre><code>chmod +x RunThisFirst.sh
+./RunThisFirst.sh</code></pre>
+
+            <p><strong>For Windows:</strong></p>
+            <pre><code>.\RunThisFirst.ps1</code></pre>
+
+            <div class="alert alert-info">
+                <strong>What the installer does:</strong>
+                <ul>
+                    <li>Validates dependencies (bash, git, sed, etc.)</li>
+                    <li>Runs LegendaryTeamDeploy.sh to create full structure</li>
+                    <li>Creates .claude/ directory with agents, skills, commands, hooks</li>
+                    <li>Initializes thoughts/ directory and SQLite artifact index</li>
+                    <li>Sets up OpenSpec structure</li>
+                    <li>Creates session-state.json</li>
+                </ul>
+            </div>
+
+            <h3>Step 3: Configure API Keys (Optional)</h3>
+            <pre><code>nano .claude/api-keys.conf
+# Add your Z.AI or Kimi keys
+# Save and exit</code></pre>
+
+            <h3>Step 4: Initialize SQLite Database</h3>
+            <pre><code>./scripts/init-artifact-index.sh</code></pre>
+
+            <h3>Step 5: Start Claude Code</h3>
+            <p>Open Claude Code and type:</p>
+            <pre><code>@chief
+
+This is a brand-new project.
+Execute the full legendary bootstrap.
+Begin now.</code></pre>
+
+            <h3>Verification</h3>
+            <p>Check that the following directories exist:</p>
+            <pre><code>ls -la .claude/
+# Should show: agents/, skills/, commands/, hooks/, cache/
+
+ls -la thoughts/
+# Should show: ledgers/, shared/, templates/
+
+sqlite3 .claude/cache/artifact-index/artifacts.db ".tables"
+# Should show: artifacts, artifacts_fts, file_changes, dependencies, learnings</code></pre>
+
+            <div class="alert alert-success">
+                <strong>✅ Installation Complete!</strong> You're ready to use the Legendary Team.
+            </div>
+        </section>
+
+        <!-- AGENTS -->
+        <section id="agents">
+            <h2>🤖 Agent Directory</h2>
+            <p>The Legendary Team consists of 11 specialized agents organized into three categories.</p>
+
+            <div id="agent-chief" class="agent-card">
+                <span class="tier tier-1">CORE ORCHESTRATION</span>
+                <h4>@chief - Master Orchestrator</h4>
+                <p><strong>Role:</strong> Supreme commander. All teams report to @chief.</p>
+                <p><strong>Responsibilities:</strong></p>
+                <ul>
+                    <li>Receives tasks from humans</li>
+                    <li>Decomposes complex tasks into parallelizable sub-tasks</li>
+                    <li>Coordinates with @ConfidenceAgent for routing decisions</li>
+                    <li>Spawns parallel teams (3-15 simultaneously)</li>
+                    <li>Manages review queue</li>
+                    <li>Integrates completed work</li>
+                    <li>Enforces quality gates and orchestration SOP</li>
+                </ul>
+                <p><strong>Commands @chief Responds To:</strong></p>
+                <ul>
+                    <li><code>@chief [task description]</code> - Execute task</li>
+                    <li><code>@chief resume session</code> - Continue from ledger</li>
+                </ul>
+            </div>
+
+            <div id="agent-confidence" class="agent-card">
+                <span class="tier tier-1">CORE ORCHESTRATION</span>
+                <h4>@ConfidenceAgent - Confidence Scoring & Routing</h4>
+                <p><strong>Role:</strong> Analyzes tasks, assigns confidence scores (0-100), routes to appropriate tier.</p>
+                <p><strong>Algorithm:</strong></p>
+                <table>
+                    <tr>
+                        <th>Factor</th>
+                        <th>Points</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>Similar task before</td>
+                        <td>+40</td>
+                        <td>We've done this successfully before</td>
+                    </tr>
+                    <tr>
+                        <td>Clear OpenSpec</td>
+                        <td>+30</td>
+                        <td>Requirements are specific and unambiguous</td>
+                    </tr>
+                    <tr>
+                        <td>Existing patterns</td>
+                        <td>+20</td>
+                        <td>Code templates/patterns available</td>
+                    </tr>
+                    <tr>
+                        <td>Low risk</td>
+                        <td>+10</td>
+                        <td>CRUD, UI, tests, documentation</td>
+                    </tr>
+                    <tr>
+                        <td>Security implications</td>
+                        <td>-20</td>
+                        <td>Auth, encryption, PII handling</td>
+                    </tr>
+                    <tr>
+                        <td>New architecture</td>
+                        <td>-20</td>
+                        <td>Never done this pattern before</td>
+                    </tr>
+                    <tr>
+                        <td>Conflicting requirements</td>
+                        <td>-30</td>
+                        <td>OpenSpec has contradictions</td>
+                    </tr>
+                    <tr>
+                        <td>Destructive operations</td>
+                        <td>-40</td>
+                        <td>Data deletion, DROP TABLE, production deploys</td>
+                    </tr>
+                </table>
+                <p><strong>Routing Decisions:</strong></p>
+                <ul>
+                    <li>≥70%: Tier 1 (Auto-proceed)</li>
+                    <li>40-69%: Tier 2 (Queue for review)</li>
+                    <li><40%: Tier 3 (Block for human)</li>
+                </ul>
+            </div>
+
+            <h3 id="agents-autonomous">Autonomous Execution Teams (Tier 1)</h3>
+            <p>These agents auto-proceed without human approval when confidence ≥70%.</p>
+
+            <div class="grid">
+                <div class="agent-card">
+                    <span class="tier tier-1">TIER 1 - AUTO</span>
+                    <h4>@DatabaseAgent</h4>
+                    <p><strong>Confidence Threshold:</strong> ≥70%</p>
+                    <p><strong>Handles:</strong></p>
+                    <ul>
+                        <li>Database schemas</li>
+                        <li>Migrations (CREATE, ALTER)</li>
+                        <li>Indexes and constraints</li>
+                        <li>CRUD operations</li>
+                        <li>Seed data</li>
+                    </ul>
+                    <p><strong>Never Auto-Proceeds:</strong> DROP operations, data deletion</p>
+                </div>
+
+                <div class="agent-card">
+                    <span class="tier tier-1">TIER 1 - AUTO</span>
+                    <h4>@UIAgent</h4>
+                    <p><strong>Confidence Threshold:</strong> ≥70%</p>
+                    <p><strong>Handles:</strong></p>
+                    <ul>
+                        <li>React/Vue components</li>
+                        <li>CSS/Tailwind styling</li>
+                        <li>Responsive design</li>
+                        <li>Form components</li>
+                        <li>Navigation</li>
+                    </ul>
+                    <p><strong>Never Auto-Proceeds:</strong> Complex animations, payment UI</p>
+                </div>
+
+                <div class="agent-card">
+                    <span class="tier tier-1">TIER 1 - AUTO</span>
+                    <h4>@TestAgent</h4>
+                    <p><strong>Confidence Threshold:</strong> ≥80%</p>
+                    <p><strong>Handles:</strong></p>
+                    <ul>
+                        <li>Unit tests</li>
+                        <li>Integration tests</li>
+                        <li>E2E tests</li>
+                        <li>Test fixtures</li>
+                        <li>Coverage reports</li>
+                    </ul>
+                    <p><strong>Never Auto-Proceeds:</strong> Load tests, security tests</p>
+                </div>
+
+                <div class="agent-card">
+                    <span class="tier tier-1">TIER 1 - AUTO</span>
+                    <h4>@DocAgent</h4>
+                    <p><strong>Confidence Threshold:</strong> ≥90%</p>
+                    <p><strong>Handles:</strong></p>
+                    <ul>
+                        <li>JSDoc/TypeScript docs</li>
+                        <li>API documentation</li>
+                        <li>README updates</li>
+                        <li>Code comments</li>
+                        <li>Changelog entries</li>
+                    </ul>
+                    <p><strong>Never Auto-Proceeds:</strong> ADRs, legal docs</p>
+                </div>
+
+                <div class="agent-card">
+                    <span class="tier tier-1">TIER 1 - AUTO</span>
+                    <h4>@RefactorAgent</h4>
+                    <p><strong>Confidence Threshold:</strong> ≥75%</p>
+                    <p><strong>Handles:</strong></p>
+                    <ul>
+                        <li>Extract functions (DRY)</li>
+                        <li>Rename variables</li>
+                        <li>Add type annotations</li>
+                        <li>Linting fixes</li>
+                        <li>Performance optimizations</li>
+                    </ul>
+                    <p><strong>Never Auto-Proceeds:</strong> API changes, architecture changes</p>
+                    <p><strong>Critical Rule:</strong> Never changes public APIs or behavior, only internal implementation</p>
+                </div>
+            </div>
+
+            <h3 id="agents-queued">Human-Queued Teams (Tier 2)</h3>
+            <p>These agents always queue for human review before execution. They create detailed plans and wait for approval.</p>
+
+            <div class="grid">
+                <div class="agent-card">
+                    <span class="tier tier-2">TIER 2 - QUEUED</span>
+                    <h4>@ArchitectureAgent</h4>
+                    <p><strong>Always Queued</strong></p>
+                    <p><strong>Handles:</strong></p>
+                    <ul>
+                        <li>Architectural decisions</li>
+                        <li>Technology selection</li>
+                        <li>System design</li>
+                        <li>Microservices boundaries</li>
+                        <li>Database architecture</li>
+                    </ul>
+                    <p><strong>Outputs:</strong></p>
+                    <ul>
+                        <li>Multiple options with pros/cons</li>
+                        <li>Architectural Decision Records (ADRs)</li>
+                        <li>Risk analysis</li>
+                        <li>Migration paths</li>
+                    </ul>
+                </div>
+
+                <div class="agent-card">
+                    <span class="tier tier-2">TIER 2 - QUEUED</span>
+                    <h4>@SecurityAgent</h4>
+                    <p><strong>Always Queued</strong></p>
+                    <p><strong>Handles:</strong></p>
+                    <ul>
+                        <li>Authentication (OAuth, JWT, SSO)</li>
+                        <li>Authorization (RBAC, permissions)</li>
+                        <li>Encryption (TLS, AES, hashing)</li>
+                        <li>Security audits</li>
+                        <li>Compliance (GDPR, PCI-DSS)</li>
+                    </ul>
+                    <p><strong>Outputs:</strong></p>
+                    <ul>
+                        <li>Threat modeling</li>
+                        <li>Security analysis</li>
+                        <li>Mitigation strategies</li>
+                        <li>Compliance documentation</li>
+                    </ul>
+                </div>
+
+                <div class="agent-card">
+                    <span class="tier tier-2">TIER 2 - QUEUED</span>
+                    <h4>@InfrastructureAgent</h4>
+                    <p><strong>Always Queued</strong></p>
+                    <p><strong>Handles:</strong></p>
+                    <ul>
+                        <li>Deployment strategies</li>
+                        <li>Infrastructure provisioning</li>
+                        <li>Scaling (horizontal/vertical)</li>
+                        <li>Monitoring & alerting</li>
+                        <li>Disaster recovery</li>
+                    </ul>
+                    <p><strong>Outputs:</strong></p>
+                    <ul>
+                        <li>Deployment plans</li>
+                        <li>Cost estimates</li>
+                        <li>Rollback procedures</li>
+                        <li>Infrastructure-as-Code</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- USAGE GUIDE -->
+        <section id="usage">
+            <h2>📘 Usage Guide</h2>
+
+            <h3>Starting a New Project</h3>
+            <pre><code>@chief
+
+This is a brand-new empty project.
+Execute the full legendary bootstrap.
+I will provide specs when requested.
+Begin now.</code></pre>
+
+            <p><strong>What happens:</strong></p>
+            <ol>
+                <li>@chief activates all agents</li>
+                <li>Prompts for OpenSpec creation</li>
+                <li>Sets up project structure</li>
+                <li>Initializes continuity system</li>
+                <li>Ready for work</li>
+            </ol>
+
+            <h3>Working on Existing Project</h3>
+            <pre><code>@chief
+
+This is an existing project.
+Execute full legendary bootstrap with discovery protection.
+Recompile specs vs actual code.
+Rebuild team for current stack.
+Begin now.</code></pre>
+
+            <p><strong>What happens:</strong></p>
+            <ol>
+                <li>@CodebaseCartographer scans current code</li>
+                <li>@SpecArchitect reconciles code with OpenSpec</li>
+                <li>@TechStackFingerprinter detects technology stack</li>
+                <li>@TeamBuilder creates specialized agents for detected stack</li>
+                <li>Ready for work</li>
+            </ol>
+
+            <h3>Resuming Previous Session</h3>
+            <pre><code>@chief resume session</code></pre>
+
+            <p><strong>What happens:</strong></p>
+            <ol>
+                <li>SessionStart hook auto-loads latest ledger</li>
+                <li>Displays current goal, completed work, next steps</li>
+                <li>Restores full context</li>
+                <li>Ready to continue where you left off</li>
+            </ol>
+
+            <h3>Requesting Work (Parallel Autonomous)</h3>
+            <pre><code>@chief implement user authentication with OAuth 2.0</code></pre>
+
+            <p><strong>What happens (step by step):</strong></p>
+            <ol>
+                <li><strong>Task Decomposition:</strong> @chief breaks down into sub-tasks
+                    <ul>
+                        <li>Database: User table, Session table</li>
+                        <li>API: Login endpoint, Logout endpoint, OAuth callback</li>
+                        <li>Security: JWT middleware, Password hashing, Token refresh</li>
+                        <li>UI: Login form, OAuth buttons, Session management</li>
+                        <li>Tests: Auth unit tests, OAuth integration tests</li>
+                    </ul>
+                </li>
+                <li><strong>Confidence Analysis:</strong> @ConfidenceAgent scores each
+                    <ul>
+                        <li>User table: 90% (done before, clear specs) → Tier 1</li>
+                        <li>Session table: 90% → Tier 1</li>
+                        <li>Login endpoint: 85% → Tier 1</li>
+                        <li>OAuth callback: 45% (security, first time) → Tier 2 (queue)</li>
+                        <li>JWT middleware: 70% → Tier 1</li>
+                        <li>OAuth integration: 40% (new pattern) → Tier 2 (queue)</li>
+                    </ul>
+                </li>
+                <li><strong>Parallel Execution:</strong> @chief spawns teams
+                    <ul>
+                        <li>T+0: Team 1 (@DatabaseAgent) → User + Session tables</li>
+                        <li>T+0: Team 2 (@APIAgent) → Login endpoint</li>
+                        <li>T+0: Team 3 (@MiddlewareAgent) → JWT middleware</li>
+                        <li>T+0: Team 4 (@UIAgent) → Login form</li>
+                        <li>T+0: Team 5 (@TestAgent) → Unit tests</li>
+                    </ul>
+                </li>
+                <li><strong>Review Queue:</strong> Medium-confidence tasks queued
+                    <ul>
+                        <li>OAuth callback → Plan created, added to queue</li>
+                        <li>OAuth integration → Plan created, added to queue</li>
+                    </ul>
+                </li>
+                <li><strong>Results:</strong>
+                    <ul>
+                        <li>T+25: Teams 1-5 complete autonomously ✓</li>
+                        <li>T+30: You review queued tasks (2 items)</li>
+                        <li>T+35: You approve with notes: "Use Passport.js library"</li>
+                        <li>T+40: Team 6 (@SecurityAgent) implements OAuth</li>
+                        <li>T+60: All complete!</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3>Reviewing Queued Work</h3>
+            <pre><code>/review-queue</code></pre>
+
+            <p><strong>Output example:</strong></p>
+            <pre><code>╔═══════════════════════════════════════════════════════════╗
+║ HUMAN REVIEW QUEUE - 2 Tasks Waiting                     ║
+╚═══════════════════════════════════════════════════════════╝
+
+🔴 [HIGH] OAuth 2.0 Integration
+   Confidence: 45%
+   Type: Security
+   Waiting: 12 minutes
+   Uncertainty:
+    • First-time OAuth implementation
+    • Security implications for user authentication
+    • New architectural pattern
+   Plan: thoughts/shared/plans/plan-oauth-security.md
+
+   To approve: /approve-task review-001
+   To reject:  /reject-task review-001
+
+🟡 [MED] Password Reset Flow
+   Confidence: 55%
+   Type: Security
+   Waiting: 8 minutes
+   Plan: thoughts/shared/plans/plan-password-reset.md
+
+Meanwhile, 5 autonomous teams working in parallel!</code></pre>
+
+            <h3>Approving/Rejecting Tasks</h3>
+            <pre><code>/approve-task review-001 "Use Passport.js library for OAuth"
+
+# Output:
+✅ Task Approved: OAuth 2.0 Integration
+🚀 Spawning Team 6: @SecurityAgent + @APIAgent
+⏱️  Estimated completion: 25 minutes</code></pre>
+
+            <pre><code>/reject-task review-002 "Timeline too long, defer to Phase 2"
+
+# Output:
+❌ Task Rejected: Password Reset Flow
+📝 Decision logged for learning
+🔄 Future similar tasks will be flagged</code></pre>
+
+            <h3>Monitoring Active Teams</h3>
+            <pre><code>/team-status
+
+# Output:
+╔═══════════════════════════════════════════════════════════╗
+║ PARALLEL AUTONOMOUS TEAMS STATUS                          ║
+╚═══════════════════════════════════════════════════════════╝
+
+🟢 ACTIVE TEAMS (3)
+
+Team 1: @DatabaseAgent
+  Task: Create orders table
+  Progress: ████████░░ 80%
+  Started: 10 minutes ago
+  ETA: 2 minutes
+  Files: migrations/003_create_orders.sql
+
+Team 2: @UIAgent
+  Task: ProductCard component
+  Progress: ██████████ 100% ✓
+  Completed: 2 minutes ago
+
+Team 3: @TestAgent
+  Task: Integration tests for checkout
+  Progress: ████░░░░░░ 40%
+  Started: 8 minutes ago
+  ETA: 12 minutes
+
+📊 TODAY'S METRICS
+Completed: 12 tasks
+Parallel efficiency: 5.2x faster
+Auto-proceed accuracy: 95% (19/20 succeeded)</code></pre>
+        </section>
+
+        <!-- COMMANDS -->
+        <section id="commands">
+            <h2>⚡ Commands Reference</h2>
+
+            <h3>Core Commands</h3>
+            <table>
+                <tr>
+                    <th>Command</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td><code>/bootstrap</code></td>
+                    <td>Full system startup</td>
+                    <td><code>/bootstrap</code></td>
+                </tr>
+                <tr>
+                    <td><code>/emergency-stop</code></td>
+                    <td>Kill all active teams immediately</td>
+                    <td><code>/emergency-stop</code></td>
+                </tr>
+                <tr>
+                    <td><code>/skill budget-cap [amount]</code></td>
+                    <td>Abort if cost exceeds amount</td>
+                    <td><code>/skill budget-cap 30</code></td>
+                </tr>
+                <tr>
+                    <td><code>/skill rollback-openspec</code></td>
+                    <td>Restore last good OpenSpec</td>
+                    <td><code>/skill rollback-openspec</code></td>
+                </tr>
+            </table>
+
+            <h3>Parallel Operation Commands</h3>
+            <table>
+                <tr>
+                    <th>Command</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td><code>/review-queue</code></td>
+                    <td>Display all tasks waiting for human review</td>
+                    <td><code>/review-queue</code></td>
+                </tr>
+                <tr>
+                    <td><code>/team-status</code></td>
+                    <td>Monitor active parallel teams in real-time</td>
+                    <td><code>/team-status</code></td>
+                </tr>
+                <tr>
+                    <td><code>/approve-task [id]</code></td>
+                    <td>Approve queued task and spawn team</td>
+                    <td><code>/approve-task review-001</code></td>
+                </tr>
+                <tr>
+                    <td><code>/reject-task [id]</code></td>
+                    <td>Reject queued task and update confidence</td>
+                    <td><code>/reject-task review-002 "reason"</code></td>
+                </tr>
+            </table>
+
+            <h3>Agent Commands</h3>
+            <table>
+                <tr>
+                    <th>Command</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><code>@chief [task]</code></td>
+                    <td>Execute task with parallel autonomous operation</td>
+                </tr>
+                <tr>
+                    <td><code>@chief resume session</code></td>
+                    <td>Continue from previous session ledger</td>
+                </tr>
+                <tr>
+                    <td><code>@ConfidenceAgent analyze [task]</code></td>
+                    <td>Get confidence score for a specific task</td>
+                </tr>
+            </table>
+
+            <h3>Continuity Commands</h3>
+            <table>
+                <tr>
+                    <th>Command</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><code>/skill create-ledger</code></td>
+                    <td>Create session continuity ledger</td>
+                </tr>
+                <tr>
+                    <td><code>/skill create-handoff</code></td>
+                    <td>Create cross-session knowledge transfer document</td>
+                </tr>
+                <tr>
+                    <td><code>/skill query-artifacts</code></td>
+                    <td>Search artifact index with full-text search</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- DASHBOARD -->
+        <section id="dashboard">
+            <h2>📊 Dashboard</h2>
+
+            <h3>Starting the Dashboard</h3>
+            <pre><code>./legendary-dashboard.sh</code></pre>
+
+            <p>The dashboard opens in your browser at <code>http://localhost:3000</code></p>
+
+            <h3>Dashboard Features</h3>
+            <div class="grid">
+                <div class="card">
+                    <h4>Team Status</h4>
+                    <ul>
+                        <li>Real-time team activity</li>
+                        <li>Progress bars for each team</li>
+                        <li>ETA calculations</li>
+                        <li>Files being modified</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>Review Queue</h4>
+                    <ul>
+                        <li>Tasks waiting for review</li>
+                        <li>Priority indicators</li>
+                        <li>Wait time tracking</li>
+                        <li>Quick approve/reject</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>Metrics</h4>
+                    <ul>
+                        <li>Parallel efficiency graph</li>
+                        <li>Auto-proceed accuracy</li>
+                        <li>Tasks completed today</li>
+                        <li>Average wait times</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>Artifact Search</h4>
+                    <ul>
+                        <li>Full-text search</li>
+                        <li>Filter by type/outcome</li>
+                        <li>View past decisions</li>
+                        <li>Learn from history</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Dashboard Architecture</h3>
+            <pre><code>legendary-dashboard/
+├── server.js           # Express server
+├── public/
+│   ├── index.html      # Main dashboard UI
+│   ├── css/
+│   │   └── style.css
+│   └── js/
+│       ├── app.js      # Frontend logic
+│       └── charts.js   # Metrics visualization
+└── api/
+    ├── teams.js        # Team status endpoints
+    ├── queue.js        # Review queue endpoints
+    └── metrics.js      # Metrics endpoints</code></pre>
+
+            <h3>API Endpoints</h3>
+            <table>
+                <tr>
+                    <th>Endpoint</th>
+                    <th>Method</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><code>/api/teams</code></td>
+                    <td>GET</td>
+                    <td>Get all active team status</td>
+                </tr>
+                <tr>
+                    <td><code>/api/queue</code></td>
+                    <td>GET</td>
+                    <td>Get review queue</td>
+                </tr>
+                <tr>
+                    <td><code>/api/queue/approve</code></td>
+                    <td>POST</td>
+                    <td>Approve queued task</td>
+                </tr>
+                <tr>
+                    <td><code>/api/queue/reject</code></td>
+                    <td>POST</td>
+                    <td>Reject queued task</td>
+                </tr>
+                <tr>
+                    <td><code>/api/metrics</code></td>
+                    <td>GET</td>
+                    <td>Get performance metrics</td>
+                </tr>
+                <tr>
+                    <td><code>/api/artifacts/search</code></td>
+                    <td>GET</td>
+                    <td>Search artifact index</td>
+                </tr>
+            </table>
+
+            <h3>Customizing the Dashboard</h3>
+            <p>Edit <code>legendary-dashboard/public/css/style.css</code> to customize colors and layout.</p>
+            <p>Edit <code>legendary-dashboard/public/js/app.js</code> to modify functionality.</p>
+        </section>
+
+        <!-- TROUBLESHOOTING -->
+        <section id="troubleshooting">
+            <h2>🔧 Troubleshooting</h2>
+
+            <h3>Common Issues</h3>
+
+            <div class="card">
+                <h4>Issue: Scripts fail with "command not found"</h4>
+                <p><strong>Cause:</strong> Missing dependencies</p>
+                <p><strong>Solution:</strong></p>
+                <pre><code>./scripts/validate-deps.sh
+# Install any missing dependencies shown</code></pre>
+            </div>
+
+            <div class="card">
+                <h4>Issue: Hooks not executing</h4>
+                <p><strong>Cause:</strong> Hooks disabled or syntax errors</p>
+                <p><strong>Solution:</strong></p>
+                <pre><code># Check hook configuration
+cat .claude/hooks/config.json
+
+# Check for syntax errors
+node .claude/hooks/SessionStart.js
+
+# Enable hooks
+# Edit config.json and set "enabled": true</code></pre>
+            </div>
+
+            <div class="card">
+                <h4>Issue: SQLite database errors</h4>
+                <p><strong>Cause:</strong> Database not initialized or corrupted</p>
+                <p><strong>Solution:</strong></p>
+                <pre><code># Reinitialize database
+rm -f .claude/cache/artifact-index/artifacts.db
+./scripts/init-artifact-index.sh</code></pre>
+            </div>
+
+            <div class="card">
+                <h4>Issue: Parallel teams not spawning</h4>
+                <p><strong>Cause:</strong> Confidence scores too low or @chief not activated</p>
+                <p><strong>Solution:</strong></p>
+                <pre><code># Check confidence decisions
+cat .claude/cache/confidence-decisions.json
+
+# Ensure @chief is active
+@chief status
+
+# Check review queue
+/review-queue</code></pre>
+            </div>
+
+            <div class="card">
+                <h4>Issue: Context fills up quickly</h4>
+                <p><strong>Cause:</strong> Large files or verbose output</p>
+                <p><strong>Solution:</strong></p>
+                <pre><code># Create handoff before clearing
+/skill create-handoff
+
+# Clear context (don't compact!)
+/clear
+
+# Resume session
+@chief resume session</code></pre>
+            </div>
+
+            <h3>Debug Mode</h3>
+            <p>Enable debug mode in hooks:</p>
+            <pre><code># Edit .claude/hooks/config.json
+{
+  "debug": true,
+  ...
+}</code></pre>
+
+            <h3>Logs</h3>
+            <p>Check logs for detailed error messages:</p>
+            <pre><code># Hook logs
+cat .claude/cache/hooks.log
+
+# Team status log
+cat .claude/cache/team-status.json
+
+# Confidence decisions
+cat .claude/cache/confidence-decisions.json</code></pre>
+
+            <h3>Reset System</h3>
+            <p>If all else fails, reset (preserves handoffs and plans):</p>
+            <pre><code># Backup important files
+cp -r thoughts/shared/handoffs/ ~/backup-handoffs/
+
+# Re-run deployment
+./LegendaryTeamDeploy.sh
+
+# Reinitialize
+./scripts/init-artifact-index.sh</code></pre>
+        </section>
+
+        <!-- ARCHITECTURE -->
+        <section id="architecture">
+            <h2>🏗️ System Architecture</h2>
+
+            <h3>High-Level Architecture</h3>
+            <pre><code>┌─────────────────────────────────────────────────────────┐
+│                    Human (You)                          │
+└──────────────────────┬──────────────────────────────────┘
+                       │
+                       │ @chief [task]
+                       │ /review-queue
+                       │ /team-status
+                       │
+         ┌─────────────▼──────────────┐
+         │        @chief              │
+         │  (Master Orchestrator)     │
+         └─────────────┬──────────────┘
+                       │
+         ┌─────────────▼──────────────┐
+         │    @ConfidenceAgent        │
+         │  (Confidence Scoring)      │
+         └─────────────┬──────────────┘
+                       │
+         ┌─────────────▼──────────────┐
+         │    Routing Decision        │
+         │                            │
+         │  ≥70%  │ 40-69% │  <40%   │
+         │  Auto  │ Queue  │  Block   │
+         └────┬────┴────┬────┴────┬───┘
+              │         │         │
+    ┌─────────▼──┐   ┌──▼───┐  ┌─▼──────┐
+    │ Parallel   │   │Review│  │ Human  │
+    │ Teams      │   │Queue │  │Decision│
+    │ (3-15)     │   │      │  │Required│
+    └─────────┬──┘   └──┬───┘  └────────┘
+              │         │
+    ┌─────────▼─────────▼──────┐
+    │   Completed Work          │
+    │   - Auto-merge if Tier 1  │
+    │   - Await approval if T2  │
+    └───────────────────────────┘</code></pre>
+
+            <h3>File System Architecture</h3>
+            <pre><code>LegendaryTeam_For_Claude/
+├── .claude/                    # Claude Code brain
+│   ├── agents/                 # 11 specialized AI agents
+│   │   ├── chief.md
+│   │   ├── confidence-agent.md
+│   │   ├── database-agent.md
+│   │   ├── ui-agent.md
+│   │   ├── test-agent.md
+│   │   ├── doc-agent.md
+│   │   ├── refactor-agent.md
+│   │   ├── architecture-agent.md
+│   │   ├── security-agent.md
+│   │   └── infrastructure-agent.md
+│   │
+│   ├── skills/                 # Reusable abilities
+│   │   ├── git-operations.md
+│   │   ├── test-runner.md
+│   │   ├── budget-cap.md
+│   │   └── openspec-rollback.md
+│   │
+│   ├── commands/               # Slash commands
+│   │   ├── review-queue.md
+│   │   ├── approve-task.md
+│   │   ├── reject-task.md
+│   │   └── team-status.md
+│   │
+│   ├── hooks/                  # Automated quality gates
+│   │   ├── SessionStart.js
+│   │   ├── PreToolUse.js
+│   │   ├── PostToolUse.js
+│   │   ├── PreCompact.js
+│   │   ├── SessionEnd.js
+│   │   ├── config.json
+│   │   └── README.md
+│   │
+│   └── cache/                  # Ephemeral data
+│       ├── artifact-index/
+│       │   └── artifacts.db    # SQLite with FTS5
+│       ├── confidence-decisions.json
+│       └── team-status.json
+│
+├── thoughts/                   # Continuity system
+│   ├── ledgers/                # Current session tracking
+│   │   └── CONTINUITY_CLAUDE-[DATE].md
+│   │
+│   ├── shared/                 # Cross-session knowledge
+│   │   ├── handoffs/           # Permanent record
+│   │   │   └── handoff-[DATE].md
+│   │   ├── plans/              # Pre-implementation design
+│   │   │   └── plan-[feature].md
+│   │   └── review-queue.json   # Human review queue
+│   │
+│   └── templates/              # Document templates
+│       ├── ledger-template.md
+│       ├── handoff-template.md
+│       └── plan-template.md
+│
+├── OpenSpec/                   # PRD - Single source of truth
+│   ├── database.md
+│   ├── api.md
+│   ├── ui-components.md
+│   └── architecture.md
+│
+├── scripts/                    # Utility scripts
+│   ├── review-queue-manager.js
+│   ├── init-artifact-index.sh
+│   └── validate-deps.sh
+│
+├── legendary-dashboard/        # Real-time monitoring
+│   ├── server.js
+│   └── public/
+│       └── index.html
+│
+├── RunThisFirst.sh            # Master installer
+├── LegendaryTeamDeploy.sh     # Deployment script
+├── Orchestration SOP.md       # Operating procedures
+└── README.md                  # Overview</code></pre>
+
+            <h3>Data Flow</h3>
+            <pre><code>1. Human Request
+   ↓
+2. @chief receives and decomposes
+   ↓
+3. @ConfidenceAgent scores each sub-task
+   ↓
+4. Routing Decision:
+   ├─ Tier 1 (≥70%) → Spawn parallel teams
+   ├─ Tier 2 (40-69%) → Add to review queue
+   └─ Tier 3 (<40%) → Block for human
+   ↓
+5. Parallel Execution:
+   ├─ Teams work independently
+   ├─ Update team-status.json
+   ├─ Report progress
+   └─ Auto-merge when done
+   ↓
+6. Human Review (async):
+   ├─ View /review-queue
+   ├─ Approve/reject tasks
+   └─ Teams spawn on approval
+   ↓
+7. Integration:
+   ├─ @chief collects all work
+   ├─ Runs integration tests
+   ├─ Updates OpenSpec
+   └─ Creates handoff if needed</code></pre>
+
+            <h3>Technology Stack</h3>
+            <table>
+                <tr>
+                    <th>Component</th>
+                    <th>Technology</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td>Agents</td>
+                    <td>Markdown</td>
+                    <td>AI agent definitions</td>
+                </tr>
+                <tr>
+                    <td>Hooks</td>
+                    <td>Node.js</td>
+                    <td>Automated quality gates</td>
+                </tr>
+                <tr>
+                    <td>Scripts</td>
+                    <td>Bash/Node.js</td>
+                    <td>Automation and utilities</td>
+                </tr>
+                <tr>
+                    <td>Database</td>
+                    <td>SQLite 3 + FTS5</td>
+                    <td>Artifact indexing and search</td>
+                </tr>
+                <tr>
+                    <td>Dashboard</td>
+                    <td>Express.js + HTML/CSS/JS</td>
+                    <td>Real-time monitoring UI</td>
+                </tr>
+                <tr>
+                    <td>OpenSpec</td>
+                    <td>Markdown</td>
+                    <td>PRD and specifications</td>
+                </tr>
+                <tr>
+                    <td>Continuity</td>
+                    <td>Markdown + JSON</td>
+                    <td>Session memory and handoffs</td>
+                </tr>
+            </table>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Legendary Team Project | Generated with Claude Code</p>
+        <p>Version 2026-legendary-v2.0 | Production-ready with parallel autonomous operation</p>
+    </footer>
+
+    <button id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Active nav link highlighting
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Show/hide scroll to top button
+            const scrollTop = document.getElementById('scrollTop');
+            if (window.pageYOffset > 300) {
+                scrollTop.style.display = 'flex';
+            } else {
+                scrollTop.style.display = 'none';
+            }
+        });
+
+        // Print functionality
+        function printDocs() {
+            window.print();
+        }
+    </script>
+</body>
+</html>

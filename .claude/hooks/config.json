@@ -1,0 +1,62 @@
+{
+  "version": "2026-continuity",
+  "lastUpdated": "2026-01-09",
+
+  "sessionStart": {
+    "enabled": true,
+    "autoLoadLedger": true,
+    "autoLoadHandoff": true,
+    "showWelcomeMessage": true,
+    "maxLedgerAge": 86400000,
+    "debug": false
+  },
+
+  "preToolUse": {
+    "enabled": true,
+    "typeScriptValidation": true,
+    "budgetCheck": false,
+    "budgetLimit": 50.0,
+    "openSpecValidation": false,
+    "debug": false
+  },
+
+  "postToolUse": {
+    "enabled": true,
+    "updateCodebaseMap": true,
+    "indexArtifacts": true,
+    "debug": false
+  },
+
+  "preCompact": {
+    "enabled": true,
+    "blockCompaction": true,
+    "requireHandoff": true,
+    "handoffMaxAge": 3600000,
+    "allowOverride": false,
+    "debug": false
+  },
+
+  "sessionEnd": {
+    "enabled": true,
+    "promptForHandoff": true,
+    "extractLearnings": false,
+    "cleanupOldLedgers": true,
+    "ledgerMaxAge": 604800000,
+    "debug": false
+  },
+
+  "global": {
+    "debug": false,
+    "logFile": ".claude/hooks/debug.log",
+    "gracefulFailure": true
+  },
+
+  "_comments": {
+    "maxLedgerAge": "24 hours in milliseconds (86400000)",
+    "handoffMaxAge": "1 hour in milliseconds (3600000)",
+    "ledgerMaxAge": "7 days in milliseconds (604800000)",
+    "budgetLimit": "Dollar amount threshold for budget warnings",
+    "gracefulFailure": "If true, hooks continue execution on errors",
+    "debug": "If true, writes detailed logs to debug.log file"
+  }
+}

@@ -25,30 +25,65 @@ Every session, every task, every time — this is LAW:
    2.10 /skill approve-specs → wait for human "specs approved"
    2.11 Implementation begins
 
-3. TASK EXECUTION (after specs approved)
-   → @chief coordinates all agents in parallel
-   → Every action updates OpenSpec + session state
-   → All agents work simultaneously under @chief's command
+3. TASK EXECUTION (after specs approved) — PARALLEL AUTONOMOUS OPERATION
+   → @chief decomposes task into sub-tasks
+   → @ConfidenceAgent analyzes each sub-task (confidence scoring)
+   → @chief routes based on confidence:
 
-4. FINAL DELIVERY
+   A. HIGH CONFIDENCE (≥70%) — AUTO-PROCEED:
+      → Spawn parallel teams immediately (no human approval)
+      → Teams: @DatabaseAgent, @UIAgent, @TestAgent, @DocAgent, @RefactorAgent
+      → Teams work independently and simultaneously
+      → Auto-merge when tests pass
+      → Update continuity ledger
+      → Report completion to @chief
+
+   B. MEDIUM CONFIDENCE (40-69%) — QUEUE FOR REVIEW:
+      → Create detailed plan in thoughts/shared/plans/
+      → Add to review queue: thoughts/shared/review-queue.json
+      → Human reviews asynchronously (non-blocking)
+      → Continue with high-confidence tasks meanwhile
+      → Execute when human approves
+
+   C. LOW CONFIDENCE (<40%) — BLOCK FOR HUMAN:
+      → Block immediately
+      → Create options analysis with pros/cons
+      → Present to human for decision
+      → Wait for explicit approval
+      → Log decision for future learning
+
+   → All agents update OpenSpec + session state
+   → Parallel coordination prevents file conflicts
+   → Failed auto-proceed tasks → auto-rollback + queue for review
+
+4. HUMAN REVIEW QUEUE (async, non-blocking)
+   → /review-queue → Display all queued tasks
+   → /approve-task [id] → Spawn team for approved task
+   → /reject-task [id] → Cancel task, update confidence model
+   → /team-status → Monitor active parallel teams
+
+5. FINAL DELIVERY
    → /skill pr-review → open-source pr-agent review
    → Only ship when pr-agent says "LGTM" or human overrides
 
-5. EMERGENCY TRIGGERS (immediate execution)
+6. EMERGENCY TRIGGERS (immediate execution)
    → /emergency-stop → kills everything
    → /skill budget-cap 30 → aborts if over $30
    → /skill rollback-openspec → restores last good OpenSpec
 
-6. MODEL SWAP (current limitation)
+7. MODEL SWAP (current limitation)
    → Model swap requires restarting Claude Code and editing api-keys.conf
    → Planned: /swap-model zai|kimi|claude (coming soon)
 
-7. GOLDEN RULES — NEVER BROKEN
-   → ONLY @chief may orchestrate
+8. GOLDEN RULES — NEVER BROKEN
+   → ONLY @chief may orchestrate (parallel teams report to @chief)
    → NO chat todo lists — @OpenSpecPolice enforces
    → NO code without "specs approved"
    → NO deployment without pr-agent review
    → NO AI bypass of human control — @CodebaseCartographer enforces
+   → AUTO-PROCEED only when confidence ≥70% — @ConfidenceAgent enforces
+   → ALWAYS queue security/architecture/infrastructure for human review
+   → BLOCK immediately for destructive operations (<40% confidence)
 
 This S.O.P. is LAW.
 It is executed exactly as written.
