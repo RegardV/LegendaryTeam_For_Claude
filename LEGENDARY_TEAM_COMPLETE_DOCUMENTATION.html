@@ -752,12 +752,17 @@
 
             <h3>Prerequisites</h3>
             <ul>
-                <li>You are in your project folder</li>
-                <li>Internet connection (for API calls)</li>
-                <li>Z.AI / Kimi API keys (or add later)</li>
+                <li><strong>Claude Code CLI installed</strong> - <a href="https://docs.anthropic.com/claude/docs/claude-code" target="_blank">Get it here</a></li>
+                <li>Linux/macOS/WSL2 or Windows terminal</li>
                 <li>Git installed</li>
                 <li>Node.js installed (for hooks and scripts)</li>
+                <li>Internet connection (for API calls)</li>
+                <li>Z.AI / Kimi API keys (optional, can add later)</li>
             </ul>
+
+            <div class="alert alert-warning">
+                <strong>⚠️ Important:</strong> Claude Code CLI is required. This is Anthropic's command-line tool. You'll run the <code>claude</code> command to start an interactive AI session.
+            </div>
 
             <h3>Step 1: Clone Repository</h3>
             <pre><code>git clone https://github.com/RegardV/LegendaryTeam_For_Claude.git
@@ -791,13 +796,36 @@ cd LegendaryTeam_For_Claude</code></pre>
             <h3>Step 4: Initialize SQLite Database</h3>
             <pre><code>./scripts/init-artifact-index.sh</code></pre>
 
-            <h3>Step 5: Start Claude Code</h3>
-            <p>Open Claude Code and type:</p>
+            <h3>Step 5: Start Claude Code CLI Session</h3>
+            <p>In your terminal (within the <code>LegendaryTeam_For_Claude</code> directory), run:</p>
+            <pre><code>claude</code></pre>
+
+            <p>This launches an interactive Claude Code session in your terminal.</p>
+
+            <h3>Step 6: Initialize Legendary Team</h3>
+            <p>In the Claude Code session, type:</p>
             <pre><code>@chief
 
 This is a brand-new project.
 Execute the full legendary bootstrap.
 Begin now.</code></pre>
+
+            <p><strong>What @chief does:</strong></p>
+            <ol>
+                <li>Activates all 11 specialized agents</li>
+                <li>Prompts you to create OpenSpec (PRD)</li>
+                <li>Sets up project structure</li>
+                <li>Initializes continuity system (ledgers, handoffs)</li>
+                <li>System ready for parallel autonomous operation</li>
+            </ol>
+
+            <h3>Step 7: Start Working</h3>
+            <p>Give @chief your first task:</p>
+            <pre><code>@chief
+
+Implement user authentication with email/password login.</code></pre>
+
+            <p>@chief will decompose the task, analyze confidence, and spawn parallel teams automatically!</p>
 
             <h3>Verification</h3>
             <p>Check that the following directories exist:</p>
@@ -1054,6 +1082,10 @@ sqlite3 .claude/cache/artifact-index/artifacts.db ".tables"
         <!-- USAGE GUIDE -->
         <section id="usage">
             <h2>📘 Usage Guide</h2>
+
+            <div class="alert alert-info">
+                <strong>📌 Note:</strong> All commands below are typed within your <code>claude</code> CLI session (after running <code>claude</code> in your terminal).
+            </div>
 
             <h3>Starting a New Project</h3>
             <pre><code>@chief

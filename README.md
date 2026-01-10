@@ -157,7 +157,13 @@ The Legendary Team is built on 10 foundational methodologies that work together:
 
 ## 🚀 Quick Start
 
-### Installation (5 minutes)
+### Prerequisites
+
+- ✅ **Claude Code CLI** installed ([Get it here](https://docs.anthropic.com/claude/docs/claude-code))
+- ✅ Linux/macOS/WSL2 or Windows terminal
+- ✅ Git and Node.js installed
+
+### Step 1: Installation (5 minutes)
 
 ```bash
 # Clone repository
@@ -172,7 +178,19 @@ chmod +x RunThisFirst.sh
 ./scripts/init-artifact-index.sh
 ```
 
-### Start Working
+### Step 2: Start Claude Code CLI
+
+Open your terminal in the `LegendaryTeam_For_Claude` directory and run:
+
+```bash
+claude
+```
+
+**This launches:** Interactive Claude Code session in your terminal.
+
+### Step 3: Initialize Legendary Team
+
+In the Claude Code session, type:
 
 ```
 @chief
@@ -188,6 +206,16 @@ Begin now.
 3. Sets up project structure
 4. Initializes continuity system
 5. Ready for parallel autonomous operation!
+
+### Step 4: Start Working
+
+```
+@chief
+
+Implement user authentication with email/password login.
+```
+
+@chief will decompose, analyze confidence, and spawn parallel teams automatically!
 
 ---
 
