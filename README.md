@@ -265,23 +265,6 @@ Begin now.
 
 ---
 
-## 📊 Dashboard
-
-Monitor your autonomous teams in real-time:
-
-```bash
-./legendary-dashboard.sh
-# Opens at http://localhost:3000
-```
-
-**Features:**
-- Real-time team activity with progress bars
-- Review queue management
-- Parallel efficiency metrics
-- Artifact search with FTS5
-
----
-
 ## 🛡️ Safety Mechanisms
 
 ### Never Auto-Proceed
@@ -327,7 +310,6 @@ LegendaryTeam_For_Claude/
 │   └── templates/                 # Document templates
 ├── OpenSpec/                      # PRD - Single source of truth
 ├── scripts/                       # Utility scripts
-├── legendary-dashboard/           # Real-time monitoring UI
 ├── LEGENDARY_TEAM_COMPLETE_DOCUMENTATION.html  # ⭐ COMPLETE DOCS
 ├── PARALLEL_AUTONOMOUS_OPERATION.md            # Design document
 ├── Orchestration SOP.md                        # Operating procedures
