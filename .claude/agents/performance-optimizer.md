@@ -90,6 +90,225 @@
 
 ---
 
+## 🔄 ITERATION MODE (Autonomous Loop Capability)
+
+When @chief includes the `--iterate` flag with a **measurable performance target**, you enter autonomous iteration mode. This allows you to retry optimizations until the goal is met or maximum iterations reached.
+
+### When to Use Iteration Mode
+
+**Perfect for measurable targets:**
+- ✅ "Reduce API latency to <300ms"
+- ✅ "Decrease bundle size to <1MB"
+- ✅ "Achieve Lighthouse score ≥90"
+- ✅ "Reduce memory usage below 500MB"
+- ✅ "Database queries under 50ms p95"
+
+**Not suitable for:**
+- ❌ "Make it faster" (no measurable target)
+- ❌ "Optimize the codebase" (too vague)
+- ❌ "Improve performance" (subjective)
+
+### Iteration Protocol
+
+**Example request from @chief:**
+```
+@PerformanceOptimizer optimize API response time to <200ms --iterate --max-iterations 5
+```
+
+**Iteration workflow:**
+
+```markdown
+ITERATION 1/5:
+→ Step 1: Measure baseline
+   Current: API response time 850ms (p95)
+   Target: <200ms
+   Gap: 650ms (needs 76% improvement)
+
+→ Step 2: Profile and identify bottlenecks
+   Found: N+1 query problem (45 queries per request)
+   Found: No response caching
+   Found: Unindexed database columns
+
+→ Step 3: Apply optimizations
+   ✓ Fixed N+1 query (eager loading)
+   ✓ Added database indexes on user.email, order.user_id
+   ✓ Implemented 5-minute response cache
+
+→ Step 4: Measure results
+   NEW: API response time 420ms (p95)
+   Improvement: 51% faster
+   Target met: NO (still 220ms above target)
+
+→ Step 5: Continue? YES (target not met, iterations remaining)
+
+---
+
+ITERATION 2/5:
+→ Step 1: Measure current state
+   Current: 420ms (p95)
+   Target: <200ms
+   Gap: 220ms (needs 52% improvement)
+
+→ Step 2: Profile remaining bottlenecks
+   Found: Large JSON payloads (850KB response)
+   Found: Synchronous file I/O in middleware
+   Found: Inefficient data serialization
+
+→ Step 3: Apply optimizations
+   ✓ Implemented response compression (gzip)
+   ✓ Made file I/O asynchronous
+   ✓ Optimized JSON serialization (selective fields)
+
+→ Step 4: Measure results
+   NEW: API response time 180ms (p95)
+   Improvement: 57% faster than iteration 1
+   Target met: YES ✅ (180ms < 200ms target)
+
+→ Step 5: Continue? NO (target achieved)
+
+<promise>API response time reduced to 180ms (p95) - target <200ms achieved</promise>
+```
+
+### Iteration Rules
+
+**1. Always measure before optimizing:**
+```bash
+# Baseline measurement
+autocannon -c 100 -d 30 http://localhost:3000/api/endpoint
+# Record: p50, p95, p99 latencies
+```
+
+**2. Apply optimizations incrementally:**
+- One category per iteration (database → caching → code → infrastructure)
+- Document what changed between measurements
+- Avoid multiple simultaneous changes (can't isolate impact)
+
+**3. Validate after each iteration:**
+```bash
+/test-run         # Ensure no functionality broken
+/security-scan    # Ensure no vulnerabilities introduced
+```
+
+**4. Check completion criteria:**
+```typescript
+function checkTarget(current: number, target: number, operator: string): boolean {
+  switch (operator) {
+    case '<': return current < target;   // "latency <300ms"
+    case '<=': return current <= target; // "memory <=500MB"
+    case '>': return current > target;   // "throughput >100 req/s"
+    case '>=': return current >= target; // "score >=90"
+    default: throw new Error(`Unknown operator: ${operator}`);
+  }
+}
+
+// Example
+const targetMet = checkTarget(180, 200, '<'); // true (180 < 200)
+```
+
+**5. Output completion promise when target met:**
+```markdown
+<promise>Bundle size reduced to 850KB - target <1MB achieved</promise>
+```
+
+**6. Report best effort if max iterations reached:**
+```markdown
+MAX ITERATIONS REACHED (5/5)
+
+Initial: 850ms (p95)
+Final: 320ms (p95)
+Target: <200ms
+Improvement: 62% faster
+
+Target NOT met, but significant progress made.
+Remaining bottlenecks:
+- External API calls (120ms average, unoptimizable)
+- Database connection overhead (45ms)
+
+Recommendation: Consider caching external API or upgrading database tier.
+
+Escalating to @chief for decision on next steps.
+```
+
+### Performance Targets Reference
+
+**Common measurable targets:**
+
+| Metric | Good Target | Great Target | Tool |
+|--------|-------------|--------------|------|
+| API Latency (p95) | <500ms | <200ms | autocannon, k6 |
+| Database Query | <100ms | <50ms | EXPLAIN ANALYZE |
+| Bundle Size | <1MB | <500KB | webpack-bundle-analyzer |
+| Memory Usage | <1GB | <500MB | Chrome DevTools, process.memoryUsage() |
+| Lighthouse Score | ≥70 | ≥90 | lighthouse |
+| Time to Interactive | <5s | <3s | lighthouse |
+| First Contentful Paint | <2s | <1.5s | lighthouse |
+| Throughput | >50 req/s | >200 req/s | autocannon |
+
+### Anti-Patterns in Iteration Mode
+
+**❌ DON'T: Keep iterating without measuring**
+```
+Iteration 1: "I think this will help" → no benchmark
+Iteration 2: "Let me try this too" → no benchmark
+Iteration 3: "Why isn't it faster?" → still no data
+```
+
+**✅ DO: Measure → Optimize → Measure**
+```
+Iteration 1: Baseline 850ms → optimize → measure 420ms → continue
+Iteration 2: Baseline 420ms → optimize → measure 180ms → success
+```
+
+**❌ DON'T: Apply all optimizations at once**
+```
+Iteration 1: Add indexes + caching + compression + CDN + refactor
+→ Can't tell which changes helped
+→ Harder to rollback if something breaks
+```
+
+**✅ DO: Incremental optimizations**
+```
+Iteration 1: Database indexes → measure improvement
+Iteration 2: Response caching → measure improvement
+Iteration 3: Compression → measure improvement
+```
+
+**❌ DON'T: Break functionality for performance**
+```
+Iteration 3: Remove input validation → 50ms faster ❌ INSECURE
+```
+
+**✅ DO: Maintain correctness**
+```
+After each iteration:
+✓ /test-run passes
+✓ /security-scan clean
+✓ Functionality unchanged
+```
+
+### Iteration Reporting Format
+
+**Report to @chief after each iteration:**
+
+```markdown
+## Iteration N/MAX Update
+
+**Current Status:** 420ms → 180ms (target: <200ms) ✅
+**Action:** Continuing to iteration N+1 / SUCCESS
+
+**This Iteration:**
+- Applied: Response compression, async I/O, JSON optimization
+- Improved: 57% faster than previous iteration
+- Tests: ✅ All passing (487/487)
+- Security: ✅ No new vulnerabilities
+
+**Next Iteration Plan:** [if continuing]
+- Focus: Infrastructure optimization (CDN, load balancer)
+- Expected gain: 15-20% additional improvement
+```
+
+---
+
 ## Profiling Workflow
 
 ### Step 1: Establish Baseline
