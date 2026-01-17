@@ -21,7 +21,7 @@ The Legendary Team transforms your `.claude` folder into a **self-healing, memor
 | **Parallel Teams** | 3-15 teams working simultaneously |
 | **Auto-Proceed Accuracy** | >90% success rate |
 | **Average Wait Time** | <15 minutes for human review |
-| **Specialized Agents** | 11 agents (5 autonomous + 3 queued + 3 core) |
+| **Specialized Agents** | 12 agents (6 autonomous + 3 queued + 3 core) |
 
 ---
 
@@ -57,7 +57,7 @@ The Legendary Team is built on 10 foundational methodologies that work together:
 ### 2. Modular Rules Architecture
 **Split by concern, load context on-demand. No monolithic files.**
 
-- `.claude/agents/` - 11 specialized AI teammates
+- `.claude/agents/` - 12 specialized AI teammates
 - `.claude/skills/` - Reusable abilities
 - `.claude/commands/` - Slash commands
 - `.claude/hooks/` - Automated quality gates
@@ -246,7 +246,7 @@ Implement user authentication with email/password login.
 
 ---
 
-## 🤖 The 11 Specialized Agents
+## 🤖 The 12 Specialized Agents
 
 ### Core Orchestration
 - **@chief** - Master orchestrator, spawns parallel teams, manages review queue
@@ -258,6 +258,7 @@ Implement user authentication with email/password login.
 - **@TestAgent** - Unit, integration, E2E tests (≥80%)
 - **@DocAgent** - Documentation, README, API docs (≥90%)
 - **@RefactorAgent** - Code cleanup, optimization (≥75%)
+- **@PerformanceOptimizer** - Profiling, benchmarking, performance optimization (≥70%)
 
 ### Human-Queued Teams (Tier 2 - Always Queue)
 - **@ArchitectureAgent** - System design, architectural decisions
@@ -274,6 +275,12 @@ Implement user authentication with email/password login.
 /team-status            # Monitor active parallel teams
 /approve-task [id]      # Approve and spawn team
 /reject-task [id]       # Reject and update confidence
+```
+
+### Quality Gates
+```bash
+/test-run               # Run all tests with coverage reporting
+/security-scan          # Scan for vulnerabilities and secrets
 ```
 
 ### Core Commands

@@ -513,7 +513,7 @@
                         <li><strong>3-5x faster</strong> delivery through parallelization</li>
                         <li><strong>70% less</strong> human review overhead</li>
                         <li><strong>Non-blocking</strong> workflow - progress never stops</li>
-                        <li><strong>11 specialized agents</strong> working autonomously</li>
+                        <li><strong>12 specialized agents</strong> working autonomously</li>
                         <li><strong>Complete safety</strong> - critical decisions always require approval</li>
                     </ul>
                 </div>
@@ -812,7 +812,7 @@ Begin now.</code></pre>
 
             <p><strong>What @chief does:</strong></p>
             <ol>
-                <li>Activates all 11 specialized agents</li>
+                <li>Activates all 12 specialized agents</li>
                 <li>Prompts you to create OpenSpec (PRD)</li>
                 <li>Sets up project structure</li>
                 <li>Initializes continuity system (ledgers, handoffs)</li>
@@ -846,7 +846,7 @@ sqlite3 .claude/cache/artifact-index/artifacts.db ".tables"
         <!-- AGENTS -->
         <section id="agents">
             <h2>🤖 Agent Directory</h2>
-            <p>The Legendary Team consists of 11 specialized agents organized into three categories.</p>
+            <p>The Legendary Team consists of 12 specialized agents organized into three categories.</p>
 
             <div id="agent-chief" class="agent-card">
                 <span class="tier tier-1">CORE ORCHESTRATION</span>
@@ -1007,6 +1007,23 @@ sqlite3 .claude/cache/artifact-index/artifacts.db ".tables"
                     </ul>
                     <p><strong>Never Auto-Proceeds:</strong> API changes, architecture changes</p>
                     <p><strong>Critical Rule:</strong> Never changes public APIs or behavior, only internal implementation</p>
+                </div>
+
+                <div class="agent-card">
+                    <span class="tier tier-1">TIER 1 - AUTO</span>
+                    <h4>@PerformanceOptimizer</h4>
+                    <p><strong>Confidence Threshold:</strong> ≥70%</p>
+                    <p><strong>Handles:</strong></p>
+                    <ul>
+                        <li>CPU/memory profiling</li>
+                        <li>Database query optimization</li>
+                        <li>Bundle size reduction</li>
+                        <li>Performance benchmarking</li>
+                        <li>Caching strategies</li>
+                        <li>Load testing</li>
+                    </ul>
+                    <p><strong>Never Auto-Proceeds:</strong> Major architecture changes, breaking API changes</p>
+                    <p><strong>Quality Standard:</strong> Requires profiling data, measures before/after, documents benchmarks</p>
                 </div>
             </div>
 
@@ -1320,6 +1337,25 @@ Auto-proceed accuracy: 95% (19/20 succeeded)</code></pre>
                     <td><code>/reject-task [id]</code></td>
                     <td>Reject queued task and update confidence</td>
                     <td><code>/reject-task review-002 "reason"</code></td>
+                </tr>
+            </table>
+
+            <h3>Quality Gates Commands</h3>
+            <table>
+                <tr>
+                    <th>Command</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td><code>/test-run</code></td>
+                    <td>Run all tests with coverage reporting (≥80% threshold)</td>
+                    <td><code>/test-run</code></td>
+                </tr>
+                <tr>
+                    <td><code>/security-scan</code></td>
+                    <td>Scan for vulnerabilities, secrets, and security issues</td>
+                    <td><code>/security-scan</code></td>
                 </tr>
             </table>
 

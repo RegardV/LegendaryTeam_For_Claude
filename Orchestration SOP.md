@@ -32,7 +32,7 @@ Every session, every task, every time — this is LAW:
 
    A. HIGH CONFIDENCE (≥70%) — AUTO-PROCEED:
       → Spawn parallel teams immediately (no human approval)
-      → Teams: @DatabaseAgent, @UIAgent, @TestAgent, @DocAgent, @RefactorAgent
+      → Teams: @DatabaseAgent, @UIAgent, @TestAgent, @DocAgent, @RefactorAgent, @PerformanceOptimizer
       → Teams work independently and simultaneously
       → Auto-merge when tests pass
       → Update continuity ledger
@@ -56,6 +56,14 @@ Every session, every task, every time — this is LAW:
    → Parallel coordination prevents file conflicts
    → Failed auto-proceed tasks → auto-rollback + queue for review
 
+   QUALITY GATES (automated, run before delivery):
+   → @TestAgent generates unit + integration tests (≥80% coverage threshold)
+   → /test-run executes all tests, reports coverage to @chief
+   → @PerformanceOptimizer profiles critical paths, benchmarks improvements
+   → /security-scan runs vulnerability checks (dependencies, code, secrets)
+   → @SecurityAgent reviews security findings (Tier 2 - queued for human)
+   → DEPLOYMENT BLOCKED if: tests fail, coverage <80%, critical vulnerabilities found
+
 4. HUMAN REVIEW QUEUE (async, non-blocking)
    → /review-queue → Display all queued tasks
    → /approve-task [id] → Spawn team for approved task
@@ -63,8 +71,11 @@ Every session, every task, every time — this is LAW:
    → /team-status → Monitor active parallel teams
 
 5. FINAL DELIVERY
+   → /test-run → Verify all tests passing (≥80% coverage)
+   → /security-scan → Verify no critical/high vulnerabilities
+   → @PerformanceOptimizer → Benchmark critical paths meet requirements
    → /skill pr-review → open-source pr-agent review
-   → Only ship when pr-agent says "LGTM" or human overrides
+   → Only ship when ALL quality gates pass or human overrides
 
 6. EMERGENCY TRIGGERS (immediate execution)
    → /emergency-stop → kills everything
@@ -79,11 +90,16 @@ Every session, every task, every time — this is LAW:
    → ONLY @chief may orchestrate (parallel teams report to @chief)
    → NO chat todo lists — @OpenSpecPolice enforces
    → NO code without "specs approved"
-   → NO deployment without pr-agent review
+   → NO deployment without pr-agent review AND quality gates passing
    → NO AI bypass of human control — @CodebaseCartographer enforces
    → AUTO-PROCEED only when confidence ≥70% — @ConfidenceAgent enforces
    → ALWAYS queue security/architecture/infrastructure for human review
    → BLOCK immediately for destructive operations (<40% confidence)
+   → MANDATORY quality gates before delivery:
+     • Tests must pass (≥80% coverage) — /test-run enforces
+     • No critical/high vulnerabilities — /security-scan enforces
+     • Performance benchmarks meet requirements — @PerformanceOptimizer verifies
+   → DEPLOYMENT BLOCKED if ANY quality gate fails
 
 This S.O.P. is LAW.
 It is executed exactly as written.
