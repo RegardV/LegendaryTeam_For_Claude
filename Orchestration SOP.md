@@ -64,6 +64,17 @@ Every session, every task, every time — this is LAW:
    → @SecurityAgent reviews security findings (Tier 2 - queued for human)
    → DEPLOYMENT BLOCKED if: tests fail, coverage <80%, critical vulnerabilities found
 
+   ITERATION PROTOCOL (autonomous retry capability):
+   → @PerformanceOptimizer, @TestAgent, @SecurityAgent support --iterate mode
+   → Enables autonomous retry loops until measurable targets met
+   → Example: "@PerformanceOptimizer reduce latency to <200ms --iterate --max-iterations 5"
+   → Each iteration: Measure → Optimize → Measure → Check target → Continue or succeed
+   → Output completion promise when target met: <promise>Target achieved</promise>
+   → Escalate to @chief if max iterations reached without success
+   → Maintain quality: /test-run + /security-scan after each iteration
+   → Safe for: measurable goals (performance, coverage, vulnerabilities)
+   → NOT for: subjective improvements without clear success criteria
+
 4. HUMAN REVIEW QUEUE (async, non-blocking)
    → /review-queue → Display all queued tasks
    → /approve-task [id] → Spawn team for approved task

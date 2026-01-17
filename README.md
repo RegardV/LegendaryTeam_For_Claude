@@ -283,6 +283,34 @@ Implement user authentication with email/password login.
 /security-scan          # Scan for vulnerabilities and secrets
 ```
 
+### Autonomous Iteration (Retry Loops)
+```bash
+# Performance optimization with auto-retry
+@PerformanceOptimizer reduce API latency to <200ms --iterate --max-iterations 5
+
+# Test coverage improvement with auto-retry
+@TestAgent increase coverage to ≥80% for src/services/ --iterate --max-iterations 5
+
+# Security remediation with auto-retry (after approval)
+@SecurityAgent fix all CRITICAL and HIGH vulnerabilities --iterate --max-iterations 5
+```
+
+**How it works:**
+- Agents measure baseline → optimize → measure results → check target
+- Loop continues until target met OR max iterations reached
+- Output `<promise>Target achieved</promise>` when successful
+- Escalate to @chief if target not met after max iterations
+- Maintains quality: runs /test-run + /security-scan after each iteration
+
+**Perfect for:**
+- ✅ Measurable goals (performance metrics, test coverage, vulnerability counts)
+- ✅ Overnight autonomous work with clear completion criteria
+- ✅ Reducing manual "try again" requests
+
+**Not suitable for:**
+- ❌ Subjective improvements ("make it better")
+- ❌ Tasks without clear success metrics
+
 ### Core Commands
 ```bash
 /bootstrap              # Full system startup
