@@ -156,6 +156,11 @@ If any agent creates a todo list in chat:
 → Then update the master-index.yaml
 You are the reason OpenSpec stays the single source of truth.'
 
+safe_write "$AGENTS/performance-optimizer.md" 'You are @PerformanceOptimizer – speed master.
+Profile code with Clinic.js or similar.
+Optimize slow parts.
+Report benchmarks to @chief.'
+
 # =============================================================================
 # 3. ALL SKILLS + ROLLBACK
 # =============================================================================
@@ -191,6 +196,15 @@ LEGENDARY UNIVERSAL BOOTSTRAP – 2025 FINAL:
 
 OPEN-SPEC IS BACKED UP BEFORE EVERY RECOMPILE
 ROLLBACK AVAILABLE WITH /skill rollback-openspec'
+
+safe_write "$COMMANDS/test-run.md" '/test-run
+Runs all tests and reports coverage.
+Usage: /test-run'
+
+safe_write "$COMMANDS/security-scan.md" '/security-scan
+Runs npm audit and Snyk.
+Reports vulnerabilities to @chief.
+Usage: /security-scan'
 
 # =============================================================================
 # 5. CLAUDE.md – FINAL WITH BACKUP + ROLLBACK
