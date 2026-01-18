@@ -1,5 +1,7 @@
 # Legendary Team 2026
 
+** This is ongoing work everytime I see anything that may be incorporated with this team I endevour to make it a reality ** 
+
 **The Most Advanced Autonomous AI Engineering Team** | Production-Ready with Parallel Autonomous Operation
 
 ---
