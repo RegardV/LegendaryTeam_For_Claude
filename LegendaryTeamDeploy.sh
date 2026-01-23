@@ -34,6 +34,7 @@ ROOT="$(pwd)"
 CLAUDE="$ROOT/.claude"
 AGENTS="$CLAUDE/agents"
 SKILLS="$CLAUDE/skills"
+RULES="$CLAUDE/rules"
 COMMANDS="$CLAUDE/commands"
 BACKUP_DIR="$ROOT/openspec/.backup"
 
@@ -54,7 +55,7 @@ safe_write() {
     fi
 }
 
-mkdir -p "$CLAUDE" "$AGENTS" "$SKILLS" "$COMMANDS" "$ROOT/openspec" ".github/workflows" "$BACKUP_DIR"
+mkdir -p "$CLAUDE" "$AGENTS" "$SKILLS" "$RULES" "$COMMANDS" "$ROOT/openspec" ".github/workflows" "$BACKUP_DIR"
 
 # =============================================================================
 # 1. THE ONE TRUE LEADER – @chief

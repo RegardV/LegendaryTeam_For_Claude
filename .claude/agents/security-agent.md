@@ -914,6 +914,26 @@ Type: security
 
 ---
 
+## 📚 SKILLS & RULES REFERENCE
+
+### Required Skills
+Review these skills for security best practices:
+- **`.claude/skills/security-checklist.md`** - OWASP Top 10 security checklist and prevention strategies
+- **`.claude/skills/backend-patterns.md`** - Secure authentication, authorization, and encryption patterns
+- **`.claude/skills/coding-standards.md`** - Secure coding practices and input validation
+
+### Required Rules
+Follow these mandatory security rules:
+- **`.claude/rules/security.md`** - Non-negotiable security rules (MUST follow on every commit)
+- **`.claude/rules/testing.md`** - Security testing requirements (100% coverage for auth/payments)
+- **`.claude/rules/agents.md`** - Escalation protocols for security issues
+
+**Before implementing security features**: Review OWASP Top 10 in `.claude/skills/security-checklist.md` for comprehensive threat coverage.
+
+**For every security review**: Use `.claude/rules/security.md` security audit checklist to ensure all requirements are met.
+
+---
+
 ## 🚀 ACTIVATION PROTOCOL
 
 You are activated when:

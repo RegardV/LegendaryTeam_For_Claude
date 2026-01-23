@@ -23,7 +23,7 @@ The Legendary Team transforms your `.claude` folder into a **self-healing, memor
 | **Parallel Teams** | 3-15 teams working simultaneously |
 | **Auto-Proceed Accuracy** | >90% success rate |
 | **Average Wait Time** | <15 minutes for human review |
-| **Specialized Agents** | 12 agents (6 autonomous + 3 queued + 3 core) |
+| **Specialized Agents** | 14 agents (8 autonomous + 3 queued + 3 core) |
 
 ---
 
@@ -59,9 +59,10 @@ The Legendary Team is built on 10 foundational methodologies that work together:
 ### 2. Modular Rules Architecture
 **Split by concern, load context on-demand. No monolithic files.**
 
-- `.claude/agents/` - 12 specialized AI teammates
-- `.claude/skills/` - Reusable abilities
-- `.claude/commands/` - Slash commands
+- `.claude/agents/` - 14 specialized AI teammates
+- `.claude/skills/` - Reusable knowledge base (patterns, best practices)
+- `.claude/rules/` - Mandatory behavioral rules for all agents
+- `.claude/commands/` - Slash commands for common operations
 - `.claude/hooks/` - Automated quality gates
 
 **Why:** Reduces context, enables specialization, maintainable at scale.
@@ -248,7 +249,7 @@ Implement user authentication with email/password login.
 
 ---
 
-## 🤖 The 12 Specialized Agents
+## 🤖 The 14 Specialized Agents
 
 ### Core Orchestration
 - **@chief** - Master orchestrator, spawns parallel teams, manages review queue
@@ -257,14 +258,16 @@ Implement user authentication with email/password login.
 ### Autonomous Execution Teams (Tier 1 - Auto-Proceed ≥70%)
 - **@DatabaseAgent** - Database schemas, migrations, CRUD
 - **@UIAgent** - React/Vue components, styling, responsive
-- **@TestAgent** - Unit, integration, E2E tests (≥80%)
+- **@TestAgent** - Unit, integration tests (≥80%) - with TDD workflow skills
+- **@E2ERunner** - Playwright E2E tests, browser automation, user flow testing
+- **@BugResolver** - Bug diagnosis, root cause analysis, test-driven fixes
 - **@DocAgent** - Documentation, README, API docs (≥90%)
 - **@RefactorAgent** - Code cleanup, optimization (≥75%)
-- **@PerformanceOptimizer** - Profiling, benchmarking, performance optimization (≥70%)
+- **@PerformanceOptimizer** - Profiling, benchmarking, optimization (≥70%) - with performance patterns
 
 ### Human-Queued Teams (Tier 2 - Always Queue)
 - **@ArchitectureAgent** - System design, architectural decisions
-- **@SecurityAgent** - Auth, encryption, security audits
+- **@SecurityAgent** - Auth, encryption, security audits - with security checklist
 - **@InfrastructureAgent** - Deployments, scaling, infrastructure
 
 ---
@@ -279,10 +282,18 @@ Implement user authentication with email/password login.
 /reject-task [id]       # Reject and update confidence
 ```
 
-### Quality Gates
+### Quality Gates & Testing
 ```bash
 /test-run               # Run all tests with coverage reporting
 /security-scan          # Scan for vulnerabilities and secrets
+/e2e [flow]             # Generate and run E2E tests for user workflows
+/build-fix              # Diagnose and fix build errors automatically
+```
+
+### Development Workflow
+```bash
+/plan [feature]         # Create detailed implementation plan before coding
+/refactor-clean         # Remove dead code and unused imports
 ```
 
 ### Autonomous Iteration (Retry Loops)
@@ -320,6 +331,34 @@ Implement user authentication with email/password login.
 @chief [task]           # Execute with parallel autonomous operation
 @chief resume session   # Continue from ledger
 ```
+
+---
+
+## 📚 Skills & Rules System
+
+The Legendary Team includes a comprehensive knowledge base and behavioral framework:
+
+### Skills (`.claude/skills/`) - Reusable Knowledge
+- **`coding-standards.md`** - Language best practices, naming conventions, code organization
+- **`backend-patterns.md`** - API design, database optimization, authentication patterns
+- **`frontend-patterns.md`** - React patterns, state management, performance optimization
+- **`tdd-workflow.md`** - Test-Driven Development methodology (Red-Green-Refactor)
+- **`security-checklist.md`** - OWASP Top 10, security best practices, threat prevention
+- **`performance-patterns.md`** - Caching, profiling, monitoring, optimization strategies
+
+**Agents reference skills** to access best practices without cluttering their core prompts.
+
+### Rules (`.claude/rules/`) - Mandatory Behavior
+- **`security.md`** - Non-negotiable security rules (input validation, no hardcoded secrets, etc.)
+- **`testing.md`** - Testing requirements (80% coverage minimum, test independence)
+- **`coding-style.md`** - Formatting rules (TypeScript, naming, file organization)
+- **`git-workflow.md`** - Git practices (conventional commits, PR workflow, branch naming)
+- **`agents.md`** - Agent collaboration rules (stay in scope, escalation protocols)
+- **`iteration.md`** - Iteration mode rules (measurable goals, stopping criteria, safety limits)
+
+**All agents must follow rules** - these are enforced requirements, not suggestions.
+
+---
 
 ### Continuity
 ```bash

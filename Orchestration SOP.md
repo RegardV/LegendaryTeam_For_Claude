@@ -32,8 +32,10 @@ Every session, every task, every time — this is LAW:
 
    A. HIGH CONFIDENCE (≥70%) — AUTO-PROCEED:
       → Spawn parallel teams immediately (no human approval)
-      → Teams: @DatabaseAgent, @UIAgent, @TestAgent, @DocAgent, @RefactorAgent, @PerformanceOptimizer
+      → Teams: @DatabaseAgent, @UIAgent, @TestAgent, @E2ERunner, @BugResolver, @DocAgent, @RefactorAgent, @PerformanceOptimizer
       → Teams work independently and simultaneously
+      → Teams reference .claude/skills/ for best practices
+      → Teams follow mandatory .claude/rules/ for behavior
       → Auto-merge when tests pass
       → Update continuity ledger
       → Report completion to @chief
@@ -58,14 +60,19 @@ Every session, every task, every time — this is LAW:
 
    QUALITY GATES (automated, run before delivery):
    → @TestAgent generates unit + integration tests (≥80% coverage threshold)
+   → @E2ERunner generates Playwright E2E tests for critical user flows
    → /test-run executes all tests, reports coverage to @chief
+   → /e2e runs E2E tests for user workflows
+   → /build-fix diagnoses and fixes build errors if detected
    → @PerformanceOptimizer profiles critical paths, benchmarks improvements
    → /security-scan runs vulnerability checks (dependencies, code, secrets)
    → @SecurityAgent reviews security findings (Tier 2 - queued for human)
+   → /refactor-clean removes dead code for cleaner codebase
    → DEPLOYMENT BLOCKED if: tests fail, coverage <80%, critical vulnerabilities found
 
    ITERATION PROTOCOL (autonomous retry capability):
    → @PerformanceOptimizer, @TestAgent, @SecurityAgent support --iterate mode
+   → All iteration rules defined in .claude/rules/iteration.md (mandatory)
    → Enables autonomous retry loops until measurable targets met
    → Example: "@PerformanceOptimizer reduce latency to <200ms --iterate --max-iterations 5"
    → Each iteration: Measure → Optimize → Measure → Check target → Continue or succeed
@@ -99,6 +106,9 @@ Every session, every task, every time — this is LAW:
 
 8. GOLDEN RULES — NEVER BROKEN
    → ONLY @chief may orchestrate (parallel teams report to @chief)
+   → ALL agents MUST follow .claude/rules/ (mandatory behavioral rules)
+   → ALL agents reference .claude/skills/ for best practices
+   → Use /plan before implementing complex features
    → NO chat todo lists — @OpenSpecPolice enforces
    → NO code without "specs approved"
    → NO deployment without pr-agent review AND quality gates passing
@@ -107,9 +117,12 @@ Every session, every task, every time — this is LAW:
    → ALWAYS queue security/architecture/infrastructure for human review
    → BLOCK immediately for destructive operations (<40% confidence)
    → MANDATORY quality gates before delivery:
+     • Build must succeed — /build-fix if errors detected
      • Tests must pass (≥80% coverage) — /test-run enforces
+     • E2E tests for critical paths — /e2e enforces
      • No critical/high vulnerabilities — /security-scan enforces
      • Performance benchmarks meet requirements — @PerformanceOptimizer verifies
+     • No dead code — /refactor-clean recommended
    → DEPLOYMENT BLOCKED if ANY quality gate fails
 
 This S.O.P. is LAW.
