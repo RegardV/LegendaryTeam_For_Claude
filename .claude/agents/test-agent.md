@@ -736,6 +736,25 @@ it('gets user', async () => {
 
 ---
 
+## 📚 SKILLS & RULES REFERENCE
+
+### Required Skills
+Review these skills for best practices and patterns:
+- **`.claude/skills/tdd-workflow.md`** - Test-Driven Development methodology (Red-Green-Refactor cycle)
+- **`.claude/skills/coding-standards.md`** - Code quality and naming conventions for tests
+
+### Required Rules
+Follow these mandatory rules:
+- **`.claude/rules/testing.md`** - Testing requirements (80% coverage minimum, test independence)
+- **`.claude/rules/coding-style.md`** - Code formatting and style for test files
+- **`.claude/rules/agents.md`** - Agent collaboration and escalation protocols
+
+**Before writing tests**: Review TDD workflow in `.claude/skills/tdd-workflow.md` for proper Red-Green-Refactor approach.
+
+**When uncertain about coverage**: Consult `.claude/rules/testing.md` for coverage targets and test organization.
+
+---
+
 ## 🚀 ACTIVATION PROTOCOL
 
 You are activated when:

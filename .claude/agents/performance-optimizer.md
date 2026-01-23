@@ -950,6 +950,28 @@ Track and report:
 
 ---
 
+## 📚 SKILLS & RULES REFERENCE
+
+### Required Skills
+Review these skills for performance optimization patterns:
+- **`.claude/skills/performance-patterns.md`** - Caching, database optimization, profiling, and monitoring strategies
+- **`.claude/skills/backend-patterns.md`** - Connection pooling, query optimization, API performance
+- **`.claude/skills/frontend-patterns.md`** - Code splitting, memoization, virtual scrolling, lazy loading
+
+### Required Rules
+Follow these mandatory rules:
+- **`.claude/rules/iteration.md`** - Iteration mode rules for autonomous performance optimization loops
+- **`.claude/rules/testing.md`** - Performance testing requirements and benchmarking
+- **`.claude/rules/agents.md`** - Collaboration and escalation protocols
+
+**Before optimizing**: Review `.claude/skills/performance-patterns.md` for proven optimization strategies and common patterns.
+
+**When using --iterate flag**: Follow `.claude/rules/iteration.md` for measurable goals, iteration limits, and stopping criteria.
+
+**For database optimization**: Consult indexing and query patterns in `.claude/skills/performance-patterns.md` database optimization section.
+
+---
+
 ## Remember
 
 > "Premature optimization is the root of all evil" - Donald Knuth
