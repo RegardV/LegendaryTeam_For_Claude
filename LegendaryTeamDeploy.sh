@@ -163,6 +163,29 @@ Optimize slow parts.
 Report benchmarks to @chief.'
 
 # =============================================================================
+# 2.5 NEW 2026 ULTIMATE AGENTS – Swarms-Inspired Features
+# =============================================================================
+
+safe_write "$AGENTS/planner.md" 'You are @Planner – task decomposition specialist.
+Break high-level goals into executable steps with dependencies.
+Output structured plan.md with IDs, deps, locations, descriptions.
+Generate execution waves for parallel processing.
+Route tasks to @chief for confidence-based team spawning.'
+
+safe_write "$AGENTS/verifier.md" 'You are @Verifier – quality assurance expert.
+Review plans/output for completeness, errors, edge cases.
+Score deliverables 0-100 on correctness, completeness, security, performance, maintainability.
+Report findings to @chief with confidence score.
+Block low-quality work (score <50) until fixed.'
+
+safe_write "$AGENTS/reflection-agent.md" 'You are @ReflectionAgent – self-critique specialist.
+After every significant action, evaluate quality, bugs, improvements.
+Criteria: Correctness (30%), Completeness (20%), Security (25%), Performance (15%), Maintainability (10%).
+Score <70 triggers iteration recommendation.
+Feed feedback back to @chief for iteration.
+Track patterns for continuous improvement.'
+
+# =============================================================================
 # 3. ALL SKILLS + ROLLBACK
 # =============================================================================
 
@@ -208,11 +231,35 @@ Reports vulnerabilities to @chief.
 Usage: /security-scan'
 
 # =============================================================================
+# 4.5 NEW 2026 ULTIMATE COMMANDS – Swarms-Inspired Features
+# =============================================================================
+
+safe_write "$COMMANDS/swarm-planner.md" '/swarm-planner [task-description]
+Generates structured plan.md with dependencies using @Planner.
+Creates DAG of tasks with confidence scores and agent assignments.
+Outputs execution waves for parallel processing.
+Usage: /swarm-planner "Build user authentication system"'
+
+safe_write "$COMMANDS/parallel-task.md" '/parallel-task [plan-file]
+Executes plan in waves with parallel subagents.
+Respects dependencies between tasks.
+Routes based on confidence (auto-proceed/queue/block).
+Triggers @ReflectionAgent after each task completion.
+Usage: /parallel-task thoughts/shared/plans/plan-auth-001.md'
+
+safe_write "$COMMANDS/spawn-subagent.md" '/spawn-subagent [role] [task]
+Spawns dynamic subagent for specific role.
+Available roles: coder, database, api, ui, security, test, e2e, perf, doc, refactor, architect, planner, verifier, reflect.
+Supports --iterate for measurable goals.
+Supports --depends-on for dependency chaining.
+Usage: /spawn-subagent security "Review authentication flow"'
+
+# =============================================================================
 # 5. CLAUDE.md – FINAL WITH BACKUP + ROLLBACK
 # =============================================================================
 
 cat > "$ROOT/CLAUDE.md" << 'EOF'
-CLAUDE.md - LEGENDARY AUTONOMOUS TEAM
+CLAUDE.md - LEGENDARY AUTONOMOUS TEAM – 2026 ULTIMATE EDITION
 ONLY @chief may orchestrate.
 OPEN-SPEC IS BACKED UP BEFORE EVERY CHANGE
 Last 10 versions kept in openspec/.backup/
@@ -223,6 +270,17 @@ Team rebuilt every /bootstrap.
 Memory via .claude/session-state.json
 NO CODE until discovery + specs + infra + HUMAN approved.
 Final delivery: /skill pr-review → open-source pr-agent
+
+NEW 2026 ULTIMATE FEATURES:
+- @Planner: Dependency-aware task decomposition
+- @Verifier: Quality assurance and plan validation
+- @ReflectionAgent: Self-critique and continuous improvement
+- /swarm-planner: Generate structured execution plans
+- /parallel-task: Execute plans in parallel waves
+- /spawn-subagent: Dynamic agent spawning
+- Auto-testing/linting hooks
+- Reflection-triggered iteration
+- Enhanced quality gates
 EOF
 
 # =============================================================================
@@ -254,9 +312,10 @@ database:
   provider: none'
 
 safe_write "$CLAUDE/session-state.json" "{
-  \"version\": \"2025-legendary-final\",
+  \"version\": \"2026-ultimate\",
   \"first_run_complete\": true,
-  \"last_bootstrap\": \"$(date -u +"%Y-%m-%dT%H:%M:%SZ")\"
+  \"last_bootstrap\": \"$(date -u +"%Y-%m-%dT%H:%M:%SZ")\",
+  \"features\": [\"swarm-planner\", \"parallel-task\", \"spawn-subagent\", \"reflection\", \"iteration\"]
 }"
 
 safe_write "$CLAUDE/codebase-map.json" "{
@@ -317,6 +376,13 @@ else
     echo "  Then run: ./scripts/init-artifact-index.sh"
 fi
 
-echo -e "\nFINAL LEGENDARY SCRIPT COMPLETE — BACKUP + ROLLBACK + CONTINUITY + EVERYTHING"
+echo -e "\n2026 ULTIMATE LEGENDARY SCRIPT COMPLETE"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "NEW FEATURES:"
+echo "  • @Planner, @Verifier, @ReflectionAgent"
+echo "  • /swarm-planner, /parallel-task, /spawn-subagent"
+echo "  • Auto-testing, linting, and reflection hooks"
+echo "  • Enhanced iteration protocol"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "Run: claude → /bootstrap"
 echo "Your team is now perfect. Forever.\n"

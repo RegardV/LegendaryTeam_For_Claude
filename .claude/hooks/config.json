@@ -1,6 +1,6 @@
 {
-  "version": "2026-continuity",
-  "lastUpdated": "2026-01-09",
+  "version": "2026-ultimate",
+  "lastUpdated": "2026-01-22",
 
   "sessionStart": {
     "enabled": true,
@@ -24,6 +24,22 @@
     "enabled": true,
     "updateCodebaseMap": true,
     "indexArtifacts": true,
+    "autoLint": true,
+    "autoTest": true,
+    "triggerReflection": true,
+    "qualityGates": {
+      "enabled": true,
+      "lintCommand": "npm run lint -- --fix",
+      "testCommand": "npm test -- --watch=false --passWithNoTests",
+      "coverageThreshold": 80
+    },
+    "reflection": {
+      "enabled": true,
+      "agent": "@ReflectionAgent",
+      "triggerOnFileTypes": [".ts", ".tsx", ".js", ".jsx"],
+      "minChangesForTrigger": 10,
+      "scoreThreshold": 70
+    },
     "debug": false
   },
 
@@ -39,10 +55,35 @@
   "sessionEnd": {
     "enabled": true,
     "promptForHandoff": true,
-    "extractLearnings": false,
+    "extractLearnings": true,
     "cleanupOldLedgers": true,
     "ledgerMaxAge": 604800000,
     "debug": false
+  },
+
+  "iteration": {
+    "enabled": true,
+    "maxIterations": 5,
+    "defaultTimeout": 300000,
+    "agents": ["@PerformanceOptimizer", "@TestAgent", "@SecurityAgent", "@ReflectionAgent"],
+    "successCriteria": {
+      "performance": "measurable_target",
+      "coverage": "percentage_threshold",
+      "security": "zero_critical_vulnerabilities"
+    }
+  },
+
+  "planning": {
+    "enabled": true,
+    "plannerAgent": "@Planner",
+    "verifierAgent": "@Verifier",
+    "autoDecompose": true,
+    "minTasksForPlanning": 3,
+    "confidenceRouting": {
+      "autoProceed": 70,
+      "queueForReview": 40,
+      "blockForHuman": 0
+    }
   },
 
   "global": {
@@ -57,6 +98,11 @@
     "ledgerMaxAge": "7 days in milliseconds (604800000)",
     "budgetLimit": "Dollar amount threshold for budget warnings",
     "gracefulFailure": "If true, hooks continue execution on errors",
-    "debug": "If true, writes detailed logs to debug.log file"
+    "debug": "If true, writes detailed logs to debug.log file",
+    "autoLint": "Run linter after code changes",
+    "autoTest": "Run tests after code changes",
+    "triggerReflection": "Trigger @ReflectionAgent after significant changes",
+    "iteration": "Configuration for autonomous iteration loops",
+    "planning": "Configuration for dependency-aware planning"
   }
 }
