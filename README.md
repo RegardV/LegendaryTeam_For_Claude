@@ -4,6 +4,16 @@
 
 **The Most Advanced Autonomous AI Engineering Team** | Production-Ready with Parallel Autonomous Operation
 
+** Most Recent Updates
+✅ @Planner - Dependency-aware task decomposition
+✅ @Verifier - Quality assurance and scoring
+✅ @ReflectionAgent - Self-critique and improvement
+✅ /swarm-planner - Structured execution plans
+✅ /parallel-task - Wave-based parallel execution
+✅ /spawn-subagent - Dynamic agent spawning
+✅ Enhanced hooks with reflection triggers
+✅ Updated SOP with planning/iteration sections
+
 ---
 
 ## 🎯 What Is This?
