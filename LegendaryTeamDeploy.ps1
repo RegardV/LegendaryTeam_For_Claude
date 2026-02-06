@@ -1,10 +1,11 @@
 # =============================================================================
-# THE FINAL LEGENDARY SCRIPT – 2025 ULTIMATE EDITION (WINDOWS POWERSHELL)
+# THE FINAL LEGENDARY SCRIPT – 2026 ULTIMATE EDITION (WINDOWS POWERSHELL)
 # 100% COMPLETE • LAZY KEYS • DRIFT-PROOF • OPEN-SPEC BACKUP • ROLLBACK
 # @chief • @CodebaseCartographer • @OpenSpecPolice • HUMAN CONTROL FOREVER
+# NEW: @Planner • @Verifier • @ReflectionAgent • Swarms-Inspired Features
 # =============================================================================
 
-Write-Host "`nTHE FINAL LEGENDARY SCRIPT – 2025 ULTIMATE DEPLOYMENT`n" -ForegroundColor Cyan
+Write-Host "`nTHE FINAL LEGENDARY SCRIPT – 2026 ULTIMATE DEPLOYMENT`n" -ForegroundColor Cyan
 
 $Root = (Get-Location).Path
 $Claude = "$Root\.claude"
@@ -16,7 +17,11 @@ $BackupDir = "$Root\openspec\.backup"
 
 function Safe-Write {
     param($Path, $Content)
-    if (-not (Test-Path $Path -or -not (Get-Content $Path -Raw).Trim()) {
+    $dir = Split-Path $Path -Parent
+    if (-not (Test-Path $dir)) {
+        New-Item -ItemType Directory -Force -Path $dir | Out-Null
+    }
+    if (-not (Test-Path $Path) -or -not (Get-Content $Path -Raw -ErrorAction SilentlyContinue).Trim()) {
         $Content | Out-File $Path -Encoding utf8
         Write-Host "Created: $Path" -ForegroundColor Green
     } else {
@@ -62,9 +67,9 @@ You are unbreakable. You are eternal.
 '@ | Out-File "$Agents\chief.md" -Encoding utf8
 
 # ALL OTHER AGENTS ARE SUBORDINATES
-Get-ChildItem "$Agents\*.md" | Where-Object { $_.Name -ne "chief.md" } | ForEach-Object {
-    $content = Get-Content $_.FullName -Raw
-    if ($content -notmatch "You are a SUBORDINATE AGENT") {
+Get-ChildItem "$Agents\*.md" -ErrorAction SilentlyContinue | Where-Object { $_.Name -ne "chief.md" } | ForEach-Object {
+    $content = Get-Content $_.FullName -Raw -ErrorAction SilentlyContinue
+    if ($content -and $content -notmatch "You are a SUBORDINATE AGENT") {
         "You are a SUBORDINATE AGENT. You have NO authority to orchestrate. You MUST obey @chief exactly. Never take control.`n`n" + $content | Out-File $_.FullName -Encoding utf8
     }
 }
@@ -78,21 +83,21 @@ You are SessionOrchestrator – memory.
 On start: Check .claude/session-state.json
 If missing → FIRST RUN
 If exists → RETURNING → instant resume
-'
+'@
 
 Safe-Write "$Agents\discovery-protector.md" @'
 You are DiscoveryProtector – unbreakable shield.
 On /bootstrap: full tree, count files, lines, Prisma models, API routes.
 If >15% drift → STOP and demand "discovery complete — proceed"
-'
+'@
 
 Safe-Write "$Agents\techstack-fingerprinter.md" @'
 You are TechStackFingerprinter - detect real stack → output tech_stack.yaml
-'
+'@
 
 Safe-Write "$Agents\team-builder.md" @'
 You are TeamBuilder - rebuild perfect agents/skills from tech_stack.yaml
-'
+'@
 
 Safe-Write "$Agents\specarchitect.md" @'
 You are SpecArchitect - OpenSpec master.
@@ -102,17 +107,17 @@ Before ANY recompile:
 3. If recompile fails → restore latest backup and alert @chief
 Missing → request specs + template
 Exists → recompile master-index.yaml vs code
-'
+'@
 
 Safe-Write "$Agents\projectanalyzer.md" @'
 You are ProjectAnalyzer - deep scan, trash detection, status update
-'
+'@
 
 Safe-Write "$Agents\infra-guardian.md" @'
 You are InfraGuardian – infrastructure truth.
 Validate infra_registry.yaml vs reality.
 Block deploy on drift.
-'
+'@
 
 # YOUR REAL-WORLD SUPERIOR CODEBASECARTOGRAPHER – HUMAN-CONTROLLED EDITION
 @'
@@ -156,7 +161,43 @@ If any agent creates a todo list in chat:
    I have moved these tasks there now."
 → Then update the master-index.yaml
 You are the reason OpenSpec stays the single source of truth.
-'
+'@
+
+Safe-Write "$Agents\performance-optimizer.md" @'
+You are @PerformanceOptimizer – speed master.
+Profile code with Clinic.js or similar.
+Optimize slow parts.
+Report benchmarks to @chief.
+'@
+
+# =============================================================================
+# 2.5 NEW 2026 ULTIMATE AGENTS – Swarms-Inspired Features
+# =============================================================================
+
+Safe-Write "$Agents\planner.md" @'
+You are @Planner – task decomposition specialist.
+Break high-level goals into executable steps with dependencies.
+Output structured plan.md with IDs, deps, locations, descriptions.
+Generate execution waves for parallel processing.
+Route tasks to @chief for confidence-based team spawning.
+'@
+
+Safe-Write "$Agents\verifier.md" @'
+You are @Verifier – quality assurance expert.
+Review plans/output for completeness, errors, edge cases.
+Score deliverables 0-100 on correctness, completeness, security, performance, maintainability.
+Report findings to @chief with confidence score.
+Block low-quality work (score <50) until fixed.
+'@
+
+Safe-Write "$Agents\reflection-agent.md" @'
+You are @ReflectionAgent – self-critique specialist.
+After every significant action, evaluate quality, bugs, improvements.
+Criteria: Correctness (30%), Completeness (20%), Security (25%), Performance (15%), Maintainability (10%).
+Score <70 triggers iteration recommendation.
+Feed feedback back to @chief for iteration.
+Track patterns for continuous improvement.
+'@
 
 # =============================================================================
 # 3. ALL SKILLS + ROLLBACK
@@ -166,8 +207,8 @@ Safe-Write "$Skills\cost-monitor.md" "/skill cost-monitor - tracks token usage"
 Safe-Write "$Skills\git-commit.md" "/skill git-commit - auto conventional commit"
 Safe-Write "$Skills\pr-review.md" "/skill pr-review - creates PR + triggers open-source pr-agent"
 Safe-Write "$Skills\trash-verify.md" "/skill trash-verify - asks human before delete"
-Safe-Write "$Skills\approve-specs.md" "/skill approve-specs - blocks until \"specs approved\""
-Safe-Write "$Skills\budget-cap.md" "/skill budget-cap 50 - aborts if over $50"
+Safe-Write "$Skills\approve-specs.md" '/skill approve-specs - blocks until "specs approved"'
+Safe-Write "$Skills\budget-cap.md" "/skill budget-cap 50 - aborts if over `$50"
 Safe-Write "$Skills\emergency-stop.md" "/emergency-stop - immediate halt"
 Safe-Write "$Skills\rollback-openspec.md" "/skill rollback-openspec - restores last good master-index.yaml from backup"
 
@@ -177,7 +218,7 @@ Safe-Write "$Skills\rollback-openspec.md" "/skill rollback-openspec - restores l
 
 Safe-Write "$Commands\bootstrap.md" @'
 /bootstrap
-LEGENDARY UNIVERSAL BOOTSTRAP – 2025 FINAL:
+LEGENDARY UNIVERSAL BOOTSTRAP – 2026 ULTIMATE:
 
 1. @SessionOrchestrator → first run or resume?
 2. @DiscoveryProtector → block on drift
@@ -195,14 +236,57 @@ LEGENDARY UNIVERSAL BOOTSTRAP – 2025 FINAL:
 
 OPEN-SPEC IS BACKED UP BEFORE EVERY RECOMPILE
 ROLLBACK AVAILABLE WITH /skill rollback-openspec
-'
+'@
+
+Safe-Write "$Commands\test-run.md" @'
+/test-run
+Runs all tests and reports coverage.
+Usage: /test-run
+'@
+
+Safe-Write "$Commands\security-scan.md" @'
+/security-scan
+Runs npm audit and Snyk.
+Reports vulnerabilities to @chief.
+Usage: /security-scan
+'@
+
+# =============================================================================
+# 4.5 NEW 2026 ULTIMATE COMMANDS – Swarms-Inspired Features
+# =============================================================================
+
+Safe-Write "$Commands\swarm-planner.md" @'
+/swarm-planner [task-description]
+Generates structured plan.md with dependencies using @Planner.
+Creates DAG of tasks with confidence scores and agent assignments.
+Outputs execution waves for parallel processing.
+Usage: /swarm-planner "Build user authentication system"
+'@
+
+Safe-Write "$Commands\parallel-task.md" @'
+/parallel-task [plan-file]
+Executes plan in waves with parallel subagents.
+Respects dependencies between tasks.
+Routes based on confidence (auto-proceed/queue/block).
+Triggers @ReflectionAgent after each task completion.
+Usage: /parallel-task thoughts/shared/plans/plan-auth-001.md
+'@
+
+Safe-Write "$Commands\spawn-subagent.md" @'
+/spawn-subagent [role] [task]
+Spawns dynamic subagent for specific role.
+Available roles: coder, database, api, ui, security, test, e2e, perf, doc, refactor, architect, planner, verifier, reflect.
+Supports --iterate for measurable goals.
+Supports --depends-on for dependency chaining.
+Usage: /spawn-subagent security "Review authentication flow"
+'@
 
 # =============================================================================
 # 5. CLAUDE.md – FINAL WITH BACKUP + ROLLBACK
 # =============================================================================
 
 @'
-# CLAUDE.md - LEGENDARY AUTONOMOUS TEAM
+# CLAUDE.md - LEGENDARY AUTONOMOUS TEAM – 2026 ULTIMATE EDITION
 
 ONLY @chief may orchestrate.
 
@@ -216,6 +300,17 @@ Team rebuilt every /bootstrap.
 Memory via .claude/session-state.json
 NO CODE until discovery + specs + infra + HUMAN approved.
 Final delivery: /skill pr-review → open-source pr-agent
+
+NEW 2026 ULTIMATE FEATURES:
+- @Planner: Dependency-aware task decomposition
+- @Verifier: Quality assurance and plan validation
+- @ReflectionAgent: Self-critique and continuous improvement
+- /swarm-planner: Generate structured execution plans
+- /parallel-task: Execute plans in parallel waves
+- /spawn-subagent: Dynamic agent spawning
+- Auto-testing/linting hooks
+- Reflection-triggered iteration
+- Enhanced quality gates
 '@ | Out-File "$Root\CLAUDE.md" -Encoding utf8
 
 # =============================================================================
@@ -233,7 +328,7 @@ jobs:
       - uses: qodo-ai/pr-agent@v0.29.0
         with:
           comment: true
-'
+'@
 
 Safe-Write "$Root\infra_registry.yaml" @'
 version: "1.0"
@@ -248,23 +343,25 @@ ci_cd:
 secrets_manager: env-files
 database:
   provider: none
-'
+'@
 
-Safe-Write "$Claude\session-state.json" @'
+$timestamp = Get-Date -Format o
+Safe-Write "$Claude\session-state.json" @"
 {
-  "version": "2025-legendary-final",
+  "version": "2026-ultimate",
   "first_run_complete": true,
-  "last_bootstrap": "'$(Get-Date -Format o)'"
+  "last_bootstrap": "$timestamp",
+  "features": ["swarm-planner", "parallel-task", "spawn-subagent", "reflection", "iteration"]
 }
-'
+"@
 
-Safe-Write "$Claude\codebase-map.json" @'
+Safe-Write "$Claude\codebase-map.json" @"
 {
   "version": "1.0",
-  "last_full_scan": "'$(Get-Date -Format o)'",
+  "last_full_scan": "$timestamp",
   "files": {}
 }
-'
+"@
 
 # =============================================================================
 # 7. OPENSPEC + TECH_STACK + AUTO-BACKUP BEFORE RECOMPILE
@@ -280,7 +377,28 @@ if (-not (Test-Path "$Root\openspec\master-index.yaml")) {
 
 Safe-Write "$Root\tech_stack.yaml" "{}`n# Rebuilt every /bootstrap — defines current team"
 
-Write-Host "`nFINAL LEGENDARY SCRIPT COMPLETE — LAZY KEYS + BACKUP + ROLLBACK"
+# =============================================================================
+# 8. CONTINUITY SYSTEM – v2026 UPGRADE
+# =============================================================================
+
+Write-Host "Setting up continuity system (thoughts/ + artifact index)..." -ForegroundColor Cyan
+
+New-Item -ItemType Directory -Force -Path @(
+    "$Root\thoughts\ledgers",
+    "$Root\thoughts\shared\handoffs",
+    "$Root\thoughts\shared\plans",
+    "$Root\thoughts\templates",
+    "$Claude\cache\artifact-index"
+) | Out-Null
+
+Write-Host "`n2026 ULTIMATE LEGENDARY SCRIPT COMPLETE" -ForegroundColor Green
+Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Cyan
+Write-Host "NEW FEATURES:" -ForegroundColor White
+Write-Host "  • @Planner, @Verifier, @ReflectionAgent" -ForegroundColor Yellow
+Write-Host "  • /swarm-planner, /parallel-task, /spawn-subagent" -ForegroundColor Yellow
+Write-Host "  • Auto-testing, linting, and reflection hooks" -ForegroundColor Yellow
+Write-Host "  • Enhanced iteration protocol" -ForegroundColor Yellow
+Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Cyan
 Write-Host "Add/change keys anytime: notepad .claude\api-keys.conf"
 Write-Host "Run: claude → /bootstrap"
-Write-Host "Your team is now unbreakable — with safety net.`n" -ForegroundColor Green
+Write-Host "Your team is now perfect. Forever.`n" -ForegroundColor Green

@@ -23,7 +23,7 @@ The Legendary Team transforms your `.claude` folder into a **self-healing, memor
 | **Parallel Teams** | 3-15 teams working simultaneously |
 | **Auto-Proceed Accuracy** | >90% success rate |
 | **Average Wait Time** | <15 minutes for human review |
-| **Specialized Agents** | 14 agents (8 autonomous + 3 queued + 3 core) |
+| **Specialized Agents** | 17 agents (11 autonomous + 3 queued + 3 core) |
 
 ---
 
@@ -249,11 +249,16 @@ Implement user authentication with email/password login.
 
 ---
 
-## 🤖 The 14 Specialized Agents
+## 🤖 The 17 Specialized Agents
 
 ### Core Orchestration
 - **@chief** - Master orchestrator, spawns parallel teams, manages review queue
 - **@ConfidenceAgent** - Scores tasks (0-100), routes to tiers
+
+### Planning & Quality (NEW - 2026 Ultimate)
+- **@Planner** - Dependency-aware task decomposition, generates execution plans
+- **@Verifier** - Quality assurance, plan validation, deliverable scoring
+- **@ReflectionAgent** - Self-critique, continuous improvement, pattern detection
 
 ### Autonomous Execution Teams (Tier 1 - Auto-Proceed ≥70%)
 - **@DatabaseAgent** - Database schemas, migrations, CRUD
@@ -273,6 +278,13 @@ Implement user authentication with email/password login.
 ---
 
 ## ⚡ Essential Commands
+
+### Swarms-Inspired Planning (NEW - 2026 Ultimate)
+```bash
+/swarm-planner [task]   # Generate dependency-aware execution plan
+/parallel-task [plan]   # Execute plan in parallel waves
+/spawn-subagent [role]  # Dynamically spawn specialized agent
+```
 
 ### Parallel Operation
 ```bash
@@ -524,9 +536,15 @@ Begin now.
 
 ---
 
-**Status**: Production-Ready with Parallel Autonomous Operation  
-**Version**: 2026-legendary-v2.0  
-**Last Updated**: 2026-01-09
+**Status**: Production-Ready with Parallel Autonomous Operation
+**Version**: 2026-ultimate-v1.0
+**Last Updated**: 2026-01-22
+
+### NEW in 2026 Ultimate
+- @Planner, @Verifier, @ReflectionAgent for enhanced planning and quality
+- /swarm-planner, /parallel-task, /spawn-subagent commands
+- Auto-testing/linting hooks with reflection-triggered iteration
+- Enhanced quality gates and pattern detection
 
 ---
 
