@@ -156,7 +156,22 @@ Every session, every task, every time — this is LAW:
     → Model swap requires restarting Claude Code and editing api-keys.conf
     → Planned: /swap-model zai|kimi|claude (coming soon)
 
-11. GOLDEN RULES — NEVER BROKEN
+11. TOKEN OPTIMIZATION (context efficiency)
+    → Default: Use lite agents from .claude/agents-lite/
+    → Self-escalation: Lite agents read full definitions when needed
+    → Dynamic loading: Agents load on-demand based on task keywords
+    → Always-loaded: @chief, @ConfidenceAgent
+    → On-demand: Other agents load when their keywords detected
+    → Context threshold: Proactive compaction at 70% (not 95%)
+    → History limit: Maximum 6 turns retained
+    → Self-escalation triggers:
+      • Task complexity exceeds lite agent scope
+      • Uncertainty about patterns or examples
+      • First-time task types
+      • Quality concerns detected
+    → Full definitions available at: .claude/agents-full/[agent].md
+
+12. GOLDEN RULES — NEVER BROKEN
     → ONLY @chief may orchestrate (parallel teams report to @chief)
     → ALL agents MUST follow .claude/rules/ (mandatory behavioral rules)
     → ALL agents reference .claude/skills/ for best practices
@@ -192,7 +207,13 @@ NEW 2026 ULTIMATE FEATURES SUMMARY:
 ├─ Auto-testing/linting hooks
 ├─ Reflection-triggered iteration
 ├─ Enhanced quality gates
-└─ Pattern detection for systemic improvements
+├─ Pattern detection for systemic improvements
+└─ TOKEN OPTIMIZATION SYSTEM (96.7% reduction):
+   ├─ Lite agents in .claude/agents-lite/ (~60-100 words each)
+   ├─ Full agents in .claude/agents-full/ (for self-escalation)
+   ├─ Self-escalation protocol for complex tasks
+   ├─ Dynamic agent loading by keywords
+   └─ Context management at 70% threshold
 
 This S.O.P. is LAW.
 It is executed exactly as written.

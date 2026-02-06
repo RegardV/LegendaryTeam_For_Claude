@@ -414,9 +414,45 @@ Hooks can be configured via `.claude/hooks/config.json`:
     "promptForHandoff": true,
     "extractLearnings": true,
     "cleanupOldLedgers": true
+  },
+  "tokenOptimization": {
+    "enabled": true,
+    "agentMode": "lite",
+    "agentPaths": {
+      "lite": ".claude/agents-lite/",
+      "full": ".claude/agents-full/"
+    },
+    "dynamicLoading": {
+      "enabled": true,
+      "alwaysLoad": ["chief", "confidence-agent"],
+      "loadOnDemand": true
+    },
+    "contextManagement": {
+      "compactThreshold": 0.70,
+      "maxHistoryTurns": 6
+    },
+    "outputCompression": {
+      "enabled": true,
+      "maxToolResponseLines": 50
+    }
   }
 }
 ```
+
+### Token Optimization Settings (NEW)
+
+The `tokenOptimization` section controls context efficiency:
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `agentMode` | `"lite"` | Use lite agents (`"lite"`) or full agents (`"full"`) |
+| `dynamicLoading.enabled` | `true` | Load agents on-demand based on keywords |
+| `dynamicLoading.alwaysLoad` | `["chief", "confidence-agent"]` | Agents to always load |
+| `contextManagement.compactThreshold` | `0.70` | Trigger compaction at 70% context usage |
+| `contextManagement.maxHistoryTurns` | `6` | Maximum conversation turns to retain |
+| `outputCompression.maxToolResponseLines` | `50` | Truncate tool responses |
+
+**Self-Escalation**: When `agentMode` is `"lite"`, agents automatically read their full definitions from `.claude/agents-full/` when encountering complex tasks.
 
 ---
 
