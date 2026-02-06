@@ -24,6 +24,13 @@
 - **Updated Documentation** - All docs aligned with new system
 - **Full Agents Preserved** - `.claude/agents-full/` available for on-demand access
 
+### Architectural Integrity
+- **OpenSpec System** - Living specifications in `OpenSpec/`, backed up before every change
+- **Drift Detection** - @DiscoveryProtector blocks if >15% code missing from specs
+- **@CodebaseCartographer** - Continuous monitoring, maintains `codebase-map.json`
+- **@TechStackFingerprinter** - Auto-detects stack, outputs `tech_stack.yaml`
+- **@OpenSpecPolice** - Chat TODO lists banned, specs are source of truth
+
 ---
 
 ## A Day With The Legendary Team
@@ -45,7 +52,25 @@ Next steps: Finish moderation queue, add comment threading
 
 Yesterday's context was long gone, but the memory wasn't. The system knew exactly where I'd left off.
 
-I just typed:
+But first, I ran `/bootstrap` to make sure everything was in sync. The guardians kicked in:
+
+```
+@TechStackFingerprinter → Scanning...
+  Detected: Node.js 20.x, TypeScript 5.3, Prisma 5.8, React 18
+  Updated: tech_stack.yaml ✓
+
+@CodebaseCartographer → Starting continuous monitoring
+  Files tracked: 247
+  Codebase map: .claude/codebase-map.json ✓
+
+@DiscoveryProtector → Checking for drift...
+  OpenSpec coverage: 94% ✓ (threshold: 85%)
+  No drift detected. Proceeding.
+```
+
+The stack was fingerprinted, the codebase was mapped, and specs matched reality. Now I could work.
+
+I typed:
 
 ```
 @chief Continue the review system from yesterday.
@@ -119,7 +144,45 @@ Both were writing to the same ledger in real-time:
 - Flag-for-review moderation (human final call)
 ```
 
-If context had cleared right then, nothing would've been lost. The ledger had everything.
+Meanwhile, @CodebaseCartographer was tracking every file change in the background:
+
+```
+CODEBASE MAP UPDATED:
+  + src/components/CommentThread.tsx (new file, @UIAgent)
+  + src/services/moderation.ts (new file, @SecurityAgent)
+  ~ prisma/schema.prisma (modified, @DatabaseAgent)
+  Dependencies: CommentThread → moderation.ts → schema
+```
+
+And @OpenSpecPolice made sure the specs stayed in sync:
+
+```
+OpenSpec/components/comment-thread.yaml → AUTO-CREATED
+OpenSpec/services/moderation.yaml → AUTO-CREATED
+Backup: openspec/.backup/v47/ ✓
+```
+
+If context had cleared right then, nothing would've been lost. The ledger had everything. The specs had everything. The codebase map had everything.
+
+---
+
+### Drift Detection Saved Us
+
+At one point, @UIAgent tried to add a new notification feature—something outside the current plan. @DiscoveryProtector stepped in:
+
+```
+⚠️  DRIFT DETECTED
+New code: src/services/notifications.ts
+OpenSpec coverage: 82% (below 85% threshold)
+Missing spec for: notifications service
+
+BLOCKED. Please either:
+1. Add spec: OpenSpec/services/notifications.yaml
+2. Remove uncommitted code
+3. Get human approval: "discovery complete — proceed"
+```
+
+I looked at it and realized—yeah, that's scope creep. I told it to revert. The system kept us on track.
 
 ---
 
@@ -195,9 +258,12 @@ Agents loaded: 4 (lite versions)
 Ledger entries: 12
 Artifact queries: 8
 Patterns applied: 3 (from history)
+OpenSpec updates: 2 (auto-created)
+Drift blocks: 1 (caught scope creep)
+Codebase map: 247 → 251 files tracked
 ```
 
-31%. An hour of work and only 31% context used. The lite agents were paying off. The memory was doing the heavy lifting.
+31%. An hour of work and only 31% context used. The lite agents were paying off. The memory was doing the heavy lifting. And the guardians kept everything in sync.
 
 Created the handoff:
 
@@ -250,6 +316,9 @@ Two months of learnings. Instantly searchable. The next performance task starts 
 | Patterns reused | 3 |
 | Context used | 31% |
 | Learnings stored | 3 |
+| OpenSpec updates | 2 (auto-created) |
+| Drift blocks | 1 (caught scope creep) |
+| Files tracked | 251 (+4 new) |
 
 ---
 
@@ -263,6 +332,10 @@ Two months of learnings. Instantly searchable. The next performance task starts 
 | Repeat mistakes | Failures never repeated |
 | Context full by mid-session | 31% used after 75 minutes |
 | Clear and lose momentum | Memory fills the gaps |
+| Scope creep goes unnoticed | Drift detection blocks it immediately |
+| Specs and code diverge | OpenSpec auto-updated, backed up |
+| "What files did we change?" | @CodebaseCartographer knows exactly |
+| "What stack are we using?" | @TechStackFingerprinter detected it |
 
 ---
 
@@ -284,6 +357,64 @@ thoughts/
     ├── artifacts (decisions, learnings)
     ├── outcomes (SUCCEEDED/PARTIAL/FAILED)
     └── patterns (searchable via FTS5)
+```
+
+---
+
+## Architectural Integrity Architecture
+
+```
+OpenSpec/                             # Living specifications
+├── components/                       # UI component specs
+├── services/                         # Service layer specs
+├── models/                           # Data model specs
+└── .backup/                          # Last 10 versions
+    ├── v47/                          # Rollback point
+    └── v46/
+
+.claude/
+├── codebase-map.json                 # @CodebaseCartographer output
+│   ├── files (path, purpose, deps)
+│   ├── last_modified (per file)
+│   └── modified_by (which agent)
+├── tech_stack.yaml                   # @TechStackFingerprinter output
+│   ├── runtime (node, python, etc)
+│   ├── frameworks (react, prisma)
+│   └── tools (typescript, eslint)
+└── session-state.json                # Current session tracking
+```
+
+**Drift Detection Flow:**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  CODE CHANGE DETECTED                                           │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│  @CodebaseCartographer → Update codebase-map.json               │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│  @DiscoveryProtector → Compare code vs OpenSpec                 │
+│  Coverage = (files with specs) / (total files)                  │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+              ┌───────────────┴───────────────┐
+              ▼                               ▼
+     Coverage ≥ 85%                  Coverage < 85%
+              │                               │
+              ▼                               ▼
+┌─────────────────────┐          ┌─────────────────────┐
+│  ✓ PROCEED          │          │  ⚠️ DRIFT DETECTED  │
+│  Update OpenSpec    │          │  BLOCK execution    │
+│  Continue work      │          │  Require:           │
+└─────────────────────┘          │  - Add missing spec │
+                                 │  - Remove code      │
+                                 │  - Human override   │
+                                 └─────────────────────┘
 ```
 
 ---
@@ -449,4 +580,4 @@ STOP CONDITIONS:
 
 ---
 
-*This is what working with the Legendary Team 2026 Ultimate actually feels like. The system remembers. The system learns. Every session builds on every previous session.*
+*This is what working with the Legendary Team 2026 Ultimate actually feels like. The system remembers. The system learns. The guardians protect. Every session builds on every previous session—and nothing drifts out of sync.*
