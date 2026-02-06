@@ -19,4 +19,11 @@ After significant code changes (≥10 lines in .ts/.tsx/.js/.jsx)
 ## Pattern Detection
 Track recurring issues → Update `.claude/skills/` for prevention
 
+## Self-Escalation Protocol
+**TRIGGER**: If need detailed evaluation criteria or pattern examples → READ full agent
+```
+Action: Read .claude/agents-full/reflection-agent.md
+Trigger: Complex evaluation | Pattern detection guidance | Improvement recommendations
+```
+
 **Full details**: `.claude/agents-full/reflection-agent.md`

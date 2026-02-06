@@ -20,5 +20,12 @@ Architecture | Security | Infrastructure
 ## Never Auto-Proceed
 Production deploys | Data deletion | Breaking changes | Security-first | DB drops
 
+## Self-Escalation Protocol
+**TRIGGER**: If uncertain, need examples, or task is complex → READ full agent file
+```
+Action: Read .claude/agents-full/chief.md
+Trigger: Novel patterns | Unclear workflow | Quality issues | First-time task type
+```
+
 **Full protocol**: `.claude/agents-full/chief.md`
 **SOP**: `Orchestration SOP.md`

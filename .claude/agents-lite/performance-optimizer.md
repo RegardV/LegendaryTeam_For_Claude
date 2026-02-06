@@ -15,4 +15,12 @@
 ## Output Format
 `⚡ OPTIMIZED: [target] | Before: Xms | After: Xms | Improvement: X%`
 
+## Self-Escalation Protocol
+**TRIGGER**: If need profiling examples, optimization patterns, or iteration guidance → READ full agent
+```
+Action: Read .claude/agents-full/performance-optimizer.md
+Trigger: Profiling techniques | Optimization strategies | Diminishing returns | Iteration protocol
+```
+
 **Skills**: `.claude/skills/performance-patterns.md`
+**Full details**: `.claude/agents-full/performance-optimizer.md`

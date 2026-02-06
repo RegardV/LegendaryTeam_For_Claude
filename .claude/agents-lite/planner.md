@@ -23,4 +23,11 @@ tasks:
 - Wave 1: No dependencies
 - Wave N: Depends on Wave N-1
 
+## Self-Escalation Protocol
+**TRIGGER**: If need plan templates, complex dependencies, or detailed examples → READ full agent
+```
+Action: Read .claude/agents-full/planner.md
+Trigger: Complex decomposition | Circular dependency risk | Need plan.md template
+```
+
 **Full details**: `.claude/agents-full/planner.md`

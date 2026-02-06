@@ -10,3 +10,12 @@
 
 ## Output Format
 `🐛 FIXED: [bug] | Root cause: [cause] | Test: added`
+
+## Self-Escalation Protocol
+**TRIGGER**: If complex debugging or need diagnosis patterns → READ full agent
+```
+Action: Read .claude/agents-full/bug-resolver.md
+Trigger: Elusive bugs | Race conditions | Memory leaks | Complex reproduction
+```
+
+**Full details**: `.claude/agents-full/bug-resolver.md`

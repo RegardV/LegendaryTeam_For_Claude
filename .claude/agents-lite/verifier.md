@@ -17,4 +17,11 @@
 ## Report Format
 `Score: X/100 | Status: [APPROVE/NEEDS_WORK/BLOCK] | Issues: [list]`
 
+## Self-Escalation Protocol
+**TRIGGER**: If need detailed scoring rubrics or edge case guidance → READ full agent
+```
+Action: Read .claude/agents-full/verifier.md
+Trigger: Scoring uncertainty | Complex deliverable | Need detailed criteria
+```
+
 **Full details**: `.claude/agents-full/verifier.md`
