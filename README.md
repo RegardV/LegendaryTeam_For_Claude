@@ -34,6 +34,7 @@ The Legendary Team transforms your `.claude` folder into a **self-healing, memor
 | **Auto-Proceed Accuracy** | >90% success rate |
 | **Average Wait Time** | <15 minutes for human review |
 | **Specialized Agents** | 17 agents (11 autonomous + 3 queued + 3 core) |
+| **Token Optimization** | 96.7% reduction with self-escalation |
 
 ---
 
@@ -43,7 +44,7 @@ The Legendary Team transforms your `.claude` folder into a **self-healing, memor
 
 The complete documentation is a comprehensive single-page HTML file with full navigation covering:
 - Installation guide
-- All 10 methodologies explained
+- All 11 methodologies explained
 - Every agent detailed
 - Complete usage guide
 - Dashboard setup
@@ -52,9 +53,9 @@ The complete documentation is a comprehensive single-page HTML file with full na
 
 ---
 
-## 🧠 The 10 Core Methodologies
+## 🧠 The 11 Core Methodologies
 
-The Legendary Team is built on 10 foundational methodologies that work together:
+The Legendary Team is built on 11 foundational methodologies that work together:
 
 ### 1. PRD-First Development (OpenSpec)
 **Document before coding. OpenSpec is the single source of truth.**
@@ -166,6 +167,34 @@ The Legendary Team is built on 10 foundational methodologies that work together:
 
 **Why:** Objective decisions, self-improving, transparent.
 
+### 11. Token Optimization System ⭐ NEW
+**Minimize context usage while maintaining quality. Self-escalate when needed.**
+
+The Legendary Team includes a comprehensive token optimization system that reduces context consumption by 96.7% while maintaining work quality through intelligent self-escalation.
+
+**Dual-Mode Agents:**
+- **Lite Mode** (`.claude/agents-lite/`): Minimal prompts (~60-100 words each)
+- **Full Mode** (`.claude/agents-full/`): Complete definitions (800-3000 words each)
+
+**Self-Escalation Protocol:**
+When a lite agent encounters complexity beyond its scope, it automatically reads its full definition:
+```
+TRIGGER: If uncertain, need examples, or task is complex → READ full agent
+Action: Read .claude/agents-full/[agent].md
+```
+
+**Dynamic Loading:**
+- Only load agents when their keywords are detected
+- Always-load: @chief, @ConfidenceAgent
+- On-demand: @DatabaseAgent loads on "database", "schema", "migration"
+
+**Context Management:**
+- Proactive compaction at 70% threshold (not 95%)
+- Maximum 6 history turns retained
+- Compressed output formats
+
+**Why:** 96.7% token reduction, maintains quality through self-escalation, enables longer sessions.
+
 ---
 
 ## 🚀 Quick Start
@@ -253,9 +282,132 @@ Implement user authentication with email/password login.
 - **T+60**: Approved tasks complete
 - **T+90**: ALL 10 DONE
 
-**Result:** 90 minutes vs 300+ sequential = **3.3x faster!**  
-**You reviewed:** Only 50% of tasks (the uncertain ones)  
+**Result:** 90 minutes vs 300+ sequential = **3.3x faster!**
+**You reviewed:** Only 50% of tasks (the uncertain ones)
 **Zero blocking** on routine work
+
+---
+
+## 📖 Usage Examples
+
+### Example 1: Swarm-Based Feature Planning
+
+Use `/swarm-planner` to create a dependency-aware execution plan:
+
+```
+You: /swarm-planner Implement user authentication with OAuth2
+
+@Planner decomposes into:
+├── Task 1: Database schema for users (no dependencies)
+├── Task 2: OAuth2 provider configuration (no dependencies)
+├── Task 3: Authentication service (depends on 1, 2)
+├── Task 4: Login/logout endpoints (depends on 3)
+├── Task 5: Session management (depends on 3)
+├── Task 6: Protected route middleware (depends on 4, 5)
+└── Task 7: Integration tests (depends on all)
+
+Execution waves:
+  Wave 1: [Task 1, Task 2] → parallel execution
+  Wave 2: [Task 3] → after wave 1
+  Wave 3: [Task 4, Task 5] → parallel after wave 2
+  Wave 4: [Task 6] → after wave 3
+  Wave 5: [Task 7] → final verification
+```
+
+### Example 2: Parallel Task Execution
+
+After planning, execute with `/parallel-task`:
+
+```
+You: /parallel-task execute wave 1
+
+@chief spawns:
+  Team A: @DatabaseAgent → users table schema
+  Team B: @SecurityAgent → OAuth2 config
+
+Both teams work simultaneously. Results:
+  ✅ Team A: Schema created, migration ready
+  ✅ Team B: OAuth2 providers configured
+
+You: /parallel-task execute wave 2
+... continues through all waves
+```
+
+### Example 3: Dynamic Agent Spawning
+
+Spawn specialized agents on-demand:
+
+```
+You: /spawn-subagent performance-analyzer for API endpoints
+
+@chief creates temporary @PerformanceAnalyzer:
+  - Profiles all API endpoints
+  - Identifies bottlenecks
+  - Suggests optimizations
+  - Self-terminates after task completion
+
+Result: "Identified 3 N+1 queries, 2 missing indexes"
+```
+
+### Example 4: Token-Optimized Session
+
+The system automatically uses lite agents for efficiency:
+
+```
+Session starts with optimized CLAUDE.md (<150 tokens)
+
+You: Implement a REST API for products
+
+@chief (lite) routes task:
+  → @DatabaseAgent (lite): Creates products table
+  → @TestAgent (lite): Writes unit tests
+
+@DatabaseAgent encounters complex migration:
+  SELF-ESCALATION TRIGGERED
+  → Reads .claude/agents-full/database-agent.md
+  → Now has full migration patterns and examples
+  → Completes complex migration successfully
+
+Token usage: ~3,000 tokens vs ~30,000 with full agents
+Quality: Maintained through self-escalation
+```
+
+### Example 5: Review Queue Workflow
+
+```
+You: @chief Implement payment processing
+
+@ConfidenceAgent scores:
+  - Payment gateway integration: 35% → Tier 3 (BLOCKS)
+  - Payment form UI: 75% → Tier 1 (auto-proceed)
+  - Payment validation: 80% → Tier 1 (auto-proceed)
+
+@chief: "Payment gateway blocked - security critical.
+        Spawning teams for UI and validation while you review."
+
+You: /review-queue
+  [BLOCKED] payment-gateway-001: Payment gateway integration
+            Reason: Security-critical, first implementation
+            Confidence: 35%
+
+You: /approve-task payment-gateway-001 "Proceed with Stripe API"
+
+@SecurityAgent now executes with your guidance.
+```
+
+### Example 6: Iterative Optimization
+
+```
+You: @PerformanceOptimizer reduce API latency to <100ms --iterate --max-iterations 5
+
+Iteration 1: Added database indexes → 450ms → 250ms ✓
+Iteration 2: Implemented caching → 250ms → 120ms ✓
+Iteration 3: Optimized queries → 120ms → 85ms ✓
+
+Target achieved! (85ms < 100ms)
+Total improvement: 81% faster
+Iterations used: 3/5
+```
 
 ---
 
@@ -367,6 +519,8 @@ The Legendary Team includes a comprehensive knowledge base and behavioral framew
 - **`tdd-workflow.md`** - Test-Driven Development methodology (Red-Green-Refactor)
 - **`security-checklist.md`** - OWASP Top 10, security best practices, threat prevention
 - **`performance-patterns.md`** - Caching, profiling, monitoring, optimization strategies
+- **`output-compression.md`** - 🆕 Compressed output formats for token efficiency
+- **`context-monitor.md`** - 🆕 Context usage monitoring and threshold management
 
 **Agents reference skills** to access best practices without cluttering their core prompts.
 
@@ -423,8 +577,12 @@ The Legendary Team includes a comprehensive knowledge base and behavioral framew
 ```
 LegendaryTeam_For_Claude/
 ├── .claude/
-│   ├── agents/                    # 17 specialized agents
+│   ├── agents/                    # 17 specialized agents (full definitions)
+│   ├── agents-lite/               # 🆕 Token-optimized lite agents (96.7% smaller)
+│   ├── agents-full/               # 🆕 Complete agent definitions (for escalation)
 │   ├── commands/                  # Slash commands
+│   ├── skills/                    # Reusable knowledge base
+│   ├── rules/                     # Mandatory behavioral rules
 │   ├── hooks/                     # Automated quality gates
 │   └── cache/artifact-index/      # SQLite + FTS5
 ├── thoughts/
@@ -436,6 +594,7 @@ LegendaryTeam_For_Claude/
 │   └── templates/                 # Document templates
 ├── OpenSpec/                      # PRD - Single source of truth
 ├── scripts/                       # Utility scripts
+├── CLAUDE.md                      # 🆕 Optimized entry point (<150 tokens)
 ├── LEGENDARY_TEAM_COMPLETE_DOCUMENTATION.html  # ⭐ COMPLETE DOCS
 ├── PARALLEL_AUTONOMOUS_OPERATION.md            # Design document
 ├── Orchestration SOP.md                        # Operating procedures
@@ -451,6 +610,9 @@ LegendaryTeam_For_Claude/
 | **[LEGENDARY_TEAM_COMPLETE_DOCUMENTATION.html](LEGENDARY_TEAM_COMPLETE_DOCUMENTATION.html)** | 👉 **Complete single-page docs** (installation, methodologies, agents, usage, dashboard, troubleshooting, architecture) |
 | [Orchestration SOP.md](Orchestration SOP.md) | Standard operating procedures |
 | [PARALLEL_AUTONOMOUS_OPERATION.md](PARALLEL_AUTONOMOUS_OPERATION.md) | Complete design document for parallel system |
+| [TOKEN_OPTIMIZATION_RESEARCH.md](TOKEN_OPTIMIZATION_RESEARCH.md) | 🆕 Token optimization research and strategies |
+| [.claude/TOKEN_OPTIMIZATION_README.md](.claude/TOKEN_OPTIMIZATION_README.md) | 🆕 Token optimization implementation guide |
+| [QUALITY_COMPARISON_ANALYSIS.md](QUALITY_COMPARISON_ANALYSIS.md) | 🆕 Full vs lite agent quality comparison |
 | [PHASE5.1_COMPLETION_REPORT.md](PHASE5.1_COMPLETION_REPORT.md) | Implementation report with metrics |
 | [thoughts/README.md](thoughts/README.md) | Continuity system guide |
 | [.claude/hooks/README.md](.claude/hooks/README.md) | Hooks documentation |
@@ -510,7 +672,7 @@ Contributions welcome! Ensure all changes:
 - Maintain 100/100 SOP compliance
 - Include tests
 - Update documentation
-- Follow the 10 methodologies
+- Follow the 11 methodologies
 
 ---
 
@@ -540,8 +702,10 @@ Begin now.
 ## 🎓 Learn More
 
 - Read the [Complete Documentation](LEGENDARY_TEAM_COMPLETE_DOCUMENTATION.html)
-- Study the [10 Core Methodologies](#-the-10-core-methodologies)
+- Study the [11 Core Methodologies](#-the-11-core-methodologies)
 - Understand [Parallel Autonomous Operation](#6-parallel-autonomous-operation-)
+- Explore [Token Optimization](#11-token-optimization-system--new)
+- Review [Usage Examples](#-usage-examples)
 - Review [Real Examples](#-how-it-works-real-example)
 
 ---
@@ -551,8 +715,11 @@ Begin now.
 **Last Updated**: 2026-02-06
 
 ### NEW in 2026 Ultimate
-- @Planner, @Verifier, @ReflectionAgent for enhanced planning and quality
-- /swarm-planner, /parallel-task, /spawn-subagent commands
+- **Swarm-Inspired Planning**: @Planner, @Verifier, @ReflectionAgent for enhanced planning and quality
+- **New Commands**: /swarm-planner, /parallel-task, /spawn-subagent for advanced orchestration
+- **Token Optimization System**: 96.7% token reduction with lite agents and self-escalation
+- **Dual-Mode Agents**: `.claude/agents-lite/` and `.claude/agents-full/` with automatic escalation
+- **Context Management**: Proactive compaction at 70%, compressed outputs, dynamic loading
 - Auto-testing/linting hooks with reflection-triggered iteration
 - Enhanced quality gates and pattern detection
 
