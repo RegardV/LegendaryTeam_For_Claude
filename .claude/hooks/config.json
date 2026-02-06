@@ -1,6 +1,50 @@
 {
-  "version": "2026-ultimate",
-  "lastUpdated": "2026-01-22",
+  "version": "2026-ultimate-optimized",
+  "lastUpdated": "2026-02-06",
+
+  "tokenOptimization": {
+    "enabled": true,
+    "agentMode": "lite",
+    "agentPaths": {
+      "lite": ".claude/agents-lite/",
+      "full": ".claude/agents-full/"
+    },
+    "dynamicLoading": {
+      "enabled": true,
+      "alwaysLoad": ["chief", "confidence-agent"],
+      "loadOnDemand": true,
+      "triggers": {
+        "database-agent": ["database", "schema", "migration", "query", "sql", "prisma"],
+        "ui-agent": ["component", "react", "vue", "ui", "frontend", "css", "style"],
+        "test-agent": ["test", "coverage", "jest", "spec", "vitest"],
+        "security-agent": ["security", "auth", "encryption", "password", "token"],
+        "planner": ["plan", "decompose", "breakdown", "swarm"],
+        "verifier": ["verify", "validate", "review", "quality"],
+        "reflection-agent": ["reflect", "evaluate", "improve"],
+        "performance-optimizer": ["performance", "optimize", "speed", "latency"],
+        "doc-agent": ["document", "readme", "docs", "api-docs"],
+        "refactor-agent": ["refactor", "cleanup", "dead-code"],
+        "architecture-agent": ["architecture", "design", "pattern"],
+        "infrastructure-agent": ["deploy", "infra", "ci", "cd", "kubernetes"],
+        "bug-resolver": ["bug", "fix", "debug", "error"],
+        "e2e-runner": ["e2e", "playwright", "cypress", "browser"]
+      }
+    },
+    "contextManagement": {
+      "compactThreshold": 0.70,
+      "maxHistoryTurns": 6,
+      "summarizeAfterTurns": 10,
+      "preserveOnCompact": ["current_task", "active_plan", "pending_approvals", "error_context"],
+      "summarizeOnCompact": ["completed_tasks", "tool_outputs", "conversation_history"]
+    },
+    "outputCompression": {
+      "enabled": true,
+      "maxToolResponseLines": 50,
+      "truncateLongOutputs": true,
+      "compressJsonResponses": true,
+      "useCompactFormat": true
+    }
+  },
 
   "sessionStart": {
     "enabled": true,
@@ -8,6 +52,7 @@
     "autoLoadHandoff": true,
     "showWelcomeMessage": true,
     "maxLedgerAge": 86400000,
+    "useLiteAgents": true,
     "debug": false
   },
 
@@ -45,10 +90,12 @@
 
   "preCompact": {
     "enabled": true,
-    "blockCompaction": true,
+    "blockCompaction": false,
+    "proactiveCompact": true,
+    "compactThreshold": 0.70,
     "requireHandoff": true,
     "handoffMaxAge": 3600000,
-    "allowOverride": false,
+    "allowOverride": true,
     "debug": false
   },
 
@@ -93,16 +140,17 @@
   },
 
   "_comments": {
+    "tokenOptimization": "Token usage reduction settings - see TOKEN_OPTIMIZATION_RESEARCH.md",
+    "agentMode": "lite = minimal tokens, full = comprehensive (use for complex tasks)",
+    "dynamicLoading": "Load agents on-demand based on task keywords",
+    "contextManagement": "Proactive compaction and history limiting",
+    "outputCompression": "Compress tool outputs to reduce context usage",
+    "compactThreshold": "Trigger compaction at 70% context usage (not 95%)",
+    "maxHistoryTurns": "Keep only last 6 conversation turns",
     "maxLedgerAge": "24 hours in milliseconds (86400000)",
     "handoffMaxAge": "1 hour in milliseconds (3600000)",
     "ledgerMaxAge": "7 days in milliseconds (604800000)",
     "budgetLimit": "Dollar amount threshold for budget warnings",
-    "gracefulFailure": "If true, hooks continue execution on errors",
-    "debug": "If true, writes detailed logs to debug.log file",
-    "autoLint": "Run linter after code changes",
-    "autoTest": "Run tests after code changes",
-    "triggerReflection": "Trigger @ReflectionAgent after significant changes",
-    "iteration": "Configuration for autonomous iteration loops",
-    "planning": "Configuration for dependency-aware planning"
+    "gracefulFailure": "If true, hooks continue execution on errors"
   }
 }
