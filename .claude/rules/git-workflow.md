@@ -577,10 +577,89 @@ git stash pop
 - [ ] No secrets or sensitive data
 - [ ] Commit message follows convention
 - [ ] Changes are atomic (one logical change)
+- [ ] Only files I touched are staged
+- [ ] No other agent's in-flight work affected
 
 ---
 
-**REMEMBER**: Good Git practices make collaboration easier and history clearer.
+## Atomic Commits with Explicit Paths
 
-**Last Updated**: 2026-01-22
+### 23. **Commit Only What You Touched**
+```bash
+# ❌ DANGEROUS - Commits everything
+git add .
+git commit -m "feat: add feature"
+
+# ❌ DANGEROUS - May include other agents' work
+git add -A
+git commit -m "feat: add feature"
+
+# ✅ REQUIRED - Explicit paths for tracked files
+git commit -m "feat(auth): add password reset" -- src/auth.ts src/auth.test.ts
+
+# ✅ REQUIRED - For new files, stage explicitly
+git restore --staged :/ && \
+git add "src/services/auth.ts" "src/services/auth.test.ts" && \
+git commit -m "feat(auth): add service" -- src/services/auth.ts src/services/auth.test.ts
+```
+
+**Rule**: Commit only files you touched. List each path explicitly.
+
+---
+
+### 24. **Quote Special Characters in Paths**
+```bash
+# ❌ WILL FAIL - Shell interprets as glob
+git add src/app/[candidate]/page.tsx
+git add src/components/(auth)/login.tsx
+
+# ✅ REQUIRED - Quote the path
+git add "src/app/[candidate]/page.tsx"
+git add "src/components/(auth)/login.tsx"
+git commit -m "feat: add pages" -- "src/app/[candidate]/page.tsx"
+```
+
+**Rule**: Quote paths containing `[ ] ( ) * ? $` or spaces.
+
+---
+
+### 25. **Non-Interactive Rebase**
+```bash
+# ❌ WILL HANG - Opens editor
+git rebase main
+
+# ✅ REQUIRED - Prevent editor
+GIT_EDITOR=: GIT_SEQUENCE_EDITOR=: git rebase main --no-edit
+
+# Or set environment first
+export GIT_EDITOR=:
+export GIT_SEQUENCE_EDITOR=:
+git rebase main
+```
+
+**Rule**: Prevent interactive editors during rebase operations.
+
+---
+
+## Multi-Agent Safety
+
+**⚠️ CRITICAL**: When working in parallel with other agents, additional rules apply.
+
+**See**: `.claude/rules/multi-agent-safety.md` for:
+- File deletion coordination
+- Revert restrictions
+- Destructive operation blocks
+- Cross-agent conflict resolution
+
+**Key Rules**:
+- Never delete files to fix type/lint errors without asking
+- Never revert files you didn't author
+- Never run destructive git commands without explicit approval
+- Coordinate with @chief when uncertain about in-flight work
+
+---
+
+**REMEMBER**: Good Git practices make collaboration easier and history clearer. In multi-agent systems, coordination prevents chaos.
+
+**Last Updated**: 2026-02-07
 **Maintained By**: Legendary Team Agents
