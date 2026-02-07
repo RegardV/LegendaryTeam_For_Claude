@@ -23,7 +23,7 @@ The Legendary Team transforms your `.claude` folder into a **self-healing, memor
 | **Parallel Teams** | 3-15 teams working simultaneously |
 | **Auto-Proceed Accuracy** | >90% success rate |
 | **Average Wait Time** | <15 minutes for human review |
-| **Specialized Agents** | 17 agents (11 autonomous + 3 queued + 3 core) |
+| **Specialized Agents** | 25 agents (16 task + 9 guardian/orchestration) |
 | **Token Optimization** | 96.7% reduction with self-escalation |
 
 ---
@@ -60,7 +60,7 @@ The Legendary Team is built on 11 foundational methodologies that work together:
 ### 2. Modular Rules Architecture
 **Split by concern, load context on-demand. No monolithic files.**
 
-- `.claude/agents/` - 17 specialized AI teammates
+- `.claude/agents/` - 25 specialized AI teammates
 - `.claude/skills/` - Reusable knowledge base (patterns, best practices)
 - `.claude/rules/` - Mandatory behavioral rules for all agents
 - `.claude/commands/` - Slash commands for common operations
@@ -233,7 +233,7 @@ Begin now.
 ```
 
 **What happens:**
-1. @chief activates all 17 agents
+1. @chief activates all 25 agents
 2. Prompts for OpenSpec creation
 3. Sets up project structure
 4. Initializes continuity system
@@ -401,7 +401,7 @@ Iterations used: 3/5
 
 ---
 
-## 🤖 The 17 Specialized Agents
+## 🤖 The 25 Specialized Agents
 
 ### Core Orchestration
 - **@chief** - Master orchestrator, spawns parallel teams, manages review queue
@@ -567,7 +567,7 @@ The Legendary Team includes a comprehensive knowledge base and behavioral framew
 ```
 LegendaryTeam_For_Claude/
 ├── .claude/
-│   ├── agents/                    # 17 specialized agents (full definitions)
+│   ├── agents/                    # 25 specialized agents (full definitions)
 │   ├── agents-lite/               # 🆕 Token-optimized lite agents (96.7% smaller)
 │   ├── agents-full/               # 🆕 Complete agent definitions (for escalation)
 │   ├── commands/                  # Slash commands

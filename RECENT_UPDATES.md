@@ -4,7 +4,7 @@
 
 ### Token Optimization
 - **96.7% Token Reduction** - Agent context consumption dramatically reduced
-- **Lite Agents** - 16 minimal agents (~60-100 words each) in `.claude/agents-lite/`
+- **Lite Agents** - 25 minimal agents (~60-100 words each) in `.claude/agents-lite/`
 - **Self-Escalation Protocol** - Lite agents automatically load full definitions when complexity requires
 - **Dynamic Agent Loading** - Agents load on-demand based on task keywords
 - **Optimized CLAUDE.md** - Entry point reduced to <150 tokens

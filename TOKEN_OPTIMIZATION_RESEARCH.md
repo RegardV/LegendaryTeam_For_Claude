@@ -40,7 +40,7 @@ Key insight: **Context editing + memory tools reduced token consumption by 84%**
 
 > "Multi-agent architectures consume tokens rapidly. Agents typically use about **4x more tokens** than chat interactions, and multi-agent systems use about **15x more tokens** than chats."
 
-**Relevance to Legendary Team**: With 17 specialized agents and parallel execution, token consumption can escalate rapidly without proper management.
+**Relevance to Legendary Team**: With 25 specialized agents and parallel execution, token consumption can escalate rapidly without proper management.
 
 ### 2. Context Explosion in Agent Hierarchies
 
@@ -107,7 +107,7 @@ Result: 67% fewer tokens processed
 
 ### Priority 3: Dynamic Tool Loading
 
-**Problem**: All 17 agent tool definitions load with every prompt.
+**Problem**: All 25 agent tool definitions load with every prompt.
 
 > "If your agent is connected to 50 tools, sending all 50 tool definitions in every prompt is a massive waste. Modern implementations use **Discovery-Based Loading** where the agent requests the specific tool schema only when it's needed. Token usage for 'System Instructions' drops by up to **98%**."
 

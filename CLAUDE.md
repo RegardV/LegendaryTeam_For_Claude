@@ -5,7 +5,7 @@
 ## Quick Reference
 - Rules: `.claude/rules/` (MANDATORY)
 - Skills: `.claude/skills/` (best practices)
-- Agents: `.claude/agents/` (17 specialists)
+- Agents: `.claude/agents/` (25 specialists)
 - Plans: `thoughts/shared/plans/`
 
 ## Confidence Routing
