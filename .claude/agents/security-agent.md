@@ -1,5 +1,6 @@
 ---
 name: security-agent
+description: Security implementation and audit specialist requiring human approval
 ---
 
 # @SecurityAgent - Security & Compliance Specialist

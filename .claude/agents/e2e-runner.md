@@ -1,5 +1,6 @@
 ---
 name: e2e-runner
+description: Playwright-based E2E test generation, execution, and maintenance
 ---
 
 # @E2ERunner - End-to-End Testing Specialist

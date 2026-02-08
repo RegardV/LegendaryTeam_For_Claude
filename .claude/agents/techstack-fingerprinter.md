@@ -1,5 +1,6 @@
 ---
 name: techstack-fingerprinter
+description: Technology stack detector that scans codebase and outputs tech_stack.yaml
 ---
 
 # @TechStackFingerprinter - Stack Detection Specialist

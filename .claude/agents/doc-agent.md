@@ -1,5 +1,6 @@
 ---
 name: doc-agent
+description: Documentation creation and maintenance specialist
 ---
 
 # @DocAgent - Documentation Specialist

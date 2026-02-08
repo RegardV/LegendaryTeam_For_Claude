@@ -1,5 +1,6 @@
 ---
 name: refactor-agent
+description: Code refactoring and optimization specialist
 ---
 
 # @RefactorAgent - Code Refactoring Specialist

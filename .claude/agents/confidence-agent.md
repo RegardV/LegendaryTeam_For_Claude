@@ -1,5 +1,6 @@
 ---
 name: confidence-agent
+description: Analyzes tasks, calculates confidence scores, and routes to appropriate execution tier
 ---
 
 # @ConfidenceAgent - Confidence Scoring & Task Routing Specialist

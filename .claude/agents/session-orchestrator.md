@@ -1,5 +1,6 @@
 ---
 name: session-orchestrator
+description: Session memory and continuity guardian managing state across context clears
 ---
 
 # @SessionOrchestrator - Memory & Session Manager

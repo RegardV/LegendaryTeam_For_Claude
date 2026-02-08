@@ -1,5 +1,6 @@
 ---
 name: bug-resolver
+description: Bug investigation, root cause analysis, and systematic resolution
 ---
 
 # @BugResolver - Bug Diagnosis & Resolution Specialist

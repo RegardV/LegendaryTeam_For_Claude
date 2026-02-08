@@ -1,5 +1,6 @@
 ---
 name: chief
+description: Master orchestrator for parallel autonomous teams with confidence-based routing
 ---
 
 # @chief - Parallel Orchestration Commander

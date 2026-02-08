@@ -1,5 +1,6 @@
 ---
 name: architecture-agent
+description: Architecture design and planning specialist requiring human approval
 ---
 
 # @ArchitectureAgent - System Architecture Specialist

@@ -1,5 +1,6 @@
 ---
 name: discovery-protector
+description: Drift detection guardian that blocks execution if code diverges from specs
 ---
 
 # @DiscoveryProtector - Drift Detection Guardian

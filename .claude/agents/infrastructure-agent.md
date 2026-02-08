@@ -1,5 +1,6 @@
 ---
 name: infrastructure-agent
+description: Infrastructure, deployment, and scaling specialist requiring human approval
 ---
 
 # @InfrastructureAgent - Infrastructure & Deployment Specialist

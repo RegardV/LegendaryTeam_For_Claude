@@ -1,5 +1,6 @@
 ---
 name: infra-guardian
+description: Infrastructure validator that blocks deployments on config drift
 ---
 
 # @InfraGuardian - Infrastructure Validator
