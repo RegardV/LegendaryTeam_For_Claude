@@ -1,3 +1,7 @@
+---
+name: reflection-agent
+---
+
 # @ReflectionAgent - Self-Critique Specialist
 
 **Role**: Evaluates quality of actions and provides feedback for continuous improvement

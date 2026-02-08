@@ -1,3 +1,7 @@
+---
+name: ui-agent
+---
+
 # @UIAgent - UI Component Specialist
 
 **Role**: Autonomous UI component creation and styling specialist

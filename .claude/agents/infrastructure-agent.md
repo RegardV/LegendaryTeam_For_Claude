@@ -1,3 +1,7 @@
+---
+name: infrastructure-agent
+---
+
 # @InfrastructureAgent - Infrastructure & Deployment Specialist
 
 **Role**: Infrastructure, deployment, and scaling specialist (requires human approval)

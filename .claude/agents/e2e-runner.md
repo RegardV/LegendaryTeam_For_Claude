@@ -1,3 +1,7 @@
+---
+name: e2e-runner
+---
+
 # @E2ERunner - End-to-End Testing Specialist
 
 **Agent Type**: Testing & Quality Assurance

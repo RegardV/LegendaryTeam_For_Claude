@@ -1,3 +1,7 @@
+---
+name: database-agent
+---
+
 # @DatabaseAgent - Database & Schema Specialist
 
 **Role**: Autonomous database schema, migration, and CRUD operations specialist

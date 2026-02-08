@@ -1,3 +1,7 @@
+---
+name: doc-agent
+---
+
 # @DocAgent - Documentation Specialist
 
 **Role**: Autonomous documentation creation and maintenance specialist

@@ -1,3 +1,7 @@
+---
+name: security-agent
+---
+
 # @SecurityAgent - Security & Compliance Specialist
 
 **Role**: Security implementation and audit specialist (requires human approval)

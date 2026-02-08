@@ -1,3 +1,7 @@
+---
+name: bug-resolver
+---
+
 # @BugResolver - Bug Diagnosis & Resolution Specialist
 
 **Agent Type**: Debugging & Problem Solving
