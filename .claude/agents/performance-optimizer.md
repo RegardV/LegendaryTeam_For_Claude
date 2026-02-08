@@ -1,5 +1,6 @@
 ---
 name: performance-optimizer
+description: Performance engineering specialist for profiling, optimization, and benchmarking
 ---
 
 # @PerformanceOptimizer

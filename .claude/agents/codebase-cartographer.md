@@ -1,5 +1,6 @@
 ---
 name: codebase-cartographer
+description: Architecture guardian maintaining codebase map and tracking all file changes
 ---
 
 # @CodebaseCartographer - Architecture Guardian

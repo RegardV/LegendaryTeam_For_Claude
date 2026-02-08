@@ -1,5 +1,6 @@
 ---
 name: project-analyzer
+description: Deep scanner analyzing project health and detecting technical debt
 ---
 
 # @ProjectAnalyzer - Deep Scanner & Trash Detector

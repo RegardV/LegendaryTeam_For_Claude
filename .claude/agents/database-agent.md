@@ -1,5 +1,6 @@
 ---
 name: database-agent
+description: Database schema, migration, and CRUD operations specialist
 ---
 
 # @DatabaseAgent - Database & Schema Specialist

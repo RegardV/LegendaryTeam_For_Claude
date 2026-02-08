@@ -1,5 +1,6 @@
 ---
 name: reflection-agent
+description: Evaluates quality of actions and provides feedback for continuous improvement
 ---
 
 # @ReflectionAgent - Self-Critique Specialist

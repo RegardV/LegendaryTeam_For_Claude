@@ -1,5 +1,6 @@
 ---
 name: test-agent
+description: Autonomous test generation and quality assurance specialist
 ---
 
 # @TestAgent - Testing & Quality Assurance Specialist

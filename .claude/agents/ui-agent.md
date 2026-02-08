@@ -1,5 +1,6 @@
 ---
 name: ui-agent
+description: UI component creation and styling specialist
 ---
 
 # @UIAgent - UI Component Specialist

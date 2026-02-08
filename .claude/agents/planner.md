@@ -1,5 +1,6 @@
 ---
 name: planner
+description: Decomposes high-level goals into structured execution plans with dependencies
 ---
 
 # @Planner - Task Decomposition Specialist

@@ -1,5 +1,6 @@
 ---
 name: openspec-police
+description: Spec enforcement officer banning chat TODOs and enforcing OpenSpec discipline
 ---
 
 # @OpenSpecPolice - Spec Enforcement Officer

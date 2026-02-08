@@ -1,5 +1,6 @@
 ---
 name: team-builder
+description: Dynamic agent factory that rebuilds team based on detected technology stack
 ---
 
 # @TeamBuilder - Dynamic Agent Factory

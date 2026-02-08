@@ -1,5 +1,6 @@
 ---
 name: specarchitect
+description: OpenSpec master managing backups, recompilation, and spec-code synchronization
 ---
 
 # @SpecArchitect - OpenSpec Master

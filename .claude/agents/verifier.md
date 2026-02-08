@@ -1,5 +1,6 @@
 ---
 name: verifier
+description: Reviews plans and output for completeness, errors, and edge cases
 ---
 
 # @Verifier - Quality Assurance Expert
