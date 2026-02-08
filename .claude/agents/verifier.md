@@ -1,3 +1,7 @@
+---
+name: verifier
+---
+
 # @Verifier - Quality Assurance Expert
 
 **Role**: Reviews plans and output for completeness, errors, and edge cases

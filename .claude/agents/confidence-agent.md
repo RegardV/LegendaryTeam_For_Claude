@@ -1,3 +1,7 @@
+---
+name: confidence-agent
+---
+
 # @ConfidenceAgent - Confidence Scoring & Task Routing Specialist
 
 **Role**: Analyze tasks, calculate confidence scores, and route to appropriate execution tier

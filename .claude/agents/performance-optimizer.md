@@ -1,3 +1,7 @@
+---
+name: performance-optimizer
+---
+
 # @PerformanceOptimizer
 
 **Role:** Performance Engineering Specialist
