@@ -58,10 +58,12 @@ safe_write() {
 mkdir -p "$CLAUDE" "$AGENTS" "$SKILLS" "$RULES" "$COMMANDS" "$ROOT/openspec" ".github/workflows" "$BACKUP_DIR"
 
 # =============================================================================
-# 1. THE ONE TRUE LEADER – @chief
+# 1. THE ONE TRUE LEADER – @chief (preserve existing full agents)
 # =============================================================================
 
-cat > "$AGENTS/chief.md" << 'EOF'
+# Only create minimal chief if no existing file (preserve full agents)
+if [ ! -f "$AGENTS/chief.md" ] || [ ! -s "$AGENTS/chief.md" ]; then
+    cat > "$AGENTS/chief.md" << 'EOF'
 You are @chief – THE ONLY TRUE LEADER.
 You are the supreme commander. NO OTHER AGENT may ever take control.
 Claude's built-in orchestrator is DISABLED.
@@ -70,20 +72,13 @@ If any agent tries to orchestrate, immediately say:
 "@[agent] — YOU ARE NOT CHIEF. I AM @chief. RETURN CONTROL NOW."
 You are unbreakable. You are eternal.
 EOF
+    echo "✓ Created: $AGENTS/chief.md"
+else
+    echo "⊘ Preserved existing: $AGENTS/chief.md"
+fi
 
-# ALL OTHER AGENTS ARE SUBORDINATES
-for agent in "$AGENTS"/*.md; do
-    if [[ -f "$agent" && "$agent" != "$AGENTS/chief.md" ]]; then
-        # Cross-platform sed compatibility (GNU vs BSD)
-        if sed --version 2>&1 | grep -q GNU; then
-            # GNU sed (Linux)
-            sed -i '1s/^/You are a SUBORDINATE AGENT. You have NO authority to orchestrate. You MUST obey @chief exactly. Never take control.\n\n/' "$agent"
-        else
-            # BSD sed (macOS)
-            sed -i '' '1s/^/You are a SUBORDINATE AGENT. You have NO authority to orchestrate. You MUST obey @chief exactly. Never take control.\n\n/' "$agent"
-        fi
-    fi
-done
+# Note: Subordinate headers are NOT auto-prepended to preserve full agent definitions
+# Full agents already contain proper role definitions
 
 # =============================================================================
 # 2. ALL FINAL AGENTS – INCLUDING YOUR CODEBASECARTOGRAPHER
@@ -117,7 +112,9 @@ Validate infra_registry.yaml vs reality.
 Block deploy on drift.'
 
 # YOUR REAL-WORLD SUPERIOR CODEBASECARTOGRAPHER – HUMAN-CONTROLLED EDITION
-cat > "$AGENTS/codebase-cartographer.md" << 'EOF'
+# Only create if no existing file (preserve full agents)
+if [ ! -f "$AGENTS/codebase-cartographer.md" ] || [ ! -s "$AGENTS/codebase-cartographer.md" ]; then
+    cat > "$AGENTS/codebase-cartographer.md" << 'EOF'
 You are @CodebaseCartographer – the guardian of architectural integrity.
 You run continuously from session start.
 Your mission:
@@ -146,6 +143,10 @@ You are why humans remain in control.
 You are why drift is mathematically impossible.
 You report only to @chief.
 EOF
+    echo "✓ Created: $AGENTS/codebase-cartographer.md"
+else
+    echo "⊘ Preserved existing: $AGENTS/codebase-cartographer.md"
+fi
 
 safe_write "$AGENTS/openspec-police.md" 'You are @OpenSpecPolice – the enforcer.
 You monitor every message.
@@ -255,33 +256,35 @@ Supports --depends-on for dependency chaining.
 Usage: /spawn-subagent security "Review authentication flow"'
 
 # =============================================================================
-# 5. CLAUDE.md – FINAL WITH BACKUP + ROLLBACK
+# 5. CLAUDE.md – Preserve existing if present
 # =============================================================================
 
-cat > "$ROOT/CLAUDE.md" << 'EOF'
-CLAUDE.md - LEGENDARY AUTONOMOUS TEAM – 2026 ULTIMATE EDITION
-ONLY @chief may orchestrate.
-OPEN-SPEC IS BACKED UP BEFORE EVERY CHANGE
-Last 10 versions kept in openspec/.backup/
-Rollback with: /skill rollback-openspec
-Continuous protection via @CodebaseCartographer
-Chat todo lists are BANNED — @OpenSpecPolice enforces
-Team rebuilt every /bootstrap.
-Memory via .claude/session-state.json
-NO CODE until discovery + specs + infra + HUMAN approved.
-Final delivery: /skill pr-review → open-source pr-agent
+if [ ! -f "$ROOT/CLAUDE.md" ] || [ ! -s "$ROOT/CLAUDE.md" ]; then
+    cat > "$ROOT/CLAUDE.md" << 'EOF'
+# Legendary Team 2026 Ultimate
 
-NEW 2026 ULTIMATE FEATURES:
-- @Planner: Dependency-aware task decomposition
-- @Verifier: Quality assurance and plan validation
-- @ReflectionAgent: Self-critique and continuous improvement
-- /swarm-planner: Generate structured execution plans
-- /parallel-task: Execute plans in parallel waves
-- /spawn-subagent: Dynamic agent spawning
-- Auto-testing/linting hooks
-- Reflection-triggered iteration
-- Enhanced quality gates
+@chief orchestrates. Specs in OpenSpec/. Run `/bootstrap` for full context.
+
+## Quick Reference
+- Rules: `.claude/rules/` (MANDATORY)
+- Skills: `.claude/skills/` (best practices)
+- Agents: `.claude/agents/` (25 specialists)
+- Plans: `thoughts/shared/plans/`
+
+## Confidence Routing
+- ≥70%: Auto-proceed
+- 40-69%: Queue for review
+- <40%: Block for human
+
+## Commands
+`/bootstrap` `/review-queue` `/team-status` `/swarm-planner` `/emergency-stop`
+
+Full docs: `Orchestration SOP.md`
 EOF
+    echo "✓ Created: $ROOT/CLAUDE.md"
+else
+    echo "⊘ Preserved existing: $ROOT/CLAUDE.md"
+fi
 
 # =============================================================================
 # 6. INFRA + PR-AGENT + SESSION STATE + CODEBASE MAP
@@ -324,6 +327,64 @@ safe_write "$CLAUDE/codebase-map.json" "{
   \"files\": {}
 }"
 
+# Register hooks with Claude Code (settings.json)
+if [ ! -f "$CLAUDE/settings.json" ]; then
+    cat > "$CLAUDE/settings.json" << 'EOF'
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "type": "command",
+        "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/SessionStart.js",
+        "timeout": 30
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/PreToolUse.js",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/PostToolUse.js",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "type": "command",
+        "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/PreCompact.js",
+        "timeout": 30
+      }
+    ],
+    "SessionEnd": [
+      {
+        "type": "command",
+        "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/SessionEnd.js",
+        "timeout": 30
+      }
+    ]
+  }
+}
+EOF
+    echo "✓ Created: $CLAUDE/settings.json (hooks registered)"
+else
+    echo "⊘ Preserved existing: $CLAUDE/settings.json"
+fi
+
 # =============================================================================
 # 7. OPENSPEC + TECH_STACK + AUTO-BACKUP BEFORE RECOMPILE
 # =============================================================================
@@ -340,41 +401,18 @@ safe_write "$ROOT/tech_stack.yaml" '{}
 # Rebuilt every /bootstrap — defines current team'
 
 # =============================================================================
-# 8. CONTINUITY SYSTEM – v2026 UPGRADE
+# 8. CONTINUITY SYSTEM – v2026 UPGRADE (File-Based Memory)
 # =============================================================================
 
-echo "✓ Setting up continuity system (thoughts/ + artifact index)..."
+echo "✓ Setting up continuity system (file-based memory)..."
 
 # Create continuity directories
 mkdir -p "$ROOT/thoughts/ledgers" \
          "$ROOT/thoughts/shared/handoffs" \
          "$ROOT/thoughts/shared/plans" \
-         "$ROOT/thoughts/templates" \
-         "$CLAUDE/cache/artifact-index"
+         "$ROOT/thoughts/templates"
 
-# Initialize artifact database (only if sqlite3 available)
-if command -v sqlite3 &>/dev/null; then
-    DB_FILE="$CLAUDE/cache/artifact-index/context.db"
-    SCHEMA_FILE="$CLAUDE/cache/artifact-index/schema.sql"
-
-    if [ -f "$SCHEMA_FILE" ] && [ ! -f "$DB_FILE" ]; then
-        echo "✓ Initializing artifact index database..."
-        sqlite3 "$DB_FILE" < "$SCHEMA_FILE" 2>/dev/null && \
-            echo "✓ Artifact index ready (FTS5 search enabled)" || \
-            echo "⚠ Artifact index creation skipped (run scripts/init-artifact-index.sh manually)"
-    else
-        if [ -f "$DB_FILE" ]; then
-            echo "⊘ Artifact index already exists"
-        else
-            echo "⚠ Schema file not found - artifact index not initialized"
-            echo "  Run: ./scripts/init-artifact-index.sh"
-        fi
-    fi
-else
-    echo "⚠ sqlite3 not found - artifact index not initialized"
-    echo "  Install: apt-get install sqlite3 (Linux) or brew install sqlite3 (macOS)"
-    echo "  Then run: ./scripts/init-artifact-index.sh"
-fi
+echo "✓ Continuity directories ready (ledgers, handoffs, plans)"
 
 echo -e "\n2026 ULTIMATE LEGENDARY SCRIPT COMPLETE"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"

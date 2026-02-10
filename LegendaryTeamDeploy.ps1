@@ -4,6 +4,11 @@
 # @chief • @CodebaseCartographer • @OpenSpecPolice • HUMAN CONTROL FOREVER
 # NEW: @Planner • @Verifier • @ReflectionAgent • Swarms-Inspired Features
 # =============================================================================
+# TODO: This script needs updates to match LegendaryTeamDeploy.sh:
+#   - Remove database references
+#   - Preserve existing full agents instead of overwriting
+#   - Add settings.json for hooks registration
+# =============================================================================
 
 Write-Host "`nTHE FINAL LEGENDARY SCRIPT – 2026 ULTIMATE DEPLOYMENT`n" -ForegroundColor Cyan
 

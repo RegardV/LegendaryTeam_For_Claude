@@ -1,0 +1,49 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "type": "command",
+        "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/SessionStart.js",
+        "timeout": 30
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/PreToolUse.js",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/PostToolUse.js",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "type": "command",
+        "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/PreCompact.js",
+        "timeout": 30
+      }
+    ],
+    "SessionEnd": [
+      {
+        "type": "command",
+        "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/SessionEnd.js",
+        "timeout": 30
+      }
+    ]
+  }
+}
