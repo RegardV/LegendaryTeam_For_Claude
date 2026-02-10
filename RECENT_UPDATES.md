@@ -14,10 +14,10 @@
 ### Memory & Continuity System
 - **Continuity Ledgers** - Session state tracked in `thoughts/ledgers/`, survives context clears
 - **Handoffs** - Cross-session knowledge transfer in `thoughts/shared/handoffs/`
-- **Artifact Index** - SQLite + FTS5 searchable history of all decisions and learnings
+- **Plans** - Execution plans persist in `thoughts/shared/plans/`
 - **SessionStart Hook** - Auto-loads previous ledger and handoff on session start
 - **PreCompact Hook** - Blocks compaction, enforces "Clear, Don't Compact" philosophy
-- **Institutional Memory** - Patterns, failures, and solutions persist across sessions
+- **Institutional Memory** - Patterns, failures, and solutions persist in handoffs
 
 ### Quality & Planning
 - **11 Core Methodologies** - Token Optimization added as methodology #11
@@ -351,13 +351,9 @@ thoughts/
 │   └── plans/                        # Execution plans
 │       └── plan-*.md                 # Persisted between sessions
 └── templates/                        # Standard formats
-
-.claude/cache/artifact-index/
-└── context.db                        # SQLite + FTS5
-    ├── artifacts (decisions, learnings)
-    ├── outcomes (SUCCEEDED/PARTIAL/FAILED)
-    └── patterns (searchable via FTS5)
 ```
+
+Memory is **file-based** for simplicity and portability. Handoffs contain learnings, patterns, and outcomes searchable by agents.
 
 ---
 
