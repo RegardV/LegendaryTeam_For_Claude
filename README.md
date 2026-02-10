@@ -44,14 +44,48 @@ Reply to prompts:
 "discovery complete — proceed"
 "specs approved"
 
-
 The team is now active. 
 
 For returning sessions: @chief resume session.
 
 This process works the same for empty folders, existing codebases, or projects with a pre-existing .claude folder — the script preserves everything and upgrades safely.
 
+# What About the SOP? (Orchestration SOP.md)
 
+The Orchestration SOP.md is the unbreakable rulebook for your Legendary Team — it defines the exact, mandatory sequence @chief and all agents must follow every time.
+What It Does
+
+Enforces strict hierarchy (@chief only orchestrates)
+
+Defines the 13-step bootstrap process
+
+Sets task execution rules (parallel teams, human approval gates)
+
+Bans chat TODOs, requires pr-agent review, blocks code without "specs approved"
+
+Includes emergency triggers, golden rules, and quality gates
+
+# It's project-agnostic — works for any project.
+
+How to Use It
+
+# After running the deploy script and /bootstrap
+
+Paste the full content of Orchestration SOP.md into the Claude session
+
+# @chief will acknowledge:
+
+# "S.O.P. LOCKED IN — ALL AGENTS NOW FOLLOW THIS EXACT FLOW FOREVER"
+
+From then on, every interaction follows the SOP exactly.
+
+# Why It's Essential
+
+Without it, agents fall back to default Claude behavior (drift, rebellion possible)
+With it, your team is disciplined, safe, and predictable
+
+# You only paste it once per project (or when updating the SOP).
+__
 ** Most Recent Updates
 ✅ @Planner - Dependency-aware task decomposition
 ✅ @Verifier - Quality assurance and scoring
