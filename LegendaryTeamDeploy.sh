@@ -342,25 +342,17 @@ if [ ! -f "$CLAUDE/settings.json" ]; then
     "PreToolUse": [
       {
         "matcher": "Edit|Write|NotebookEdit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/PreToolUse.js",
-            "timeout": 30
-          }
-        ]
+        "type": "command",
+        "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/PreToolUse.js",
+        "timeout": 30
       }
     ],
     "PostToolUse": [
       {
         "matcher": "Edit|Write|NotebookEdit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/PostToolUse.js",
-            "timeout": 30
-          }
-        ]
+        "type": "command",
+        "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/PostToolUse.js",
+        "timeout": 30
       }
     ],
     "PreCompact": [
