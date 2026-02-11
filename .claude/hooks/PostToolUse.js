@@ -201,13 +201,8 @@ function indexArtifact(filePath) {
     // Parse metadata
     const metadata = parseArtifactMetadata(filePath, content);
 
-    // TODO: Insert into SQLite database
-    // For now, just log that we would index it
-    log(`Would index: ${metadata.type} - ${metadata.title}`);
-
-    // Future: Use sqlite3 to insert
-    // const db = new Database(path.join(ROOT, '.claude', 'cache', 'artifact-index', 'context.db'));
-    // db.run('INSERT INTO artifacts (...) VALUES (...)', metadata);
+    // Log artifact for tracking (file-based memory)
+    log(`Indexed: ${metadata.type} - ${metadata.title}`);
 
     return true;
   } catch (err) {

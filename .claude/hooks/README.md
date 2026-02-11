@@ -179,8 +179,7 @@ Fix type errors before proceeding:
 2. **Index New Handoffs**:
    - Detect new files in `thoughts/shared/handoffs/`
    - Parse markdown content
-   - Insert into SQLite database
-   - Enable FTS5 search
+   - Log for tracking
 
 3. **Track File Changes**:
    - Record which files were modified
@@ -273,7 +272,6 @@ We **never** compact. We **always** "clear, don't compact."
 
 4. **Cleanup**:
    - Remove old ledgers (>7 days)
-   - Optimize database: `VACUUM; ANALYZE;`
 
 ---
 
@@ -321,12 +319,10 @@ fileExists(path)            // Check if file exists
 listFiles(dir, pattern)     // List files matching pattern
 ```
 
-### Database Helpers
+### File Helpers
 ```javascript
-insertArtifact(artifact)    // Insert into SQLite
-queryArtifacts(query)       // Full-text search
-getLatestHandoff()          // Get most recent handoff
-getSessionLearnings(sessionId) // Get learnings
+getLatestHandoff()          // Get most recent handoff file
+getSessionLearnings()       // Parse learnings from handoffs
 ```
 
 ### State Helpers
