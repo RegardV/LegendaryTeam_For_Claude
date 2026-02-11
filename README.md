@@ -1,8 +1,96 @@
-# Legendary Team 2026 Ultimate
+# Feb 2026 Update – Clarifications on Setup and Features
 
-**The Most Advanced Autonomous AI Engineering Team for Claude Code**
+Here's a straightforward update addressing the Run This First script, the database, and how to use the main script.
 
-> Transform your `.claude` folder into a self-healing, memory-aware, production-grade autonomous engineering organization.
+# 1. Run This First Script
+
+The Run This First script is no longer needed. It was a temporary wrapper used during early development when we had separate patch files for monitoring and troubleshooting. The current main deployment script (LegendaryTeamDeploy.sh or .ps1) now includes all those features directly. You can delete Run This First — it's redundant.
+
+# 2. Database Requirement
+No database is required. The optional SQLite artifact index from earlier versions has been removed from the core script because the system works perfectly with simple file-based storage:
+
+# Session memory: session-state.json
+
+# Codebase tracking: codebase-map.json
+
+# Specs/tasks: OpenSpec YAML files
+
+This keeps the setup lightweight and dependency-free. If you have a very large project and want advanced search, you can add SQLite manually later, but it's not necessary for normal use.
+
+# 3. How to Use the Script
+
+In your project root folder:
+
+# Create the file:
+
+Linux/macOS/WSL2: nano LegendaryTeamDeploy.sh
+Windows: Create LegendaryTeamDeploy.ps1
+
+Paste the full script from the latest version.
+
+# Run it:
+Linux/macOS/WSL2:textchmod +x LegendaryTeamDeploy.sh
+./LegendaryTeamDeploy.sh
+
+# Windows:textpowershell -ExecutionPolicy Bypass -File LegendaryTeamDeploy.ps1
+
+Start Claude Code:textclaude
+Run bootstrap:text/bootstrap
+Reply to prompts:
+"discovery complete — proceed"
+"specs approved"
+
+The team is now active. 
+
+For returning sessions: @chief resume session.
+
+This process works the same for empty folders, existing codebases, or projects with a pre-existing .claude folder — the script preserves everything and upgrades safely.
+
+# What About the SOP? (Orchestration SOP.md)
+
+The Orchestration SOP.md is the unbreakable rulebook for your Legendary Team — it defines the exact, mandatory sequence @chief and all agents must follow every time.
+What It Does
+
+Enforces strict hierarchy (@chief only orchestrates)
+
+Defines the 13-step bootstrap process
+
+Sets task execution rules (parallel teams, human approval gates)
+
+Bans chat TODOs, requires pr-agent review, blocks code without "specs approved"
+
+Includes emergency triggers, golden rules, and quality gates
+
+# It's project-agnostic — works for any project.
+
+How to Use It
+
+# After running the deploy script and /bootstrap
+
+Paste the full content of Orchestration SOP.md into the Claude session
+
+# @chief will acknowledge:
+
+# "S.O.P. LOCKED IN — ALL AGENTS NOW FOLLOW THIS EXACT FLOW FOREVER"
+
+From then on, every interaction follows the SOP exactly.
+
+# Why It's Essential
+
+Without it, agents fall back to default Claude behavior (drift, rebellion possible)
+With it, your team is disciplined, safe, and predictable
+
+# You only paste it once per project (or when updating the SOP).
+__
+** Most Recent Updates
+✅ @Planner - Dependency-aware task decomposition
+✅ @Verifier - Quality assurance and scoring
+✅ @ReflectionAgent - Self-critique and improvement
+✅ /swarm-planner - Structured execution plans
+✅ /parallel-task - Wave-based parallel execution
+✅ /spawn-subagent - Dynamic agent spawning
+✅ Enhanced hooks with reflection triggers
+✅ Updated SOP with planning/iteration sections
 
 ---
 
