@@ -334,7 +334,7 @@ if [ ! -f "$CLAUDE/settings.json" ]; then
   "hooks": {
     "SessionStart": [
       {
-        "matcher": {},
+        "matcher": "*",
         "hooks": [
           {
             "type": "command",
@@ -346,9 +346,7 @@ if [ ! -f "$CLAUDE/settings.json" ]; then
     ],
     "PreToolUse": [
       {
-        "matcher": {
-          "tools": ["Edit", "Write", "NotebookEdit"]
-        },
+        "matcher": "Edit|Write|NotebookEdit",
         "hooks": [
           {
             "type": "command",
@@ -360,9 +358,7 @@ if [ ! -f "$CLAUDE/settings.json" ]; then
     ],
     "PostToolUse": [
       {
-        "matcher": {
-          "tools": ["Edit", "Write", "NotebookEdit"]
-        },
+        "matcher": "Edit|Write|NotebookEdit",
         "hooks": [
           {
             "type": "command",
@@ -374,7 +370,7 @@ if [ ! -f "$CLAUDE/settings.json" ]; then
     ],
     "PreCompact": [
       {
-        "matcher": {},
+        "matcher": "*",
         "hooks": [
           {
             "type": "command",
@@ -386,7 +382,7 @@ if [ ! -f "$CLAUDE/settings.json" ]; then
     ],
     "SessionEnd": [
       {
-        "matcher": {},
+        "matcher": "*",
         "hooks": [
           {
             "type": "command",

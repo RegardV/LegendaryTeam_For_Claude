@@ -2,7 +2,7 @@
   "hooks": {
     "SessionStart": [
       {
-        "matcher": {},
+        "matcher": "*",
         "hooks": [
           {
             "type": "command",
@@ -14,9 +14,7 @@
     ],
     "PreToolUse": [
       {
-        "matcher": {
-          "tools": ["Edit", "Write", "NotebookEdit"]
-        },
+        "matcher": "Edit|Write|NotebookEdit",
         "hooks": [
           {
             "type": "command",
@@ -28,9 +26,7 @@
     ],
     "PostToolUse": [
       {
-        "matcher": {
-          "tools": ["Edit", "Write", "NotebookEdit"]
-        },
+        "matcher": "Edit|Write|NotebookEdit",
         "hooks": [
           {
             "type": "command",
@@ -42,7 +38,7 @@
     ],
     "PreCompact": [
       {
-        "matcher": {},
+        "matcher": "*",
         "hooks": [
           {
             "type": "command",
@@ -54,7 +50,7 @@
     ],
     "SessionEnd": [
       {
-        "matcher": {},
+        "matcher": "*",
         "hooks": [
           {
             "type": "command",
