@@ -334,39 +334,66 @@ if [ ! -f "$CLAUDE/settings.json" ]; then
   "hooks": {
     "SessionStart": [
       {
-        "type": "command",
-        "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/SessionStart.js",
-        "timeout": 30
+        "matcher": {},
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/SessionStart.js",
+            "timeout": 30
+          }
+        ]
       }
     ],
     "PreToolUse": [
       {
-        "matcher": "Edit|Write|NotebookEdit",
-        "type": "command",
-        "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/PreToolUse.js",
-        "timeout": 30
+        "matcher": {
+          "tools": ["Edit", "Write", "NotebookEdit"]
+        },
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/PreToolUse.js",
+            "timeout": 30
+          }
+        ]
       }
     ],
     "PostToolUse": [
       {
-        "matcher": "Edit|Write|NotebookEdit",
-        "type": "command",
-        "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/PostToolUse.js",
-        "timeout": 30
+        "matcher": {
+          "tools": ["Edit", "Write", "NotebookEdit"]
+        },
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/PostToolUse.js",
+            "timeout": 30
+          }
+        ]
       }
     ],
     "PreCompact": [
       {
-        "type": "command",
-        "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/PreCompact.js",
-        "timeout": 30
+        "matcher": {},
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/PreCompact.js",
+            "timeout": 30
+          }
+        ]
       }
     ],
     "SessionEnd": [
       {
-        "type": "command",
-        "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/SessionEnd.js",
-        "timeout": 30
+        "matcher": {},
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/SessionEnd.js",
+            "timeout": 30
+          }
+        ]
       }
     ]
   }
